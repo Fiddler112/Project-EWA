@@ -11,10 +11,6 @@
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-	<!--[if lt IE 9]>
-	<script src="js/html5shiv.js"></script>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 </head>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -24,10 +20,11 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>google home</span> dashboard</a>
+				<a class="navbar-brand" href="#"><span>google home</span> social hub</a>
 			</div>
     
-		</div><!-- /.container-fluid -->
+    <!-- PROFILE -->        
+		</div>
 	</nav>
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
@@ -40,17 +37,18 @@
 			</div>
 			<div class="clear"></div>
 		</div>
+   <!-- PROFILE -->
         
+   <!-- NAVIGATIE BAR -->     
 		<div class="divider"></div>
-		<!-- NAVIGATIE BAR, ZIJN ALLEEN VOORBEELDEN ATM -->
 		<ul class="nav menu">
 			<li class="active"><a href="index.html"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li><a href="widgets.html"><em class="fa fa-calendar">&nbsp;</em> Devices</a></li>
-			<li><a href="charts.html"><em class="fa fa-bar-chart">&nbsp;</em> Statistics</a></li>
-			<li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> Users</a></li>
+			<li><a href="widgets.html"><em class="fa fa-flash">&nbsp;</em> Devices</a></li>
+			<li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> Settings</a></li>
 			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
-	</div><!--/.sidebar-->
+	</div>
+    <!-- NAVIGATIE BAR -->
 		
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
@@ -60,185 +58,53 @@
 				</a></li>
 				<li class="active">Dashboard</li>
 			</ol>
-		</div><!--/.row-->
+		</div>
 		
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">Dashboard</h1>
 			</div>
-		</div><!--/.row-->
+		</div>
 		
+        <!-- DEVICE PANEL -->
 		<div class="panel panel-container">
 			<div class="row">
 				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-teal panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-flash color-teal"></em>
-							<div class="large">5</div>
-							<div class="text-muted">Devices connected</div>
-							<button type="button" class="btn btn-primary" onclick="location.href='widgets.html';"> Add Device</button>
+						<div class="row no-padding">
+							<img src="img/fb-art.png">
+							<div class="text-muted">
+                                Faceboook</div>
+							<button type="button" class="btn btn-primary" onclick="location.href='widgets.html';"> Add Platform</button>
 						</div>
 					</div>
 				</div>
 				
 				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
-							<div class="large">4</div>
-							<div class="text-muted">Active Users</div>
-                            <button type="button" class="btn btn-primary" onclick="location.href='elements.html';"> Add User</button>
+						<div class="row no-padding">
+							<img src="img/twitter.png">
+							<div class="text-muted">Twitter</div>
+                            <button type="button" class="btn btn-primary" onclick="location.href='elements.html';"> Add Platform</button>
 						</div>
 					</div>
 				</div>
+                
 				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
-					<div class="panel panel-red panel-widget ">
-						<div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em>
-							<div class="large">25.2k</div>
-							<div class="text-muted">Page Views</div>
-						</div>
-					</div>
-				</div>
-			</div><!--/.row-->
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Devices Activated
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
-					<div class="panel-body">
-						<div class="canvas-wrapper">
-							<canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+					<div class="panel panel-orange panel-widget border-right">
+						<div class="row no-padding">
+							<img src="img/linkedin.png">
+							<div class="text-muted">LinkedIn</div>
+                            <button type="button" class="btn btn-primary" onclick="location.href='elements.html';"> Add Platform</button>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div><!--/.row-->
-		
-		
-		
-		<div class="row">
-			<div class="col-md-6">
-				
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						To-do List
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-                        
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
-					<div class="panel-body">
-						<ul class="todo-list">
-							<li class="todo-list-item">
-								<div class="checkbox">
-									<input type="checkbox" id="checkbox-1" />
-									<label for="checkbox-1">Make coffee</label>
-								</div>
-								<div class="pull-right action-buttons"><a href="#" class="trash">
-									<em class="fa fa-trash"></em>
-								</a></div>
-							</li>
-							<li class="todo-list-item">
-								<div class="checkbox">
-									<input type="checkbox" id="checkbox-2" />
-									<label for="checkbox-2">Check emails</label>
-								</div>
-								<div class="pull-right action-buttons"><a href="#" class="trash">
-									<em class="fa fa-trash"></em>
-								</a></div>
-							</li>
-							<li class="todo-list-item">
-								<div class="checkbox">
-									<input type="checkbox" id="checkbox-3" />
-									<label for="checkbox-3">Reply to Jane</label>
-								</div>
-								<div class="pull-right action-buttons"><a href="#" class="trash">
-									<em class="fa fa-trash"></em>
-								</a></div>
-							</li>
-							<li class="todo-list-item">
-								<div class="checkbox">
-									<input type="checkbox" id="checkbox-4" />
-									<label for="checkbox-4">Make more coffee</label>
-								</div>
-								<div class="pull-right action-buttons"><a href="#" class="trash">
-									<em class="fa fa-trash"></em>
-								</a></div>
-							</li>
-							<li class="todo-list-item">
-								<div class="checkbox">
-									<input type="checkbox" id="checkbox-5" />
-									<label for="checkbox-5">Work on the new design</label>
-								</div>
-								<div class="pull-right action-buttons"><a href="#" class="trash">
-									<em class="fa fa-trash"></em>
-								</a></div>
-							</li>
-							<li class="todo-list-item">
-								<div class="checkbox">
-									<input type="checkbox" id="checkbox-6" />
-									<label for="checkbox-6">Get feedback on design</label>
-								</div>
-								<div class="pull-right action-buttons"><a href="#" class="trash">
-									<em class="fa fa-trash"></em>
-								</a></div>
-							</li>
-						</ul>
-					</div>
-					<div class="panel-footer">
-						<div class="input-group">
-							<input id="btn-input" type="text" class="form-control input-md" placeholder="Add new task" /><span class="input-group-btn">
-								<button class="btn btn-primary btn-md" id="btn-todo">Add</button>
-						</span></div>
-					</div>
-				</div>
-			</div><!--/.col-->
-			
-			
-			<div class="col-md-6">
+		</div>
+		<!-- DEVICE PANEL -->
+ 
+		<!-- TIMELINE -->	
+			<div class="panel panel-container">
 				<div class="panel panel-default ">
 					<div class="panel-heading">
 						Timeline
@@ -293,13 +159,16 @@
 						</ul>
 					</div>
 				</div>
-			</div><!--/.col-->
+			</div> 
+        <!-- TIMELINE -->
+        
+        <!-- FOOTER -->
 			<div class="col-sm-12">
-				<p class="back-link">Google home dashboard by <a href="https://www.medialoot.com">Team D</a></p>
+				<p class="back-link">Google home social hub by <a href="https://www.medialoot.com">Team D</a></p>
 			</div>
-		</div><!--/.row-->
-	</div>	<!--/.main-->
-	
+		</div>
+		<!-- FOOTER -->
+    
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/chart.min.js"></script>

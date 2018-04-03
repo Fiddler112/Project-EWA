@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Google Home - Exercices</title>
+	<title>Google Home - Goals</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/datepicker3.css" rel="stylesheet">
@@ -41,7 +41,7 @@
 		<ul class="nav menu">
 			<li><a href="index.html"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
 			<li><a href="widgets.html"><em class="fa fa-bar-chart">&nbsp;</em>  Nutrition</a></li>
-			<li class="active"><a href="elements.html"><em class="fa fa-line-chart">&nbsp;</em> Exercices</a></li>
+			<li class="active"><a href="elements.html"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
 			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
@@ -52,17 +52,17 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Exercices</li>
+				<li class="active">Goals</li>
 			</ol>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Exercices</h1>
+				<h1 class="page-header">Goals</h1>
 			</div>
 		</div><!--/.row-->
         
-         <!--ACTIVE USERS-->
+ <!--       
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Active Users Panel
@@ -88,9 +88,9 @@
 									</li>
 								</ul>
 							</li>
-						</ul>
+						</ul> -->
                         
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+		<!--				<span class="pull-right clickable                 panel-toggle panel-button-tab-left"><em                     class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
 						<ul class="todo-list">
 							<li class="todo-list-item">
@@ -123,33 +123,27 @@
 							</li>
 						</ul>
 					</div>
-				</div>
+				</div> -->
         <!--ACTIVE USERS-->
         
        <!--ADD NEW USER-->
 				<div class="panel panel-default">
-					<div class="panel-heading">Add New User</div>
+					<div class="panel-heading">Add a new goal</div>
 					<div class="panel-body">
 						<div class="col-md-6">
 							<form role="form">
 								<div class="form-group">
 									<label>Name</label>
-									<input class="form-control" placeholder="User name">
+									<input class="form-control" placeholder="Goal name">
 								</div>
+								<!-- Message body -->
 								<div class="form-group">
-									<label>Password</label>
-									<input type="password" class="form-control">
+									<label class="col-md-6" for="message">Describe your goal</label>
+									<div class="col-md-9">
+										<textarea class="form-control" id="message" name="message" placeholder="Please enter your description here..." rows="5"></textarea>
+									</div>
 								</div>
-								<div class="form-group checkbox">
-									<label>
-										<input type="checkbox">Remember me
-									</label>
-								</div>
-								<div class="form-group">
-									<label>Choose Photo</label>
-									<input type="file">
-									<p class="help-block"></p>
-								</div>
+
 	<!--							<div class="col-md-6">
 									<div class="form-group">
 										<label>Checkboxes</label>
@@ -173,31 +167,31 @@
 												<input type="checkbox" value="">Checkbox 4
 											</label>
 										</div>
-									</div>
+									</div> -->
 									<div class="form-group">
-										<label>Radio Buttons</label>
+										<label>specify goal</label>
 										<div class="radio">
 											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio Button 1
+												<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>loss weight
 											</label>
 										</div>
 										<div class="radio">
 											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio Button 2
+												<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">stay weight
 											</label>
 										</div>
 										<div class="radio">
 											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio Button 3
+												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">gain weight 
 											</label>
 										</div>
 										<div class="radio">
 											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio Button 4
+												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">gain muscel 
 											</label>
 										</div>
 									</div>
-									<div class="form-group">
+								<!--	<div class="form-group">
 										<label>Selects</label>
 										<select class="form-control">
 											<option>Option 1</option>
@@ -215,7 +209,7 @@
 											<option>Option 4</option>
 										</select> 
 									</div> -->
-									<button type="Add User" class="btn btn-primary">Add User
+									<button type="Add User" class="btn btn-primary">Add goal
                                    </button>
                            
                         </form>

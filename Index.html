@@ -13,7 +13,22 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 </head>
 <body>
-    
+    <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD_PFFxEaUqfPxQ2bSPENxqcNmWaTW5JWA",
+    authDomain: "ewa-project-9e11e.firebaseapp.com",
+    databaseURL: "https://ewa-project-9e11e.firebaseio.com",
+    projectId: "ewa-project-9e11e",
+    storageBucket: "ewa-project-9e11e.appspot.com",
+    messagingSenderId: "307112913485"
+  };
+  firebase.initializeApp(config);
+
+  var bigOne = document.getElementById('bigOne');
+  var dbRef = firebase.database().ref().child('text');
+  dbRef.on('value', snap => bigOne.innerText = snap.val());
+</script>
     
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
@@ -23,7 +38,9 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
 				<a class="navbar-brand" href="#"><span>google home</span> Healthy hub</a>
+				
 			</div>
+
     
     <!-- PROFILE -->        
 		</div>
@@ -66,7 +83,7 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Dashboard</li>
+				<li class="active" id="bigOne"></li>
 			</ol>
 		</div>
 		
@@ -198,6 +215,7 @@
 };
 	</script>
 
-		
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+
 </body>
 </html>

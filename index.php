@@ -6,14 +6,19 @@
 	<title>Dashboard</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	
 </head>
 <body>
-    <script>
+
+	<?php
+	include "db_connect.php";
+	?>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+        <script>
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyD_PFFxEaUqfPxQ2bSPENxqcNmWaTW5JWA",
@@ -25,11 +30,7 @@
   };
   firebase.initializeApp(config);
 
-  var bigOne = document.getElementById('bigOne');
-  var dbRef = firebase.database().ref().child('text');
-  dbRef.on('value', snap => bigOne.innerText = snap.val());
 </script>
-    
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">

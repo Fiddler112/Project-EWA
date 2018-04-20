@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-signin-client_id" content="545886800583-dalqks3k5rr49o9969ogmai4vhvc23gv.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="307112913485-5kkslq098hfj65e6l3qngjo1916a7h4i.apps.googleusercontent.com">
 
 	<title>Google Home - Login</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -11,7 +11,12 @@
 
 </head>
 <body>
-     <script>
+
+	<?php
+	include 'db_connect.php';	
+	?>
+     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script>
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyD_PFFxEaUqfPxQ2bSPENxqcNmWaTW5JWA",
@@ -31,7 +36,7 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Log in</div>
 				<div class="panel-body">
-					<form role="form">
+					<form role="form" action="index.html">
 
 							<div class="form-group">
 								<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
@@ -44,9 +49,8 @@
 									<input name="remember" type="checkbox" value="Remember Me">Remember Me
 								</label>
 							</div>
-                            <div class="g-signin2" data-onsuccess="onSignIn" href="index.html">
-                            
-                        </div>
+                            <div class="g-signin2" data-onsuccess="onSignIn" href="index.html">                 </div>
+                            <button type="submit" class="btn btn-success" >Naar index</button>
 					</form>
 				</div>
 			</div>

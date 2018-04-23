@@ -39,7 +39,8 @@
 		<ul class="nav menu">
 			<li><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
 			<li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em>  Nutrition</a></li>
-			<li class="active"><a href="goal.php'><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li class="active"><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em>  My details</a></li>
 			<li><a href="login.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->

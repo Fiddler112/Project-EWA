@@ -1,29 +1,11 @@
 <?php
-/*
-$servername = "oege.ie.hva.nl:3306";
-$username = "edep002";
-$password = 'oMaIEqzNzZ$Fu/';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password);
-
-mysql_select_db('zedep002') or die ("could not open db".mysql_error());
+define('DB_NAME', 'zedep002');
+define('DB_USER', 'edep002');
+define('DB_PASSWORD','oMaIEqzNzZ$Fu/');
+define('DB_HOST', 'oege.ie.hva.nl:3306');
+$conn=mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
-*/
-
-// Oude database connectie boven! 
-
-$link = mysql_connect('oege.ie.hva.nl:3306', 'edep002', 'oMaIEqzNzZ$Fu/');
-if (!$link) {
+if (!$conn) {
     die('Could not connect: ' . mysql_error());
 }
-
-mysql_select_db('zedep002',$link) or die ("could not open db".mysql_error());
-
-$sql = "SELECT * FROM User"
-
 ?>

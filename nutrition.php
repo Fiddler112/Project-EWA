@@ -20,7 +20,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>Google home</span> social hub</a>
+				<a class="navbar-brand" href="#"><span>Google home</span> healthy habits</a>
 				
 			</div>
 		</div><!-- /.container-fluid -->
@@ -38,10 +38,10 @@
 		</div>
 		<div class="divider"></div>
 		<ul class="nav menu">
-			<li><a href="index.html"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li class="active"><a href="widgets.html"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
-			<li><a href="elements.html"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
-			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li class="active"><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
+			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li><a href="login.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -67,31 +67,8 @@
 				<div class="panel panel-default articles">
 					<div class="panel-heading">
 						Daily intake 
-                        
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+
+						</div>
 					<div class="panel-body articles-container">
 						<div class="article border-bottom">
 							<div class="col-xs-12">
@@ -140,36 +117,16 @@
 					</div>
                         </div>
 				</div> 
+            
+        </div>
 				<!--/.DAILY INTAKE-->
 
                 <!--/.DAILY INTAKE-->
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Search recipe
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+
+					</div>
 					<div class="panel-body">
 						<form class="form-horizontal" action="" method="post">
 							<fieldset>
@@ -191,11 +148,13 @@
 						</form>
 					</div>
 				</div>
+            
+            
 			</div><!--/.col-->
 			<div class="col-sm-12">
-				<p class="back-link">Google Home social hub by <a href="https://www.medialoot.com">team D</a></p>
+				<p class="back-link">Google home Healthy Habits  <a href="https://www.medialoot.com">EWA United</a></p>
 			</div>
-		</div><!--/.row-->
+		<!--/.row-->
 	</div>	<!--/.main-->
 	  
 

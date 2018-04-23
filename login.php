@@ -36,7 +36,7 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Log in</div>
 				<div class="panel-body">
-					<form role="form" action="index.html">
+					<form role="form" action="index.php">
 
 							<div class="form-group">
 								<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
@@ -49,7 +49,7 @@
 									<input name="remember" type="checkbox" value="Remember Me">Remember Me
 								</label>
 							</div>
-                            <div class="g-signin2" data-onsuccess="onSignIn" href="index.html">                 </div>
+                            <div class="g-signin2" data-onsuccess="onSignIn" href="index.php">                 </div>
                             <button type="submit" class="btn btn-success" >Naar index</button>
 					</form>
 				</div>
@@ -60,10 +60,6 @@
 
     <script src="https://apis.google.com/js/platform.js" async defer>
     
-        gapi.load('auth2', function(){
-            
-            gapi.auth2.init();
-        });
         
         
         function onSignIn(googleUser) {

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 <head>
 	<meta charset="utf-8">
@@ -13,24 +13,9 @@
 	
 </head>
 <body>
-
 	<?php
 	include "db_connect.php";
 	?>
-	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-        <script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyD_PFFxEaUqfPxQ2bSPENxqcNmWaTW5JWA",
-    authDomain: "ewa-project-9e11e.firebaseapp.com",
-    databaseURL: "https://ewa-project-9e11e.firebaseio.com",
-    projectId: "ewa-project-9e11e",
-    storageBucket: "ewa-project-9e11e.appspot.com",
-    messagingSenderId: "307112913485"
-  };
-  firebase.initializeApp(config);
-
-</script>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -38,8 +23,8 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>google home</span> Healthy hub</a>
-				
+
+				<a class="navbar-brand" href="#"><span>Google home</span> Healthy hub</a>
 			</div>
 
     
@@ -62,10 +47,10 @@
    <!-- NAVIGATIE BAR -->     
 		<div class="divider"></div>
 		<ul class="nav menu">
-			<li class="active"><a href="index.html"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-            <li><a href="widgets.html"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
-			<li><a href="goal.html"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
-            <li><a href="login.html" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em>Sign out</a> </li>
+			<li class="active"><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+            <li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
+			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+            <li><a href="login.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 <script>
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
@@ -100,8 +85,10 @@
 				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-teal panel-widget border-right">
 						<div class="row no-padding">
-							<img src="img/fb-art.png">
-							<button type="button" class="btn btn-primary" onclick="location.href='goal.html';"> Add a new goal</button>
+							<img src="img/bar-chart.png">
+                            <div class="text-muted">Goals</div>
+
+							<button type="button" class="btn btn-primary" onclick="location.href='goal.php';"> Add a new goal</button>
 						</div>
 					</div>
 				</div>
@@ -109,9 +96,9 @@
 				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
 						<div class="row no-padding">
-							<img src="img/twitter.png">
-							<div class="text-muted">Twitter</div>
-                            <button type="button" class="btn btn-primary" onclick="location.href='goal.html';"> Search recipie</button>
+							<img src="img/recipe.png">
+							<div class="text-muted">Recipes</div>
+                            <button type="button" class="btn btn-primary" onclick="location.href='nutrition.php';"> Search recipie</button>
 						</div>
 					</div>
 				</div>
@@ -121,7 +108,7 @@
 						<div class="row no-padding">
 							<img src="img/linkedin.png">
 							<div class="text-muted">LinkedIn</div>
-                            <button type="button" class="btn btn-primary" onclick="location.href='elements.html';"> Add Platform</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='elements.php';"> Add Platform</button>
 						</div>
 					</div>
 				</div> -->
@@ -142,7 +129,7 @@
 								<div class="timeline-badge"><em class="glyphicon glyphicon-user"></em></div>
 								<div class="timeline-panel">
 									<div class="timeline-heading">
-										<h4 class="timeline-title">You lost 5 kilo's</h4>
+										<h4 class="timeline-title">You've lost 5 kilo's</h4>
 									</div>
 									<div class="timeline-body">
 										<p>19:32</p>
@@ -153,7 +140,7 @@
 								<div class="timeline-badge primary"><em class="glyphicon glyphicon-link"></em></div>
 								<div class="timeline-panel">
 									<div class="timeline-heading">
-										<h4 class="timeline-title">A recepie was added to your account </h4>
+										<h4 class="timeline-title">A recipe was added to your account </h4>
 									</div>
 									<div class="timeline-body">
 										<p>14:49</p>
@@ -164,7 +151,7 @@
 								<div class="timeline-badge"><em class="glyphicon glyphicon-flash"></em></div>
 								<div class="timeline-panel">
 									<div class="timeline-heading">
-										<h4 class="timeline-title">You completed your workout  </h4>
+										<h4 class="timeline-title">You've completed your workout  </h4>
 									</div>
 									<div class="timeline-body">
 										<p>12:05</p>
@@ -175,7 +162,7 @@
 								<div class="timeline-badge"><em class="glyphicon glyphicon-flash"></em></div>
 								<div class="timeline-panel">
 									<div class="timeline-heading">
-										<h4 class="timeline-title">You completed your workout</h4>
+										<h4 class="timeline-title">You've completed your workout</h4>
 									</div>
 									<div class="timeline-body">
 										<p>10:20</p>
@@ -190,10 +177,11 @@
         
         <!-- FOOTER -->
 			<div class="col-sm-12">
-				<p class="back-link">Google home social hub by <a href="https://www.medialoot.com">Team D</a></p>
+				<p class="back-link">Google home Healthy Habits </p>
 			</div>
 		</div>
 		<!-- FOOTER -->
+   <!-- bestanden die waarschijnlijk niet in gebruik zijn!-->
     
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -204,6 +192,7 @@
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/custom.js"></script>
 	
+	<!-- grafiek van tevoren?-->
 	<script>
 		window.onload = function () {
 	var chart1 = document.getElementById("line-chart").getContext("2d");
@@ -216,7 +205,6 @@
 };
 	</script>
 
-	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
 
 </body>
 </html>

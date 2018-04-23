@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -6,7 +5,6 @@
 	<title>Google Home - Goals</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	
 	<!--Custom Font-->
@@ -20,7 +18,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>Google home</span> social hub</a>
+				<a class="navbar-brand" href="#"><span>Google home</span> healthy habits</a>
 			
 		</div><!-- /.container-fluid -->
             </div>
@@ -39,10 +37,10 @@
 		</div>
 		<div class="divider"></div>
 		<ul class="nav menu">
-			<li><a href="index.html"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li><a href="widgets.html"><em class="fa fa-bar-chart">&nbsp;</em>  Nutrition</a></li>
-			<li class="active"><a href="goal.html"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
-			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em>  Nutrition</a></li>
+			<li class="active"><a href="goal.php'><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li><a href="login.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -62,84 +60,87 @@
 			</div>
 		</div><!--/.row-->
         
- <!--       
-				<div class="panel panel-default">
+<!-- TIMELINE -->	
+			<div class="panel panel-container">
+				<div class="panel panel-default ">
 					<div class="panel-heading">
-						Active Users Panel
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul> -->
-                        
-		<!--				<span class="pull-right clickable                 panel-toggle panel-button-tab-left"><em                     class="fa fa-toggle-up"></em></span></div>
-					<div class="panel-body">
-						<ul class="todo-list">
-							<li class="todo-list-item">
-								<div class="checkbox">
-									<input type="checkbox" id="checkbox-1" />
-									<label for="checkbox-1">MOM</label>
+						Goal history
+						
+						</div>
+					<div class="panel-body timeline-container">
+						<ul class="timeline">
+							<li>
+								<div class="timeline-badge"><em class="glyphicon glyphicon-refresh"></em></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Los 7 kilo's</h4>
+									</div>
+									<div class="timeline-body">
+										<p>Start date: 04-2</p>
+                                        <p>End date:   04-16</p>
+                                        <p>Status: Currently in progress</p>
+									</div>
 								</div>
-								<div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
 							</li>
-							<li class="todo-list-item">
-								<div class="checkbox">
-									<input type="checkbox" id="checkbox-2" />
-									<label for="checkbox-2">DAD</label>
+							<li>
+								<div class="timeline-badge primary"><em class="glyphicon glyphicon-ok"></em></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Los 5 kilo's </h4>
+									</div>
+									<div class="timeline-body">
+										<p>Start date: 03-17</p>
+                                        <p>End date:   03-27</p>
+                                        <p>Status: Completed</p>
+									</div>
 								</div>
-								<div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
 							</li>
-							<li class="todo-list-item">
-								<div class="checkbox">
-									<input type="checkbox" id="checkbox-3" />
-									<label for="checkbox-3">SISTER</label>
+                            <li>
+								<div class="timeline-badge primary"><em class="glyphicon glyphicon-remove"></em></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Los 5 kilo's </h4>
+									</div>
+									<div class="timeline-body">
+										<p>Start date: 03-3</p>
+                                        <p>End date:   03-17</p>
+                                        <p>Status: Not completed</p>
+									</div>
 								</div>
-								<div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-							</li>
-							<li class="todo-list-item">
-								<div class="checkbox">
-									<input type="checkbox" id="checkbox-4" />
-									<label for="checkbox-4">BROTHER</label>
-								</div>
-								<div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
 							</li>
 						</ul>
 					</div>
-				</div> -->
-        <!--ACTIVE USERS-->
+				</div>
+			</div> 
+        <!-- TIMELINE -->
         
        <!--ADD NEW USER-->
 				<div class="panel panel-default">
 					<div class="panel-heading">Add a new goal</div>
 					<div class="panel-body">
 						<div class="col-md-6">
+                            <h3 >Starting information </h3>
 							<form role="form">
 								<div class="form-group">
-									<label>Name</label>
-									<input class="form-control" placeholder="Goal name">
+									<label>    Goal name</label>
+									<input class="form-control" >
+								</div>
+                                <div class="form-group">
+									<label>Age</label>
+									<input class="form-control" >
+								</div>
+                                <div class="form-group">
+									<label>Height</label>
+									<input class="form-control" >
+								</div>
+                                 <div class="form-group">
+									<label>Weight</label>
+									<input class="form-control" >
 								</div>
 								<!-- Message body -->
 								<div class="form-group">
-									<label class="col-md-6" for="message">Describe your goal</label>
-									<div class="col-md-9">
+									<label class="form-group" for="message">Describe your goal</label>
+									<div class="form-group">
 										<textarea class="form-control" id="message" name="message" placeholder="Please enter your description here..." rows="5"></textarea>
 									</div>
 								</div>
@@ -168,6 +169,21 @@
 											</label>
 										</div>
 									</div> -->
+                                <h3 >Results </h3>
+                                <div class="form-group">
+									<label>    Goal Weight</label>
+									<input class="form-control"placeholder="Desired weight" >
+								</div>
+                                <div class="form-group">
+									<label>I want to reach my goal in </label>
+									<input class="form-control" placeholder="Amount of days">
+								</div>
+                                <h3 >OR select a date </h3>
+                                <div class="form-group">
+									<label>I want to reach my goal by </label>
+									<input class="form-control" 
+                                    placeholder="10/14/2018">
+								</div>
 									<div class="form-group">
 										<label>specify goal</label>
 										<div class="radio">
@@ -209,7 +225,7 @@
 											<option>Option 4</option>
 										</select> 
 									</div> -->
-									<button type="Add User" class="btn btn-primary">Add goal
+									<button type="Add User" class="btn btn-primary">Add your goal
                                    </button>
                            
                         </form>
@@ -220,7 +236,7 @@
      <!--ADD NEW USER-->
     
 			<div class="col-sm-12">
-				<p class="back-link">google home social hub by <a href="https://www.medialoot.com">team d</a></p>
+				<p class="back-link">Google home Healthy Habits<a href="https://www.medialoot.com">EWA United</a></p>
 			</div>
 		</div><!-- /.row -->
 	

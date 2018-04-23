@@ -51,7 +51,7 @@
             <li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> My details</a></li>
-            <li><a href="login.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
+            <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 <script>
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();

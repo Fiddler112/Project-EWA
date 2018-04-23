@@ -42,7 +42,7 @@
 			<li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
 			<li class="active"><a href="User.php"><em class="fa fa-user">&nbsp;</em> My details</a></li>
-			<li><a href="login.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			 <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -76,8 +76,8 @@
 							if($result == FALSE) {
 								print(mysqli_error());
 							} else {
-								while($row = $result->fetch_assoc()) {
-								// PRINTEN VAN BMI WERKT, MAAR NAMEN OPHALEN NIET!!!!
+								while($row = $result->fetch_array()) {
+								// PRINTEN VAN BMI WERKT, MAAR NAMEN OPHALEN NIET!!!
 								echo" <div class='article'>";
 									echo"<div class='col-xs-12'>";
 									echo"	<div class='row'>";

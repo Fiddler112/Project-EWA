@@ -43,6 +43,10 @@
 
    
      <script>
+//         var name;
+//         var email;
+//         var gIdToken;
+//         var expiry = 30;
     function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -51,16 +55,34 @@
         console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
             
             
-               // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-            var name = profile.getName();
-            var email=profile.getEmail();
+       // The ID token you need to pass to your backend:
             var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
+             var name = profile.getName();
+             var email=profile.getEmail();
+             var gIdToken = googleUser.getAuthResponse().id_token;
             
-             window.location = "db_login_gUser.php?name=" + name + "&email=" + email + "&id_token=" + id_token;
-      };
+          //Call create cookie script
+             createCookie('name', name, 30);
+             createCookie('email', email, 30);
+             createCookie('gIdToken', gIdToken, 30);
+        
+    //redirect to database to create user profile
+             window.location = "db_login_gUser.php?name=" + name + "&email=" + email + "&id_token=" + gIdToken;
+        
+      
        
+      };
+       function createCookie(name,value, days){
+        var expires = "";
+        if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires;
+   
+       }
     
     </script>
     

@@ -51,6 +51,9 @@
         var profile = googleUser.getBasicProfile();
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
         console.log('Name: ' + profile.getName());
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
             
@@ -58,17 +61,23 @@
        // The ID token you need to pass to your backend:
             var id_token = googleUser.getAuthResponse().id_token;
             console.log("ID Token: " + id_token);
-             var name = profile.getName();
+             var profileName = profile.getName();
              var email=profile.getEmail();
              var gIdToken = googleUser.getAuthResponse().id_token;
+             var firstName = profile.getGivenName();
+             var lastName = profile.getFamilyName();
+             var imgURL = profile.getImageUrl();
             
           //Call create cookie script
-             createCookie('name', name, 30);
+             createCookie('profileName', profileName, 30);
              createCookie('email', email, 30);
              createCookie('gIdToken', gIdToken, 30);
+             createCookie('firstName', firstName, 30);
+             createCookie('lastName', lastName, 30);
+             createCookie('imgURL', imgURL, 30);
         
     //redirect to database to create user profile
-             window.location = "db_login_gUser.php?name=" + name + "&email=" + email + "&id_token=" + gIdToken;
+             window.location = "db_login_gUser.php?profileName=" + profileName + "&email=" + email + "&firstName=" + firstName + "&lastName=" + lastName + "&imgURL= " + imgURL + "&id_token=" + gIdToken;
         
       
        

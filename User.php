@@ -71,7 +71,8 @@
 						</div>					
 						<?php
 							include_once 'db_connect.php';
-							$sql = "SELECT * FROM BMI";
+                            $_email =  $_COOKIE["email"];
+							$sql = "SELECT BMI FROM `BMI` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."')";
 							$result = $conn->query($sql);
 							if($result == FALSE) {
 								print(mysqli_error());
@@ -86,7 +87,7 @@
 									echo"	<div class='text-muted'>bmi</div>";
 									echo"	</div>";
 									echo"<div class='col-xs-10 col-md-10'>";
-									echo'	<p>'.$row["BMI_id"].'</p>';
+									//echo'	<p>'.$row["BMI_id"].'</p>';
 									echo"</div>";
 									echo"</div>";
 								echo"</div>";

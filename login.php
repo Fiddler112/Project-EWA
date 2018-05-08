@@ -1,17 +1,14 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-signin-client_id" content="307112913485-5kkslq098hfj65e6l3qngjo1916a7h4i.apps.googleusercontent.com">
-    <script> src="https://apis.google.com/js/platform.js" async defer>  </script> 
+    <script src="https://apis.google.com/js/platform.js" async defer type="text/javascript">  </script>
 	<title>Google Home - Login</title>
-<!--	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/styles.css" rel="stylesheet"> -->
-    
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
+
 </head>
 <body>
 	<div class="row">
@@ -19,39 +16,46 @@ session_start();
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Log in</div>
 				<div class="panel-body">
-					<form action="db_login.php" method="post">
+					<!-- <form action="db_login.php" method="post">
 
 							<div class="form-group">
 								<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Password" name="password" type="password" value="">
+								<input c$lass="form-control" placeholder="Password" name="password" type="password" value="">
 							</div>
 							<div class="checkbox">
 								<label>
 									<input name="remember" type="checkbox" value="Remember Me">Remember Me
 								</label>
-							</div>
-                            <div class="g-signin2" data-onsuccess="onSignIn" href="index.php"> </div>  
+							</div>  
+                           
+					</form> -->
+                     <div class="g-signin2" data-onsuccess="onSignIn">   
+                             </div>&nbsp;
+                          <!--  <button type="submit" class="btn btn-success" >Login</button> --> 
                             
-                            <button type="submit" class="btn btn-success" >Login</button>
-					</form>
 				</div>
 			</div>
-		</div><!-- /.col-->
+		</div><!-- /.col--> 
 	</div><!-- /.row -->	
 	
 
-    
-    <script>         
-        function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-          
-    // The ID token you need to pass to your backend:
+   
+     <script>
+//         var name;
+//         var email;
+//         var gIdToken;
+//         var expiry = 30;
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            
+            
+       // The ID token you need to pass to your backend:
             var id_token = googleUser.getAuthResponse().id_token;
             console.log("ID Token: " + id_token);
              var name = profile.getName();
@@ -85,8 +89,5 @@ session_start();
     
 <script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-    
-    
-    
 </body>
 </html>

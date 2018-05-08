@@ -6,7 +6,6 @@
 	<title>Google Home - Nutrition</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	
 	<!--Custom Font-->
@@ -20,7 +19,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>Google home</span> healthy habits</a>
+				<a class="navbar-brand" href="#"><span>Google home</span> healthy hub</a>
 				
 			</div>
 		</div><!-- /.container-fluid -->
@@ -87,7 +86,6 @@
 									echo"	<div class='text-muted'>bmi</div>";
 									echo"	</div>";
 									echo"<div class='col-xs-10 col-md-10'>";
-									//echo'	<p>'.$row["BMI_id"].'</p>';
 									echo"</div>";
 									echo"</div>";
 								echo"</div>";
@@ -109,17 +107,10 @@
 				<p class="back-link">Google home Healthy Habits  <a href="https://www.medialoot.com">EWA United</a></p>
 			</div>
 		<!--/.row-->
-	</div>	<!--/.main-->
-	  
+	</div>	<!--/.main-->  
 
 <script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/custom.js"></script>
 	
 </body>
 </html>

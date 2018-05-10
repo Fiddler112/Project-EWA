@@ -28,11 +28,14 @@
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+				<img src="  <?php $imgURL =  $_COOKIE["imgURL"];
+                echo $imgURL;
+                ?> " class="img-responsive" alt="">
 			</div>
-			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">Username</div>
-				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+			<div class="profile-usertitle">                
+				<div class="profile-usertitle-name"> <?php $firstName =  $_COOKIE["firstName"];
+                echo $firstName;
+                ?> </div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -72,7 +75,7 @@
 						<?php
 							include_once 'db_connect.php';
                             $_email =  $_COOKIE["email"];
-							$sql = "SELECT BMI FROM `BMI` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."')";
+                            $sql = "SELECT BMI FROM `BMI` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT 1";							
 							$result = $conn->query($sql);
 							if($result == FALSE) {
 								print(mysqli_error());

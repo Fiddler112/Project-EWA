@@ -34,12 +34,14 @@
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src=" $_GET['imgURL'];" class="img-responsive" alt="">
+				<img src="  <?php $imgURL =  $_COOKIE["imgURL"];
+                echo $imgURL;
+                ?> " class="img-responsive" alt="">
 			</div>
-			<div class="profile-usertitle">
-                <?php $firstName =  $_COOKIE["firstName"];
-                ?>
-				<div class="profile-usertitle-name"> .$_firstName.</div>
+			<div class="profile-usertitle">                
+				<div class="profile-usertitle-name"> <?php $firstName =  $_COOKIE["firstName"];
+                echo $firstName;
+                ?> </div>
 <!--				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>-->
 			</div>
 			<div class="clear"></div>
@@ -60,7 +62,6 @@
     auth2.signOut().then(function () {
       console.log('User signed out.');
     });
-  }
 </script>
 		</ul>
 	</div>

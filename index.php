@@ -34,11 +34,13 @@
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+				<img src=" $_GET['imgURL'];" class="img-responsive" alt="">
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">Username</div>
-				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+                <?php $firstName =  $_COOKIE["firstName"];
+                ?>
+				<div class="profile-usertitle-name"> .$_firstName.</div>
+<!--				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>-->
 			</div>
 			<div class="clear"></div>
 		</div>

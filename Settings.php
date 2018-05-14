@@ -66,7 +66,7 @@
 			</div>
 		</div>
 
-        
+        <form action="functions.js" method="post" onsubmit="validateForm">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default articles">
@@ -75,29 +75,46 @@
 						</div>	
 					<!--	<form class="form" action="Function.php"> Functie komt er zo bij-->
 							<div class="panel-body articles-container">
-
+                                <div class="form-group">
+                                  <label for="sel1">Home many timestamps do you want to show on your dashboard?</label>
+                                  <select class="form-control" id="amountTimestamps">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                  </select>
+                                </div>
 							</div>
                         </div>
 				</div> 
+        </div>
 			<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default articles">
-					<div class="panel-heading">
-						Personal
-									
+					<div class="panel-heading articles-container">
+						Personal									
 						</div>		
-						<div class="panel-body articles-container">			
+						<div class="panel-body">			                        
 						<label class="radio-inline"><input type="radio" name="optradio">Notifications on</label>
-									<label class="radio-inline"><input type="radio" name="optradio">Notifications off</label>	
-							</div>
-                        </div>
+                        <label class="radio-inline"><input type="radio" name="optradio">Notifications off</label>	
+					</div> 
 				</div>			           
         </div>
-				<!--/.DAILY INTAKE-->
+        
+            <button type="submit" class="btn btn-success" onclick="saveSettings()">Submit</button>
+                
+        
+
+        
+				
 
 			</div><!--/.col-->
 			<div class="col-sm-12">
-				<p class="back-link">Google home Healthy Habits  <a href="https://www.medialoot.com">EWA United</a></p>
+				<p class="back-link">Google home Healthy Habits EWA United</a></p>
 			</div>
 		<!--/.row-->
 	</div>	<!--/.main-->

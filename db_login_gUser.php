@@ -20,7 +20,7 @@ $imgURL = $_GET['imgURL'];
   
          if(mysqli_query($conn, $sql)){
     echo '<script type="text/javascript">
-           window.location = "index.php"
+           window.location = "Settings.php"
       </script>';
             
 } else{

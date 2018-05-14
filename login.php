@@ -8,7 +8,7 @@
 	<title>Google Home - Login</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
-
+    <link rel="icon" href="img/pic.png">
 </head>
 <body>
 	<div class="row">
@@ -16,25 +16,8 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Log in</div>
 				<div class="panel-body">
-					<!-- <form action="db_login.php" method="post">
-
-							<div class="form-group">
-								<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
-							</div>
-							<div class="form-group">
-								<input c$lass="form-control" placeholder="Password" name="password" type="password" value="">
-							</div>
-							<div class="checkbox">
-								<label>
-									<input name="remember" type="checkbox" value="Remember Me">Remember Me
-								</label>
-							</div>  
-                           
-					</form> -->
                      <div class="g-signin2" data-onsuccess="onSignIn">   
-                             </div>&nbsp;
-                          <!--  <button type="submit" class="btn btn-success" >Login</button> --> 
-                            
+                             </div>&nbsp;                      
 				</div>
 			</div>
 		</div><!-- /.col--> 
@@ -69,12 +52,12 @@
              var imgURL = profile.getImageUrl();
             
           //Call create cookie script
-             createCookie('profileName', profileName, 30);
-             createCookie('email', email, 30);
-             createCookie('gIdToken', gIdToken, 30);
-             createCookie('firstName', firstName, 30);
-             createCookie('lastName', lastName, 30);
-             createCookie('imgURL', imgURL, 30);
+             createCookie('profileName', profileName, 30, '/');
+             createCookie('email', email, 30, '/');
+             createCookie('gIdToken', gIdToken, 30, '/');
+             createCookie('firstName', firstName, 30, '/');
+             createCookie('lastName', lastName, 30, '/');
+             createCookie('imgURL', imgURL, 30, '/');
         
     //redirect to database to create user profile
              window.location = "db_login_gUser.php?profileName=" + profileName + "&email=" + email + "&firstName=" + firstName + "&lastName=" + lastName + "&imgURL= " + imgURL + "&id_token=" + gIdToken;
@@ -82,14 +65,14 @@
       
        
       };
-       function createCookie(name,value, days){
+       function createCookie(name,value, days, path){
         var expires = "";
         if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days*24*60*60*1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "")  + expires;
+    document.cookie = name + "=" + (value || "")  + expires + " path=" + path;
    
        }
     

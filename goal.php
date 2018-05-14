@@ -6,7 +6,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
-	
+	<link rel="icon" href="img/pic.png">
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 </head>
@@ -43,6 +43,7 @@
 			<li><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
 			<li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em>  Nutrition</a></li>
 			<li class="active"><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em>  My details</a></li>
 		    <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		</ul>
@@ -123,12 +124,20 @@
 					<div class="panel-heading">Add a new goal</div>
 					<div class="panel-body">
 						<div class="col-md-6">
-                            <h3 >Starting information </h3>
+<!--                            <h3 >Starting information </h3>-->
+                            <label for="plan">  Select weight plan: </label>
+                                <select id="cmbMake" name="plan" >
+                                <option value="0"> Lose weight</option>
+                                <option value="1">Stay on the same weight</option>
+                                <option value="2">Gain weight</option>
+                                <option value="3">Gain muscles</option>
+                                </select>
 							<form role="form">
 								<div class="form-group">
 									<label>    Goal name</label>
 									<input class="form-control" >
 								</div>
+<!--
                                 <div class="form-group">
 									<label>Age</label>
 									<input class="form-control" >
@@ -141,13 +150,14 @@
 									<label>Weight</label>
 									<input class="form-control" >
 								</div>
-								<!-- Message body -->
+								 Message body 
 								<div class="form-group">
 									<label class="form-group" for="message">Describe your goal</label>
 									<div class="form-group">
 										<textarea class="form-control" id="message" name="message" placeholder="Please enter your description here..." rows="5"></textarea>
 									</div>
 								</div>
+-->
 
 	<!--							<div class="col-md-6">
 									<div class="form-group">
@@ -173,8 +183,8 @@
 											</label>
 										</div>
 									</div> -->
-                                <h3 >Results </h3>
-                                <div class="form-group">
+<!--                                <h3 >Results </h3>-->
+                                <div class="form-group"  >
 									<label>    Goal Weight</label>
 									<input class="form-control"placeholder="Desired weight" >
 								</div>
@@ -188,6 +198,7 @@
 									<input class="form-control" 
                                     placeholder="10/14/2018">
 								</div>
+<!--
 									<div class="form-group">
 										<label>specify goal</label>
 										<div class="radio">
@@ -211,6 +222,7 @@
 											</label>
 										</div>
 									</div>
+-->
 								<!--	<div class="form-group">
 										<label>Selects</label>
 										<select class="form-control">

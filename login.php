@@ -8,7 +8,7 @@
 	<title>Google Home - Login</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
-
+    <link rel="icon" href="img/pic.png">
 </head>
 <body>
 	<div class="row">
@@ -52,12 +52,12 @@
              var imgURL = profile.getImageUrl();
             
           //Call create cookie script
-             createCookie('profileName', profileName, 30);
-             createCookie('email', email, 30);
-             createCookie('gIdToken', gIdToken, 30);
-             createCookie('firstName', firstName, 30);
-             createCookie('lastName', lastName, 30);
-             createCookie('imgURL', imgURL, 30);
+             createCookie('profileName', profileName, 30, '/');
+             createCookie('email', email, 30, '/');
+             createCookie('gIdToken', gIdToken, 30, '/');
+             createCookie('firstName', firstName, 30, '/');
+             createCookie('lastName', lastName, 30, '/');
+             createCookie('imgURL', imgURL, 30, '/');
         
     //redirect to database to create user profile
              window.location = "db_login_gUser.php?profileName=" + profileName + "&email=" + email + "&firstName=" + firstName + "&lastName=" + lastName + "&imgURL= " + imgURL + "&id_token=" + gIdToken;
@@ -65,14 +65,14 @@
       
        
       };
-       function createCookie(name,value, days){
+       function createCookie(name,value, days, path){
         var expires = "";
         if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days*24*60*60*1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "")  + expires;
+    document.cookie = name + "=" + (value || "")  + expires + " path=" + path;
    
        }
     

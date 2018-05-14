@@ -43,6 +43,7 @@
 			<li><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
 			<li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em>  Nutrition</a></li>
 			<li class="active"><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em>  My details</a></li>
 		    <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		</ul>
@@ -148,8 +149,7 @@
 										<textarea class="form-control" id="message" name="message" placeholder="Please enter your description here..." rows="5"></textarea>
 									</div>
 								</div>
-
-	<!--							<div class="col-md-6">
+								<div class="col-md-6">
 									<div class="form-group">
 										<label>Checkboxes</label>
 										<div class="checkbox">
@@ -172,7 +172,7 @@
 												<input type="checkbox" value="">Checkbox 4
 											</label>
 										</div>
-									</div> -->
+									</div> 
                                 <h3 >Results </h3>
                                 <div class="form-group">
 									<label>    Goal Weight</label>

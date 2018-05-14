@@ -28,14 +28,11 @@
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="  <?php $imgURL =  $_COOKIE["imgURL"];
-                echo $imgURL;
-                ?> " class="img-responsive" alt="">
+				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
 			</div>
-			<div class="profile-usertitle">                
-				<div class="profile-usertitle-name"> <?php $firstName =  $_COOKIE["firstName"];
-                echo $firstName;
-                ?> </div>
+			<div class="profile-usertitle">
+				<div class="profile-usertitle-name">Username</div>
+				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -44,6 +41,7 @@
 			<li><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
 			<li class="active"><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> My details</a></li>
 		    <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		</ul>

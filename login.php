@@ -16,25 +16,8 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Log in</div>
 				<div class="panel-body">
-					<!-- <form action="db_login.php" method="post">
-
-							<div class="form-group">
-								<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
-							</div>
-							<div class="form-group">
-								<input c$lass="form-control" placeholder="Password" name="password" type="password" value="">
-							</div>
-							<div class="checkbox">
-								<label>
-									<input name="remember" type="checkbox" value="Remember Me">Remember Me
-								</label>
-							</div>  
-                           
-					</form> -->
                      <div class="g-signin2" data-onsuccess="onSignIn">   
-                             </div>&nbsp;
-                          <!--  <button type="submit" class="btn btn-success" >Login</button> --> 
-                            
+                             </div>&nbsp;                      
 				</div>
 			</div>
 		</div><!-- /.col--> 

@@ -82,102 +82,117 @@
 				<h1 class="page-header">Dashboard</h1>
 			</div>
 		</div>
-		
-        <!-- DEVICE PANEL -->
-		<div class="panel panel-container">
-			<div class="row">
-				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
-					<div class="panel panel-teal panel-widget border-right">
-						<div class="row no-padding">
-							<img src="img/bar-chart.png">
-                            <div class="text-muted">Goals</div>
+        
+        
+        
+   <!-- CAROUSEL-->     
+                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
 
-							<button type="button" class="btn btn-primary" onclick="location.href='goal.php';"> Add a new goal</button>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
-					<div class="panel panel-orange panel-widget border-right">
-						<div class="row no-padding">
-							<img src="img/recipe.png">
-							<div class="text-muted">Recipes</div>
-                            <button type="button" class="btn btn-primary" onclick="location.href='nutrition.php';"> Search recipie</button>
-						</div>
-					</div>
-				</div>
-                
-<!---				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
-					<div class="panel panel-orange panel-widget border-right">
-						<div class="row no-padding">
-							<img src="img/linkedin.png">
-							<div class="text-muted">LinkedIn</div>
-                            <button type="button" class="btn btn-primary" onclick="location.href='elements.php';"> Add Platform</button>
-						</div>
-					</div>
-				</div> -->
-			</div>
-		</div>
-		<!-- DEVICE PANEL -->
- 
-		<!-- TIMELINE -->	
-			<div class="panel panel-container">
-				<div class="panel panel-default ">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+        <img src="sugar.png" alt="sugar_facts">
+        </div>
+
+        <div class="item">
+        <img src="chicago.jpg" alt="Chicago">
+        </div>
+
+        <div class="item">
+            <img src="ny.jpg" alt="New York">
+        </div>
+    </div>
+                     
+		
+ <!-- TIMELINE versie 1-->
+<!--		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default articles">
 					<div class="panel-heading">
-						Recent achievements 
-						
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
-					<div class="panel-body timeline-container">
-						<ul class="timeline">
-							<li>
-								<div class="timeline-badge"><em class="glyphicon glyphicon-user"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">You've lost 5 kilo's</h4>
-									</div>
-									<div class="timeline-body">
-										<p>19:32</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="timeline-badge primary"><em class="glyphicon glyphicon-link"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">A recipe was added to your account </h4>
-									</div>
-									<div class="timeline-body">
-										<p>14:49</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="timeline-badge"><em class="glyphicon glyphicon-flash"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">You've completed your workout  </h4>
-									</div>
-									<div class="timeline-body">
-										<p>12:05</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="timeline-badge"><em class="glyphicon glyphicon-flash"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">You've completed your workout</h4>
-									</div>
-									<div class="timeline-body">
-										<p>10:20</p>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div> 
-        <!-- TIMELINE -->
+						Time line 1
+						</div>					
+						<?php
+												
+							$result = $conn->query($sql);
+							if($result == FALSE) {
+								print(mysqli_error());
+							} else {
+								while($row = $result->fetch_array()) {
+								echo" <div class='article'>";
+									echo"<div class='col-xs-12'>";
+									echo"	<div class='row'>";
+									echo"	<div class='col-xs-2 col-md-2 date'>";
+									echo"	<div class='large'>".$row["Events"]. "</div>";
+									echo"	<div class='text-muted'>bmi</div>";
+									echo"	</div>";
+									echo"<div class='col-xs-10 col-md-10'>";
+									echo"</div>";
+									echo"</div>";
+								echo"</div>";
+								echo"<div class='clear'></div>";
+								echo"</div>	";																																	
+								}
+							}
+							$conn->close();
+							?>
+							</div>
+                        </div>
+				</div> 
+				           
+        </div>-->
+
+    <!-- TIMELINE versie 1—>
+
+ 
+	<!-- TIMELINE versie 2-->
+
+<!--
+    <div class="panel panel-container">
+        <div class="panel panel-default ">
+            <div class="panel-heading">
+                Time line 2
+                <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+            <div class="panel-body timeline-container">
+                        <?php
+                include_once 'db_connect.php';
+                $sql = "SELECT * FROM Events";
+                $result = $conn->query($sql);
+                if($result == FALSE) {
+                    print(mysqli_error());
+                } else {
+                    while($row = $result->fetch_array()) {
+
+                        echo "<ul class='timeline'>";
+                            
+                        echo   "	<li>";
+                        echo	"<div class='timeline-badge'><em class='glyphicon glyphicon-user'></em></div>";
+                        echo	"<div class='timeline-panel'>";
+                        echo	"<div class='timeline-heading'>";
+                        echo	"<h4 class='timeline-title'>".$row["description"]"</h4>";
+                        echo	"</div>";
+                        echo	"<div class='timeline-body'>";
+                        echo	"<p>".$row["timestamp"]"</p>";
+                        echo	"</div>";
+                        echo	"</div>";
+                        echo	"</li>";
+                    }
+                }
+                $conn->close();
+                ?> 
+                  </div>
+</div>
+</div> 
+-->
+
+               
+        <!-- TIMELINE versie 2—>
+
         
         <!-- FOOTER -->
 			<div class="col-sm-12">

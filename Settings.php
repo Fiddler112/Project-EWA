@@ -66,19 +66,20 @@
 			</div>
 		</div>
 
-<!--
-        <form action="javascript:setEventValue();" method="post">
+
+
+     <form method="post" action="" name="form">  
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default articles">
 					<div class="panel-heading">
 						Amount of timestamps
 						</div>	
-						<form class="form" action="Function.php"> Functie komt er zo bij
 							<div class="panel-body articles-container">
                                 <div class="form-group">
                                   <label for="sel1">Home many timestamps do you want to show on your dashboard?</label>
-                                  <select class="form-control" id="amountTimestamps">
+                                  <select class="form-control" id="amountTimestamps" placeholder="4">
+                                      <option value="" disabled selected>Select amount of events</option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
                                       <option value="3">3</option>
@@ -96,14 +97,24 @@
 				</div> 
         </div>
             
+
+<!--
+        <form method="post" action="" name="form">  
+ <select name="category">
+    <option value="1">Adventure</option>
+    <option value="2">Drama</option>
+ </select>
+ <input name="submit" type="submit"> 
+</form>
 -->
         
             <script type="text/javascript">
-        setEventValue(){
+       
+        function setEventValue(){
              var getAmountOfEvents = document.getElementById("amountTimestamps");
              var amountOfEvents = getAmountOfEvents.value;
              createCookie("amountOfEvents", amountOfEvents,"365", "/");      
-        }
+            }
          
         function createCookie(name,value, days, path){
         var expires = "";
@@ -130,9 +141,9 @@
 				</div>			           
         </div>
         
-            <button type="submit" class="btn btn-success" onclick="javascript:setEventValue();">Submit</button>
-              
-
+<!--            <button type="submit" class="btn btn-success" onclick="">Submit</button>-->
+              <button type="submit" class="btn btn-success" onclick="setEventValue();">Submit</button> 
+                
 			</div><!--/.col-->
 			<div class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</a></p>

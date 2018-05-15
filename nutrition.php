@@ -134,17 +134,24 @@
         <!-- TIMELINE -->	
             <?php
             include_once 'db_connect.php';
-            $foodName = array();
+           // $foodName = array();
             $foodCal = array();
             $timeStamp = array();
             $_email =  $_COOKIE["email"];
-            $_limitEvents =  $_COOKIE["eventLimit"];
-             $sql = "SELECT name FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."";		
-            while ($user_row = $site_db->fetch_array($result)) {
-            $yourArr[] = $user_row['user_id'];
-        }
-        echo "<pre>";
-        print_r($yourArr);
+            $_limitEvents =  $_COOKIE["amountOfEvents"];
+             $foodName = $conn->query("SELECT product FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT .$_limitEvents.");	
+            $foodNames = $conn->query( "SELECT * FROM `Food`");	
+        echo $foodNames[0];
+        echo $foodNames[1];
+        echo $foodNames[2];
+        echo $foodNames[3];
+//            while($row = mysqli_query($conn,$sql1)){ // loop to store the data in an associative array.
+//            $foodName[$index] = $row;
+//            $index++;
+//            }
+           
+            
+           
             ?>
 			<div class="panel panel-container">
 				<div class="panel panel-default ">

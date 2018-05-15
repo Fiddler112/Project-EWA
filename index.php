@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Dashboard - Healthy Hub</title>
+	<title>Dashboard</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
@@ -36,9 +36,9 @@
 			<div class="profile-userpic">
 				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
 			</div>
-			<div class="profile-usertitle" style="margin-bottom:10px">
+			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">Username</div>
-				
+				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -83,7 +83,7 @@
         <!-- DEVICE PANEL -->
 		<div class="panel panel-container">
 			<div class="row">
-				<div class="col-xs-6 col-md-6 col-lg-4 no-padding">
+				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-teal panel-widget border-right">
 						<div class="row no-padding">
 							<img src="img/bar-chart.png">
@@ -94,7 +94,7 @@
 					</div>
 				</div>
 				
-				<div class="col-xs-6 col-md-6 col-lg-4 no-padding">
+				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
 						<div class="row no-padding">
 							<img src="img/recipe.png">
@@ -103,16 +103,16 @@
 						</div>
 					</div>
 				</div>
-                <!--
-				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
+                
+<!---				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
 						<div class="row no-padding">
-						<	<img src="img/user.jpg">-
-							<div class="text-muted">My Details</div>
-                            <button type="button" class="btn btn-primary" onclick="location.href='User.php';"> My details</button>
+							<img src="img/linkedin.png">
+							<div class="text-muted">LinkedIn</div>
+                            <button type="button" class="btn btn-primary" onclick="location.href='elements.php';"> Add Platform</button>
 						</div>
 					</div>
-				</div>-->
+				</div> -->
 			</div>
 		</div>
 		<!-- DEVICE PANEL -->
@@ -186,6 +186,26 @@
     
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/custom.js"></script>
+	
+	<!-- grafiek van tevoren?-->
+	<script>
+		window.onload = function () {
+	var chart1 = document.getElementById("line-chart").getContext("2d");
+	window.myLine = new Chart(chart1).Line(lineChartData, {
+	responsive: true,
+	scaleLineColor: "rgba(0,0,0,.2)",
+	scaleGridLineColor: "rgba(0,0,0,.05)",
+	scaleFontColor: "#c5c7cc"
+	});
+};
+	</script>
+
 
 </body>
 </html>

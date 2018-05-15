@@ -145,6 +145,31 @@
 										<textarea class="form-control" id="message" name="message" placeholder="Please enter your description here..." rows="5"></textarea>
 									</div>
 								</div>
+
+	<!--							<div class="col-md-6">
+									<div class="form-group">
+										<label>Checkboxes</label>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="">Checkbox 1
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="">Checkbox 2
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="">Checkbox 3
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="">Checkbox 4
+											</label>
+										</div>
+									</div> -->
                                 <h3 >Results </h3>
                                 <div class="form-group">
 									<label>    Goal Weight</label>
@@ -179,7 +204,7 @@
 										</div>
 										<div class="radio">
 											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">gain muscle
+												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">gain muscel 
 											</label>
 										</div>
 									</div>
@@ -216,9 +241,14 @@
 			</div>
 		</div><!-- /.row -->
 	
- <script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/custom.js"></script>
 	
 </body>
 </html>

@@ -6,7 +6,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
-	
+	<link rel="icon" href="img/pic.png">
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 </head>
@@ -27,11 +27,14 @@
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+				<img src="  <?php $imgURL =  $_COOKIE["imgURL"];
+                echo $imgURL;
+                ?> " class="img-responsive" alt="">
 			</div>
-			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">Username</div>
-				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+			<div class="profile-usertitle">                
+				<div class="profile-usertitle-name"> <?php $firstName =  $_COOKIE["firstName"];
+                echo $firstName;
+                ?> </div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -40,6 +43,7 @@
 			<li><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
 			<li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em>  Nutrition</a></li>
 			<li class="active"><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em>  My details</a></li>
 		    <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		</ul>
@@ -120,12 +124,20 @@
 					<div class="panel-heading">Add a new goal</div>
 					<div class="panel-body">
 						<div class="col-md-6">
-                            <h3 >Starting information </h3>
+<!--                            <h3 >Starting information </h3>-->
+                            <label for="plan">  Select weight plan: </label>
+                                <select id="cmbMake" name="plan" >
+                                <option value="0"> Lose weight</option>
+                                <option value="1">Stay on the same weight</option>
+                                <option value="2">Gain weight</option>
+                                <option value="3">Gain muscles</option>
+                                </select>
 							<form role="form">
 								<div class="form-group">
 									<label>    Goal name</label>
 									<input class="form-control" >
 								</div>
+<!--
                                 <div class="form-group">
 									<label>Age</label>
 									<input class="form-control" >
@@ -138,15 +150,41 @@
 									<label>Weight</label>
 									<input class="form-control" >
 								</div>
-								<!-- Message body -->
+								 Message body 
 								<div class="form-group">
 									<label class="form-group" for="message">Describe your goal</label>
 									<div class="form-group">
 										<textarea class="form-control" id="message" name="message" placeholder="Please enter your description here..." rows="5"></textarea>
 									</div>
 								</div>
-                                <h3 >Results </h3>
-                                <div class="form-group">
+-->
+
+	<!--							<div class="col-md-6">
+									<div class="form-group">
+										<label>Checkboxes</label>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="">Checkbox 1
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="">Checkbox 2
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="">Checkbox 3
+											</label>
+										</div>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="">Checkbox 4
+											</label>
+										</div>
+									</div> -->
+<!--                                <h3 >Results </h3>-->
+                                <div class="form-group"  >
 									<label>    Goal Weight</label>
 									<input class="form-control"placeholder="Desired weight" >
 								</div>
@@ -160,6 +198,7 @@
 									<input class="form-control" 
                                     placeholder="10/14/2018">
 								</div>
+<!--
 									<div class="form-group">
 										<label>specify goal</label>
 										<div class="radio">
@@ -179,10 +218,11 @@
 										</div>
 										<div class="radio">
 											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">gain muscle
+												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">gain muscel 
 											</label>
 										</div>
 									</div>
+-->
 								<!--	<div class="form-group">
 										<label>Selects</label>
 										<select class="form-control">
@@ -216,9 +256,14 @@
 			</div>
 		</div><!-- /.row -->
 	
- <script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/custom.js"></script>
 	
 </body>
 </html>

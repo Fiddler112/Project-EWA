@@ -12,6 +12,8 @@
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 </head>
+   
+    
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
@@ -67,6 +69,8 @@
 		</div><!--/.row-->
 
         <!--/.DAILY INTAKE-->
+        
+        
 		<div class="row">
 			<div class="col-md-6">
 				<div class="panel panel-default articles">
@@ -88,7 +92,7 @@
 								</div>
 							</div>
 							<div class="clear"></div>
-						</div><!--End .article-->
+						</div>End .article
 						
 						<div class="article border-bottom">
 							<div class="col-xs-12">
@@ -124,7 +128,83 @@
 				</div> 
             
         </div>
+
 				<!--/.DAILY INTAKE-->
+        
+        <!-- TIMELINE -->	
+            <?php
+            include_once 'db_connect.php';
+            $foodName = array();
+            $foodCal = array();
+            $timeStamp = array();
+            $_email =  $_COOKIE["email"];
+            $_limitEvents =  $_COOKIE["eventLimit"];
+             $sql = "SELECT name FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."";		
+            while ($user_row = $site_db->fetch_array($result)) {
+            $yourArr[] = $user_row['user_id'];
+        }
+        echo "<pre>";
+        print_r($yourArr);
+            ?>
+			<div class="panel panel-container">
+				<div class="panel panel-default ">
+					<div class="panel-heading">
+						Intake history
+						
+						</div>
+					<div class="panel-body timeline-container">
+						<ul class="timeline">
+							<li>
+								<div class="timeline-badge"><em class="glyphicon glyphicon-refresh"></em></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Los 7 kilo's</h4>
+									</div>
+									<div class="timeline-body">
+										<p>Time:
+                                        <?php 
+                                                    
+                                        ?>
+                                        </p>
+                                        <p>End date:   04-16</p>
+                                        <p>Status: Currently in progress</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge primary"><em class="glyphicon glyphicon-ok"></em></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Los 5 kilo's </h4>
+									</div>
+									<div class="timeline-body">
+										<p>Time: </p>
+                                        <p>End date:   03-27</p>
+                                        <p>Status: Completed</p>
+									</div>
+								</div>
+							</li>
+                            <li>
+								<div class="timeline-badge primary"><em class="glyphicon glyphicon-remove"></em></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Los 5 kilo's </h4>
+									</div>
+									<div class="timeline-body">
+										<p>Time: </p>
+                                        <p>End date:   03-17</p>
+                                        <p>Status: Not completed</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div> 
+    
+        
+        <!-- TIMELINE -->
+        
 
                 <!--/.DAILY INTAKE-->
 				<div class="panel panel-default">

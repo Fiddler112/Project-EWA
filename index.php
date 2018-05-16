@@ -116,7 +116,6 @@
             <img src="img/pure.png" alt="Third Slide">
         </div>
     </div>
-<<<<<<< HEAD
     <!-- Carousel nav -->
     <a class="carousel-control left" href="#myCarousel" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -124,12 +123,7 @@
     <a class="carousel-control right" href="#myCarousel" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
-</div>  
-=======
-                     
->>>>>>> 02ff5f511d0cb8e01551926695b3b04e719e79e8
-        
-        
+</div>   
         
         
   <div class="panel panel-info">
@@ -140,7 +134,7 @@
                     <?php
                         include_once 'db_connect.php';
                         $_email =  $_COOKIE["email"];
-                        $sql = "SELECT * FROM `Events` WHERE email='".$_email."'";
+                        $sql = "SELECT type, description, timestamp FROM `Events` WHERE user_id IN (select User.user_id FROM `User` where User.email = '".$_email."')";
                         $result = $conn->query($sql);
                         if($result == FALSE) {
                         print(mysqli_error());
@@ -153,7 +147,7 @@
                        echo  "<tbody>";
                             
                         echo    "<tr>";
-                        echo    "<td>".$row["desctiption"]."</td>";
+                        echo    "<td>".$row["description"]."</td>";
                         echo    "<td>".$row["timestamp"]."</td>";
                         echo    "<tr>";
                       

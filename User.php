@@ -91,8 +91,8 @@
                 
                     <?php
                         include_once 'db_connect.php';
-                        $_email =  $_COOKIE["email"];
-                        $sql = "SELECT * FROM `User` WHERE email='".$_email."'";
+                        $_email =  $_COOKIE["email"]; 
+                        $sql = "select BMI.BMI_id,BMI.weight, BMI.BMI,User.length,User.email,User.birthdate,User.user_id, User.profileName, User.gender from `BMI` INNER JOIN  `User` ON BMI.user_id = User.user_id WHERE User.email ='".$_email."'ORDER BY timestamp DESC LIMIT 1";
                         $result = $conn->query($sql);
                         if($result == FALSE) {
                         print(mysqli_error());
@@ -100,9 +100,9 @@
                         while($row = $result->fetch_array()) {
                             
                             
-                       echo  "<div class=' col-md-9 col-lg-9 '>";
-                       echo  "<table class='table table-user-information'>";
-                       echo  "<tbody>";
+                        echo  "<div class=' col-md-9 col-lg-9 '>";
+                        echo  "<table class='table table-user-information'>";
+                        echo  "<tbody>";
                             
                         echo    "<tr>";
                         echo    "<td>Profile name</td>";
@@ -121,7 +121,7 @@
                    
                         echo    "<tr>";
                         echo    "<td>BMI</td>";
-                        echo    "<td>".$row[""]."</td>";
+                        echo    "<td>".$row["BMI"]."</td>";
                         echo    "<tr>";
                         
                         echo    "<tr>";

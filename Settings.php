@@ -96,18 +96,7 @@
                         </div>
 				</div> 
         </div>
-            
-
-<!--
-        <form method="post" action="" name="form">  
- <select name="category">
-    <option value="1">Adventure</option>
-    <option value="2">Drama</option>
- </select>
- <input name="submit" type="submit"> 
-</form>
--->
-        
+                    
             <script type="text/javascript">
        
         function setEventValue(){

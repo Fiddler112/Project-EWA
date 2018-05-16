@@ -58,6 +58,7 @@
              createCookie('firstName', firstName, 30, '/');
              createCookie('lastName', lastName, 30, '/');
              createCookie('imgURL', imgURL, 30, '/');
+             createCookie('amountOfEvents', '3', 30, '/');
         
     //redirect to database to create user profile
              window.location = "db_login_gUser.php?profileName=" + profileName + "&email=" + email + "&firstName=" + firstName + "&lastName=" + lastName + "&imgURL= " + imgURL + "&id_token=" + gIdToken;

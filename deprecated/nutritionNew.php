@@ -140,8 +140,8 @@
             $_email =  $_COOKIE["email"];
             $_limitEvents =  $_COOKIE["amountOfEvents"];
              	
-            $foodName = $conn->query(
-                "SELECT product FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."");
+            $foodProperties = $conn->query(
+                "SELECT product,calories,timestamp FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."");
             $foodCal = $conn->query(
                 "SELECT calories FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."");
              $foodTime = $conn->query(
@@ -149,21 +149,11 @@
         
             /*Show mysql output on screen to test*/
            
-//            while ($row = $foodCal->fetch_assoc()) {
-//            echo $row['calories']."<br>";
-//            }
-//           print_r($foodNameNormalArray);
-//            echo $newArray[3];
-             while ($row = $foodName->fetch_assoc()) {
-                 while ($rows = $foodCal->fetch_assoc()) {
-                      while ($rowTime = $foodTime->fetch_assoc()) {
-//            echo $row['product']."<br>";
-//            $foodNameNormalArray[] = $row;
-//            $newArray = array_keys($foodNameNormalArray);
-            
+             while ($row = $foodProperties->fetch_assoc()) {
+
 			echo"<div class='panel panel-container'>";
 				echo"<div class='panel panel-default '>";
-					echo"<div class='panel-heading'>:";
+					echo"<div class='panel-heading'>";
 						echo $row['product'];
 						
 						echo"</div>";
@@ -176,10 +166,10 @@
 											echo"<h4 class='timeline-title'>".$row['product']."<br>";"</h4>";
 										echo"</div>";
 										echo"<div class='timeline-body'>";
-											echo"<p>Time:" .$rowTime['timestamp']."</p>";
+											echo"<p>Time: " .$row['timestamp']."</p>";
                                       
-                                       	echo" <p>Time and date:  </p>";
-                                        	echo"<p>Calories:" .$rows['calories']."</p>";
+                                       //	echo" <p>Time and date:  </p>";
+                                        	echo"<p>Calories: " .$row['calories']."</p>";
 										echo"</div>";
 									echo"</div>";
 								echo"</li>";
@@ -213,8 +203,8 @@
 						echo"</div>";
 					echo"</div>";
 				echo"</div> ";
-                 }
-             }
+                 
+             
              }
         ?>
         <!-- TIMELINE -->

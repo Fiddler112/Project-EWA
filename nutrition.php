@@ -71,6 +71,7 @@
         <!--/.DAILY INTAKE-->
         
         
+<!--
 		<div class="row">
 			<div class="col-md-6">
 				<div class="panel panel-default articles">
@@ -128,96 +129,11 @@
 				</div> 
             
         </div>
+-->
 
 				<!--/.DAILY INTAKE-->
         
-        <!-- TIMELINE -->	
-            <?php
-            include_once 'db_connect.php';
-            $foodName = array();
-            $foodCal = array();
-            $timeStamp = array();
-            $_email =  $_COOKIE["email"];
-            $_limitEvents =  $_COOKIE["amountOfEvents"];
-             	
-            $foodName = $conn->query(
-                "SELECT product FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."");
-            $foodCal = $conn->query(
-                "SELECT calories FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."");
-        
-            /*Show mysql output on screen to test*/
-            while ($row = $foodName->fetch_assoc()) {
-            echo $row['product']."<br>";
-            $foodNameNormalArray[] = $row;
-            $newArray = array_keys($foodNameNormalArray);
-            }
-            while ($row = $foodCal->fetch_assoc()) {
-            echo $row['calories']."<br>";
-            }
-           print_r($foodNameNormalArray);
-            echo $newArray[3];
-            ?>
-			<div class="panel panel-container">
-				<div class="panel panel-default ">
-					<div class="panel-heading">
-						Intake history
-						
-						</div>
-					<div class="panel-body timeline-container">
-						<ul class="timeline">
-							<li>
-								<div class="timeline-badge"><em class="glyphicon glyphicon-refresh"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Los 7 kilo's</h4>
-									</div>
-									<div class="timeline-body">
-										<p>Time:
-                                        <?php 
-                                                    
-                                        ?>
-                                        </p>
-                                        <p>End date:   04-16</p>
-                                        <p>Status: Currently in progress</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="timeline-badge primary"><em class="glyphicon glyphicon-ok"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Los 5 kilo's </h4>
-									</div>
-									<div class="timeline-body">
-										<p>Time: </p>
-                                        <p>End date:   03-27</p>
-                                        <p>Status: Completed</p>
-									</div>
-								</div>
-							</li>
-                            <li>
-								<div class="timeline-badge primary"><em class="glyphicon glyphicon-remove"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Los 5 kilo's </h4>
-									</div>
-									<div class="timeline-body">
-										<p>Time: </p>
-                                        <p>End date:   03-17</p>
-                                        <p>Status: Not completed</p>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div> 
-    
-        
-        <!-- TIMELINE -->
-        
-
-                <!--/.DAILY INTAKE-->
+            <!--/.DAILY INTAKE-->
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Search recipe
@@ -245,6 +161,54 @@
 					</div>
 				</div>
             
+        
+        
+        
+        <!-- TIMELINE -->	
+            <?php
+            include_once 'db_connect.php';
+            $foodName = array();
+            $foodCal = array();
+            $timeStamp = array();
+            $_email =  $_COOKIE["email"];
+            $_limitEvents =  $_COOKIE["amountOfEvents"];
+             	
+            $foodProperties = $conn->query(
+                "SELECT product,calories,timestamp FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."");           
+
+			echo"<div class='panel panel-container'>";
+				echo"<div class='panel panel-default '>";
+					echo"<div class='panel-heading'>";
+						echo "What you've eaten today";						
+						echo"</div>";
+                   while ($row = $foodProperties->fetch_assoc()) {
+                       
+              echo"<div class='panel panel-container'>";
+				echo"<div class='panel panel-default '>";
+					echo"<div class='panel-body timeline-container'>";
+						echo"<ul class='timeline'>";
+								echo"<li>";
+									echo"<div class='timeline-badge'><em class='glyphicon glyphicon-refresh'></em></div>";
+									echo"<div class='timeline-panel'>";
+										echo"<div class='timeline-heading'>";
+											echo"<h4 class='timeline-title'>".$row['product']."<br>";"</h4>";
+										echo"</div>";
+										echo"<div class='timeline-body'>";
+											echo"<p>Date and time: " .$row['timestamp']."</p>";
+                                        	echo"<p>Calories: " .$row['calories']."</p>";
+										echo"</div>";
+									echo"</div>";
+								echo"</li>";
+								echo"<li>";
+						  echo"</ul>";
+						echo"</div>";
+					echo"</div>";
+				echo"</div> ";            
+             
+             }
+        ?>
+        <!-- TIMELINE -->
+        
             
 			</div><!--/.col-->
 			<div class="col-sm-12">

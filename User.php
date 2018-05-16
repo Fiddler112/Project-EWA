@@ -6,7 +6,6 @@
 	<title>Google Home - Nutrition</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	<link rel="icon" href="img/pic.png">
 	<!--Custom Font-->
@@ -16,11 +15,15 @@
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+                    <span><a href="Settings.php"><em class="fa fa-cog" style="font-size:48px;">&nbsp;</em> </a></span>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only" >Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>Google home</span> healthy habits</a>
+					<span class="icon-bar"></span>
+                </button>
+				<a class="navbar-brand" href="#"><span>Google home</span> healthy habits </a>
+                
+                
 				
 			</div>
 		</div><!-- /.container-fluid -->
@@ -41,11 +44,11 @@
 		</div>
 		<div class="divider"></div>
 		<ul class="nav menu">
-			<li><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li><a href="index.php"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 			<li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li class="active"><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
-			<li class="active"><a href="User.php"><em class="fa fa-user">&nbsp;</em> My details</a></li>
 			 <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		</ul>
 	</div><!--/.sidebar-->
@@ -56,175 +59,108 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Details</li>
+				<li class="active">Personal info</li>
 			</ol>
 		</div><!--/.row-->
 		
-		<div class="row">
+        	<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Personal details</h1>
+				<h1 class="page-header">Personal info</h1>
 			</div>
 		</div><!--/.row-->
-
-        <!--/.DAILY INTAKE-->
-        <div class="panel panel-container">
-			<div class="row">
-				<div class="col-xs-6 col-md-4 col-lg-4 left-padding ">
-					<div class="panel panel-teal panel-widget border-left ">
-						<div class="row no-padding">
-                            <?php
-							include_once 'db_connect.php';
-                            $_email =  $_COOKIE["email"];
-                            $sql = "SELECT length FROM `User` WHERE email='".$_email."'";					
-							$result = $conn->query($sql);
-							if($result == FALSE) {
-								print(mysqli_error());
-							} else {
-								while($row = $result->fetch_array()) {
-								// PRINTEN VAN BMI WERKT, MAAR NAMEN OPHALEN NIET!!!
-								echo" <div class='article'>";
-									echo"<div class='col-xs-12'>";
-									echo"	<div class='row'>";
-									echo"	<div class='col-xs-2 col-md-2 date'>";
-									echo"	<div class='large'>".$row["length"]. "</div>";
-									echo"	<div class='text-muted'>length</div>";
-									echo"	</div>";
-									echo"<div class='col-xs-10 col-md-10'>";
-									//echo'	<p>'.$row["BMI_id"].'</p>';
-									echo"</div>";
-									echo"</div>";
-								echo"</div>";
-								echo"<div class='clear'></div>";
-								echo"</div>	";																																	
-								}
-							}
-						//	$conn->close();
-							?>		
-						
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
-					<div class="panel panel-orange panel-widget border-right">
-						<div class="row no-padding">
-							  	    <?php
-							include_once 'db_connect.php';
-                            $_email =  $_COOKIE["email"];
-                            $sql = "SELECT weight FROM `BMI` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT 1";							
-							$result = $conn->query($sql);
-							if($result == FALSE) {
-								print(mysqli_error());
-							} else {
-								while($row = $result->fetch_array()) {
-								// PRINTEN VAN BMI WERKT, MAAR NAMEN OPHALEN NIET!!!
-								echo" <div class='article'>";
-									echo"<div class='col-xs-12'>";
-									echo"	<div class='row'>";
-									echo"	<div class='col-xs-2 col-md-2 date'>";
-									echo"	<div class='large'>".$row["weight"]. "</div>";
-									echo"	<div class='text-muted'>weight</div>";
-									echo"	</div>";
-									echo"<div class='col-xs-10 col-md-10'>";
-									//echo'	<p>'.$row["BMI_id"].'</p>';
-									echo"</div>";
-									echo"</div>";
-								echo"</div>";
-								echo"<div class='clear'></div>";
-								echo"</div>	";																																	
-								}
-							}
-						//	$conn->close();
-							?>
-						</div>
+ 
+        
+        <div class="panel panel-info">
+            <div class="panel-heading">
+               <div class="profile-userpic">
+				<img src="  <?php $imgURL =  $_COOKIE["imgURL"];
+                echo $imgURL;
+                ?> " class="img-responsive" alt="">
+			</div> 
+              <h1 class="panel-title"><?php $firstName =  $_COOKIE["firstName"];
+                echo $firstName;
+                  
+                  $lastName =  $_COOKIE["lastName"];
+                echo $lastName;
+                ?> </h1>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-4 col-lg-4 " align="center"> <div class="profile-usertitle-name"> 
+     </div> </div>
+                
+                    <?php
+                        include_once 'db_connect.php';
+                        $_email =  $_COOKIE["email"];
+                        $sql = "SELECT * FROM `User` WHERE email='".$_email."'";
+                        $result = $conn->query($sql);
+                        if($result == FALSE) {
+                        print(mysqli_error());
+                        } else {
+                        while($row = $result->fetch_array()) {
+                            
+                            
+                       echo  "<div class=' col-md-9 col-lg-9 '>";
+                       echo  "<table class='table table-user-information'>";
+                       echo  "<tbody>";
+                            
+                        echo    "<tr>";
+                        echo    "<td>Profile name</td>";
+                        echo    "<td>".$row["profileName"]."</td>";
+                        echo    "<tr>";
+                      
+                        echo  "<tr>";
+                        echo  "<td>Weight</td>";
+                        echo  "<td>".$row["weight"]."</td>";
+                        echo  "<tr>";
+                     
+                        echo  "<tr>";
+                        echo  "<td>Length</td>";
+                        echo "<td>".$row["length"]."</td>";
+                        echo  "<tr>";  
+                   
+                        echo    "<tr>";
+                        echo    "<td>BMI</td>";
+                        echo    "<td>".$row[""]."</td>";
+                        echo    "<tr>";
                         
-					</div>
-				</div>
-            <div class="col-xs-6 col-md-4 col-lg-4 no-padding">
-					<div class="panel panel-orange panel-widget border-right">
-						<div class="row no-padding">
-							
-                             <?php
-							include_once 'db_connect.php';
-                            $_email =  $_COOKIE["email"];
-                            $sql = "SELECT BMI FROM `BMI` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT 1";							
-							$result = $conn->query($sql);
-							if($result == FALSE) {
-								print(mysqli_error());
-							} else {
-								while($row = $result->fetch_array()) {
-								// PRINTEN VAN BMI WERKT, MAAR NAMEN OPHALEN NIET!!!
-								echo" <div class='article'>";
-									echo"<div class='col-xs-12'>";
-									echo"	<div class='row'>";
-									echo"	<div class='col-xs-2 col-md-2 date'>";
-									echo"	<div class='large'>".$row["BMI"]. "</div>";
-									echo"	<div class='text-muted'>bmi</div>";
-									echo"	</div>";
-									echo"<div class='col-xs-10 col-md-10'>";
-									//echo'	<p>'.$row["BMI_id"].'</p>';
-									echo"</div>";
-									echo"</div>";
-								echo"</div>";
-								echo"<div class='clear'></div>";
-								echo"</div>	";																																	
-								}
-							}
-						//	$conn->close();
-							?>					
-						
-				</div>
-	   </div>
-</div>
+                        echo    "<tr>";
+                        echo    "<td>Email</td>";
+                        echo    "<td>".$row["email"]."</td>";
+                        echo    "<tr>";
+                     
+                        echo  "<tr>";
+                        echo  "<td>Gender</td>";
+                        echo   "<td>".$row["gender"]."</td>";
+                        echo  "<tr>";
+                    
+                        echo   "<tr>";
+                        echo   "<td>Birthdate</td>";
+                        echo   "<td>".$row["birthdate"]."</td>";
+                        echo  "<tr>";
+                      
+                            
+                    echo    "<tbody>";
+                    echo    "</table>";
+                    echo    "</div>";
+                    echo    "</div>";
+                     }
+}
+$conn->close();
+?>      
+                           
+                   
+                </div>
+              </div>
+            </div>
+       
+    
         
         
         
-<!--
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default articles">
-					<div class="panel-heading">
-						BMI Tracker
-						</div>					
-						<?php
-							include_once 'db_connect.php';
-                            $_email =  $_COOKIE["email"];
-                            $sql = "SELECT BMI FROM `BMI` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT 1";							
-							$result = $conn->query($sql);
-							if($result == FALSE) {
-								print(mysqli_error());
-							} else {
-								while($row = $result->fetch_array()) {
-								// PRINTEN VAN BMI WERKT, MAAR NAMEN OPHALEN NIET!!!
-								echo" <div class='article'>";
-									echo"<div class='col-xs-12'>";
-									echo"	<div class='row'>";
-									echo"	<div class='col-xs-2 col-md-2 date'>";
-									echo"	<div class='large'>".$row["BMI"]. "</div>";
-									echo"	<div class='text-muted'>bmi</div>";
-									echo"	</div>";
-									echo"<div class='col-xs-10 col-md-10'>";
-									//echo'	<p>'.$row["BMI_id"].'</p>';
-									echo"</div>";
-									echo"</div>";
-								echo"</div>";
-								echo"<div class='clear'></div>";
-								echo"</div>	";																																	
-								}
-							}
-							$conn->close();
-							?>
-							</div>
-                        </div>
-				</div> 
-				           
-        </div>
--->
-				<!--/.DAILY INTAKE-->
 
-			</div><!--/.col-->
 			<div class="col-sm-12">
-				<p class="back-link">Google home Healthy Habits  <a href="https://www.medialoot.com">EWA United</a></p>
+				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
 		<!--/.row-->
 	</div>	<!--/.main-->

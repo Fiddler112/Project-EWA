@@ -16,6 +16,7 @@
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
+                <span><a href="Settings.php"><em class="fa fa-cog" style="font-size:48px;">&nbsp;</em> </a></span>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -41,11 +42,11 @@
 		</div>
 		<div class="divider"></div>
 		<ul class="nav menu">
-			<li><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li><a href="index.php"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 			<li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li class="active"><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
-			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> My details</a></li>
 			 <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		</ul>
 	</div><!--/.sidebar-->
@@ -112,9 +113,9 @@
         
 				
 
-			</div><!--/.col-->
+			
 			<div class="col-sm-12">
-				<p class="back-link">Google home Healthy Habits EWA United</a></p>
+				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
 		<!--/.row-->
 	</div>	<!--/.main-->

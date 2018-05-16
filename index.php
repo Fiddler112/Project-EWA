@@ -19,12 +19,13 @@
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
+                <span><a href="Settings.php"><em class="fa fa-cog" style="font-size:48px;">&nbsp;</em> </a></span>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
 
-				<a class="navbar-brand" href="#"><span>Google home</span> Healthy hub</a>
+				<a class="navbar-brand" href="#"><span>Google home</span> Healthy habits</a>
 			</div>
 
     
@@ -42,7 +43,6 @@
 				<div class="profile-usertitle-name"> <?php $firstName =  $_COOKIE["firstName"];
                 echo $firstName;
                 ?> </div>
-<!--				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>-->
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -51,11 +51,11 @@
    <!-- NAVIGATIE BAR -->     
 		<div class="divider"></div>
 		<ul class="nav menu">
-			<li class="active"><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li class="active"><a href="index.php"><em class="fa fa-home">&nbsp;</em> Home</a></li>
             <li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
-			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> My details</a></li>
             <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 <script>
   function signOut() {
@@ -84,133 +84,96 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active" id="bigOne"></li>
+				<li class="active" id="bigOne"> Home</li>
 			</ol>
 		</div>
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Dashboard</h1>
+				<h1 class="page-header">Home</h1>
 			</div>
 		</div>
         
         
         
-   <!-- CAROUSEL-->     
-                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
+        
+      <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
+    <!-- Carousel indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
+    </ol>   
+    <!-- Carousel items -->
     <div class="carousel-inner">
         <div class="item active">
-        <img src="sugar.png" alt="sugar_facts">
+            <img src="img/slises.png" alt="First Slide">
         </div>
-
         <div class="item">
-        <img src="chicago.jpg" alt="Chicago">
+            <img src="img/superfoods.png" alt="Second Slide">
         </div>
-
         <div class="item">
-            <img src="ny.jpg" alt="New York">
+            <img src="img/pure.png" alt="Third Slide">
         </div>
     </div>
-                     
-		
- <!-- TIMELINE versie 1-->
-<!--		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default articles">
-					<div class="panel-heading">
-						Time line 1
-						</div>					
-						<?php
-												
-							$result = $conn->query($sql);
-							if($result == FALSE) {
-								print(mysqli_error());
-							} else {
-								while($row = $result->fetch_array()) {
-								echo" <div class='article'>";
-									echo"<div class='col-xs-12'>";
-									echo"	<div class='row'>";
-									echo"	<div class='col-xs-2 col-md-2 date'>";
-									echo"	<div class='large'>".$row["Events"]. "</div>";
-									echo"	<div class='text-muted'>bmi</div>";
-									echo"	</div>";
-									echo"<div class='col-xs-10 col-md-10'>";
-									echo"</div>";
-									echo"</div>";
-								echo"</div>";
-								echo"<div class='clear'></div>";
-								echo"</div>	";																																	
-								}
-							}
-							$conn->close();
-							?>
-							</div>
-                        </div>
-				</div> 
-				           
-        </div>-->
-
-    <!-- TIMELINE versie 1—>
-
- 
-	<!-- TIMELINE versie 2-->
-
-<!--
-    <div class="panel panel-container">
-        <div class="panel panel-default ">
-            <div class="panel-heading">
-                Time line 2
-                <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
-            <div class="panel-body timeline-container">
-                        <?php
-                include_once 'db_connect.php';
-                $sql = "SELECT * FROM Events";
-                $result = $conn->query($sql);
-                if($result == FALSE) {
-                    print(mysqli_error());
-                } else {
-                    while($row = $result->fetch_array()) {
-
-                        echo "<ul class='timeline'>";
-                            
-                        echo   "	<li>";
-                        echo	"<div class='timeline-badge'><em class='glyphicon glyphicon-user'></em></div>";
-                        echo	"<div class='timeline-panel'>";
-                        echo	"<div class='timeline-heading'>";
-                        echo	"<h4 class='timeline-title'>".$row["description"]"</h4>";
-                        echo	"</div>";
-                        echo	"<div class='timeline-body'>";
-                        echo	"<p>".$row["timestamp"]"</p>";
-                        echo	"</div>";
-                        echo	"</div>";
-                        echo	"</li>";
-                    }
-                }
-                $conn->close();
-                ?> 
-                  </div>
-</div>
-</div> 
--->
-
-               
-        <!-- TIMELINE versie 2—>
-
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>  
         
-        <!-- FOOTER -->
+        
+        
+        
+  <div class="panel panel-info">
+         
+            <div class="panel-body">
+        
+                
+                    <?php
+                        include_once 'db_connect.php';
+                        $_email =  $_COOKIE["email"];
+                        $sql = "SELECT * FROM `Events` WHERE email='".$_email."'";
+                        $result = $conn->query($sql);
+                        if($result == FALSE) {
+                        print(mysqli_error());
+                        } else {
+                        while($row = $result->fetch_array()) {
+                            
+                            
+                       echo  "<div class=' col-md-9 col-lg-9 '>";
+                       echo  "<table class='table table-user-information'>";
+                       echo  "<tbody>";
+                            
+                        echo    "<tr>";
+                        echo    "<td>".$row["desctiption"]."</td>";
+                        echo    "<td>".$row["timestamp"]."</td>";
+                        echo    "<tr>";
+                      
+                            
+                    echo    "<tbody>";
+                    echo    "</table>";
+                    echo    "</div>";
+                    echo    "</div>";
+                     }
+}
+$conn->close();
+?>      
+                           
+                   
+                </div>
+              
+            
+  
+      		</div><!--/.col-->
 			<div class="col-sm-12">
-				<p class="back-link">Google home Healthy Habits </p>
+				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
-		</div>
-		<!-- FOOTER -->
+		<!--/.row-->
+	</div>	<!--/.main-->
    <!-- bestanden die waarschijnlijk niet in gebruik zijn!-->
     
 	<script src="js/jquery-1.11.1.min.js"></script>
@@ -233,6 +196,12 @@
 	scaleFontColor: "#c5c7cc"
 	});
 };
+        
+ type="text/javascript">
+$(document).ready(function(){
+     $("#myCarousel").carousel();
+});
+
 	</script>
 
 

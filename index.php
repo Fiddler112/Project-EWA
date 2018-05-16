@@ -116,6 +116,7 @@
             <img src="img/pure.png" alt="Third Slide">
         </div>
     </div>
+<<<<<<< HEAD
     <!-- Carousel nav -->
     <a class="carousel-control left" href="#myCarousel" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -124,6 +125,9 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
 </div>  
+=======
+                     
+>>>>>>> 02ff5f511d0cb8e01551926695b3b04e719e79e8
         
         
         

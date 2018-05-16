@@ -67,32 +67,60 @@
 			</div>
 		</div>
 
-        <form action="functions.js" method="post" onsubmit="validateForm">
+
+
+     <form method="post" action="" name="form">  
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default articles">
 					<div class="panel-heading">
-						Design
+						Amount of timestamps
 						</div>	
-					<!--	<form class="form" action="Function.php"> Functie komt er zo bij-->
 							<div class="panel-body articles-container">
                                 <div class="form-group">
-                                  <label for="sel1">Home many timestamps do you want to show on your dashboard?</label>
-                                  <select class="form-control" id="amountTimestamps">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                  </select>
+                                  <label for="sel1">Home many timestamps do you want shown on your dashboard?</label>
+                                  <select class="form-control" id="amountTimestamps" placeholder="4">
+                                      <option value="" disabled selected>Select amount of events, current: <?php
+                                           $_limitEvents =  $_COOKIE["amountOfEvents"];
+                                          echo $_limitEvents;
+                                          ?></option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                      <option value="6">6</option>
+                                      <option value="7">7</option>
+                                      <option value="8">8</option>
+                                      <option value="9">9</option>
+                                      <option value="10">10</option>                             
+                                    </select>
                                 </div>
 							</div>
                         </div>
 				</div> 
         </div>
+                    
+            <script type="text/javascript">
+       
+        function setEventValue(){
+             var getAmountOfEvents = document.getElementById("amountTimestamps");
+             var amountOfEvents = getAmountOfEvents.value;
+             createCookie("amountOfEvents", amountOfEvents,"365", "/");      
+            }
+         
+        function createCookie(name,value, days, path){
+        var expires = "";
+        if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + " path=" + path;
+   
+       }
+            </script>
+            
 			<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default articles">
@@ -106,14 +134,19 @@
 				</div>			           
         </div>
         
-            <button type="submit" class="btn btn-success" onclick="saveSettings()">Submit</button>
+<!--            <button type="submit" class="btn btn-success" onclick="">Submit</button>-->
+              <button type="submit" class="btn btn-success" onclick="setEventValue();">Submit</button> 
                 
+<<<<<<< HEAD
         
 
         
 				
 
 			
+=======
+			</div><!--/.col-->
+>>>>>>> 02ff5f511d0cb8e01551926695b3b04e719e79e8
 			<div class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>

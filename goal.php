@@ -10,6 +10,8 @@
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 </head>
+
+    
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
@@ -118,9 +120,12 @@
 					</div>
 				</div>
 			</div> 
+    
+        
         <!-- TIMELINE -->
         
        <!--ADD NEW USER-->
+        <!-- userfull link: https://stackoverflow.com/questions/3479130/how-to-preselect-an-html-dropdown-list-with-php/12273128#12273128->
 				<div class="panel panel-default">
 					<div class="panel-heading">Add a new goal</div>
 					<div class="panel-body">

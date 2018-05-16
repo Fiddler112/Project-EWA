@@ -77,9 +77,12 @@
 						</div>	
 							<div class="panel-body articles-container">
                                 <div class="form-group">
-                                  <label for="sel1">Home many timestamps do you want to show on your dashboard?</label>
+                                  <label for="sel1">Home many timestamps do you want shown on your dashboard?</label>
                                   <select class="form-control" id="amountTimestamps" placeholder="4">
-                                      <option value="" disabled selected>Select amount of events</option>
+                                      <option value="" disabled selected>Select amount of events, current: <?php
+                                           $_limitEvents =  $_COOKIE["amountOfEvents"];
+                                          echo $_limitEvents;
+                                          ?></option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
                                       <option value="3">3</option>

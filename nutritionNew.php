@@ -144,76 +144,79 @@
                 "SELECT product FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."");
             $foodCal = $conn->query(
                 "SELECT calories FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."");
+             $foodTime = $conn->query(
+                "SELECT timestamp FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."");
         
             /*Show mysql output on screen to test*/
-            while ($row = $foodName->fetch_assoc()) {
-            echo $row['product']."<br>";
-            $foodNameNormalArray[] = $row;
-            $newArray = array_keys($foodNameNormalArray);
-            }
-            while ($row = $foodCal->fetch_assoc()) {
-            echo $row['calories']."<br>";
-            }
-           print_r($foodNameNormalArray);
-            echo $newArray[3];
-            ?>
-			<div class="panel panel-container">
-				<div class="panel panel-default ">
-					<div class="panel-heading">
-						Intake history
+           
+//            while ($row = $foodCal->fetch_assoc()) {
+//            echo $row['calories']."<br>";
+//            }
+//           print_r($foodNameNormalArray);
+//            echo $newArray[3];
+             while ($row = $foodName->fetch_assoc()) {
+                 while ($rows = $foodCal->fetch_assoc()) {
+                      while ($rowTime = $foodTime->fetch_assoc()) {
+//            echo $row['product']."<br>";
+//            $foodNameNormalArray[] = $row;
+//            $newArray = array_keys($foodNameNormalArray);
+            
+			echo"<div class='panel panel-container'>";
+				echo"<div class='panel panel-default '>";
+					echo"<div class='panel-heading'>:";
+						echo $row['product'];
 						
-						</div>
-					<div class="panel-body timeline-container">
-						<ul class="timeline">
-							<li>
-								<div class="timeline-badge"><em class="glyphicon glyphicon-refresh"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Los 7 kilo's</h4>
-									</div>
-									<div class="timeline-body">
-										<p>Time:
-                                        <?php 
-                                                    
-                                        ?>
-                                        </p>
-                                        <p>End date:   04-16</p>
-                                        <p>Status: Currently in progress</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="timeline-badge primary"><em class="glyphicon glyphicon-ok"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Los 5 kilo's </h4>
-									</div>
-									<div class="timeline-body">
-										<p>Time: </p>
-                                        <p>End date:   03-27</p>
-                                        <p>Status: Completed</p>
-									</div>
-								</div>
-							</li>
-                            <li>
-								<div class="timeline-badge primary"><em class="glyphicon glyphicon-remove"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Los 5 kilo's </h4>
-									</div>
-									<div class="timeline-body">
-										<p>Time: </p>
-                                        <p>End date:   03-17</p>
-                                        <p>Status: Not completed</p>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div> 
-    
-        
+						echo"</div>";
+					echo"<div class='panel-body timeline-container'>";
+						echo"<ul class='timeline'>";
+								echo"<li>";
+									echo"<div class='timeline-badge'><em class='glyphicon glyphicon-refresh'></em></div>";
+									echo"<div class='timeline-panel'>";
+										echo"<div class='timeline-heading'>";
+											echo"<h4 class='timeline-title'>".$row['product']."<br>";"</h4>";
+										echo"</div>";
+										echo"<div class='timeline-body'>";
+											echo"<p>Time:" .$rowTime['timestamp']."</p>";
+                                      
+                                       	echo" <p>Time and date:  </p>";
+                                        	echo"<p>Calories:" .$rows['calories']."</p>";
+										echo"</div>";
+									echo"</div>";
+								echo"</li>";
+								echo"<li>";
+//									echo"<div class='timeline-badge primary'><em class='glyphicon'"; 	echo"glyphicon-ok></em></div>";
+//									echo"<div class='timeline-panel'>";
+//										echo"<div class='timeline-heading'>";
+//											echo"<h4 class='timeline-title'>".$row['product']." </h4>";
+//										echo"</div>";
+//										echo"<div class='timeline-body'>";
+//											echo"<p>Time: </p>";
+//                                       	echo" <p>End date:   03-27</p>";
+//                                        	echo"<p>Status: Completed</p>";
+//										echo"</div>";
+//									echo"</div>";
+//								echo"</li>";
+//                           	echo" <li>";
+//									echo"<div class='timeline-badge primary'><em class='glyphicon ";	echo"glyphicon-remove'></em></div>";
+//									echo"<div class='timeline-panel'>";
+//										echo"<div class='timeline-heading'>";
+//											echo"<h4 class='timeline-title'" .$row['product']."</h4>";
+//										echo"</div>";
+//										echo"<div class='timeline-body'>";
+//											echo"<p>Time: </p>";
+//                                        	echo"<p>End date:   03-17</p>";
+//                                       	echo" <p>Status: Not completed</p>";
+//										echo"</div>";
+//									echo"</div>";
+//							echo"</li>";
+							echo"</ul>";
+						echo"</div>";
+					echo"</div>";
+				echo"</div> ";
+                 }
+             }
+             }
+        ?>
         <!-- TIMELINE -->
         
 

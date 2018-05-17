@@ -12,15 +12,18 @@
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 </head>
+   
+    
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
+                <span><a href="Settings.php"><em class="fa fa-cog" style="font-size:48px;">&nbsp;</em> </a></span>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>Google home</span> healthy hub</a>
+				<a class="navbar-brand" href="#"><span>Google home</span> healthy habits</a>
 				
 			</div>
 		</div><!-- /.container-fluid -->
@@ -41,11 +44,11 @@
 		</div>
 		<div class="divider"></div>
 		<ul class="nav menu">
-			<li><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li><a href="index.php"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 			<li class="active"><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
+			<li><a href="Settings.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
-			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> My details</a></li>
 		    <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		</ul>
 	</div><!--/.sidebar-->
@@ -66,7 +69,14 @@
 			</div>
 		</div><!--/.row-->
 
+        
+
+
+
         <!--/.DAILY INTAKE-->
+        
+        
+<!--
 		<div class="row">
 			<div class="col-md-6">
 				<div class="panel panel-default articles">
@@ -88,7 +98,7 @@
 								</div>
 							</div>
 							<div class="clear"></div>
-						</div><!--End .article-->
+						</div>End .article
 						
 						<div class="article border-bottom">
 							<div class="col-xs-12">
@@ -124,9 +134,11 @@
 				</div> 
             
         </div>
-				<!--/.DAILY INTAKE-->
+-->
 
-                <!--/.DAILY INTAKE-->
+				<!--/.DAILY INTAKE-->
+        
+            <!--/.DAILY INTAKE-->
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Search recipe
@@ -154,10 +166,58 @@
 					</div>
 				</div>
             
+        
+        
+        
+        <!-- TIMELINE -->	
+            <?php
+            include_once 'db_connect.php';
+            $foodName = array();
+            $foodCal = array();
+            $timeStamp = array();
+            $_email =  $_COOKIE["email"];
+            $_limitEvents =  $_COOKIE["amountOfEvents"];
+             	
+            $foodProperties = $conn->query(
+                "SELECT product,calories,timestamp FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."");           
+
+			echo"<div class='panel panel-container'>";
+				echo"<div class='panel panel-default '>";
+					echo"<div class='panel-heading'>";
+						echo "What you've eaten today";						
+						echo"</div>";
+                   while ($row = $foodProperties->fetch_assoc()) {
+                       
+              echo"<div class='panel panel-container'>";
+				echo"<div class='panel panel-default '>";
+					echo"<div class='panel-body timeline-container'>";
+						echo"<ul class='timeline'>";
+								echo"<li>";
+									echo"<div class='timeline-badge'><em class='glyphicon glyphicon-refresh'></em></div>";
+									echo"<div class='timeline-panel'>";
+										echo"<div class='timeline-heading'>";
+											echo"<h4 class='timeline-title'>".$row['product']."<br>";"</h4>";
+										echo"</div>";
+										echo"<div class='timeline-body'>";
+											echo"<p>Date and time: " .$row['timestamp']."</p>";
+                                        	echo"<p>Calories: " .$row['calories']."</p>";
+										echo"</div>";
+									echo"</div>";
+								echo"</li>";
+								echo"<li>";
+						  echo"</ul>";
+						echo"</div>";
+					echo"</div>";
+				echo"</div> ";            
+             
+             }
+        ?>
+        <!-- TIMELINE -->
+        
             
-			</div><!--/.col-->
+			
 			<div class="col-sm-12">
-				<p class="back-link">Google home Healthy Habits  <a href="https://www.medialoot.com">EWA United</a></p>
+				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
 		<!--/.row-->
 	</div>	<!--/.main-->

@@ -47,7 +47,7 @@
 			<li><a href="index.php"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 			<li class="active"><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
-			<li><a href="Settings.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
+			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
 		    <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		</ul>
@@ -154,6 +154,12 @@
 										<input id="name" name="name" type="text" placeholder="Recipe name or ingrëdient" class="form-control">
 									</div>
 								</div>
+                                <div class="form-group">
+									<label class="col-md-3 control-label" for="name">Maximum calories</label>
+									<div class="col-md-9">
+										<input id="maxCalories" name="maxCalories" type="text" placeholder="Maximum amount of calories" class="form-control">
+									</div>
+								</div>
 								
 								<!-- Form actions -->
 								<div class="form-group">
@@ -163,6 +169,35 @@
 								</div>
 							</fieldset>
 						</form>
+                        
+                            <?php
+                                $name = $_POST["name"];
+                                $maxcalories = $_POST["maxCalories"];
+                                require __DIR__ . '/vendor/autoload.php';
+                                use RapidApi\RapidApiConnect;
+                                $rapid = new RapidApiConnect('default-application_5adf253de4b0b4824e5ac536', 'dc6004e0-4602-4c1c-b599-38838972f5ea');
+
+                                $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".$name."&maxCalories=".$maxcalories,
+                              array(
+                                "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
+                                "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
+                              )
+                                                              
+                         );
+                                $getResponseVal = $response->raw_body;
+                                $getDecodeData = json_decode($getResponseVal, true);
+                                //$getSpecificValue = $getDecodeData['results'][0]['title'];
+                                
+                                foreach($getDecodeData['results'] as $key=>$value) {
+                                    if (empty($value)) {
+                                        echo "<div class='panel-heading'>No recepts found </div>";
+                                    } else {
+                                        echo "<div class='panel-heading'>";
+                                        echo "Recipe ".$key." : ".$value['title']."Amount of calories: ".$value['calories']. "<br>";
+                                        echo "</div>";
+                                        }
+                                }
+                        ?>
 					</div>
 				</div>
             

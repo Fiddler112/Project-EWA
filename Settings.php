@@ -136,17 +136,8 @@
         
 <!--            <button type="submit" class="btn btn-success" onclick="">Submit</button>-->
               <button type="submit" class="btn btn-success" onclick="setEventValue();">Submit</button> 
-                
-<<<<<<< HEAD
-        
 
-        
-				
-
-			
-=======
 			</div><!--/.col-->
->>>>>>> 02ff5f511d0cb8e01551926695b3b04e719e79e8
 			<div class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>

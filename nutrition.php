@@ -11,6 +11,7 @@
 	<link rel="icon" href="img/pic.png">
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <meta name="google-signin-client_id" content="307112913485-5kkslq098hfj65e6l3qngjo1916a7h4i.apps.googleusercontent.com">
 </head>
    
     
@@ -49,7 +50,28 @@
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
-		    <li><a href="db_logout.php" onclick="signOut();"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
+            <li><a href="#" onclick="signOut()"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
+		    <script>
+              function signOut() {
+                  alert("User will be logged off and redirected to Google");
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {  
+
+
+
+                  console.log('User signed out.');
+                    window.location = "https://mail.google.com/mail/u/0/?logout&hl=en";;
+                });
+              }
+                function onLoad() {
+                  gapi.load('auth2', function() {
+                    gapi.auth2.init();
+                  });
+                }
+                 function deleteCookie(name) {
+                    setCookie({name: name, value: "", seconds: 0.1});
+                }
+            </script>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -69,13 +91,8 @@
 			</div>
 		</div><!--/.row-->
 
-        
-
-
-
         <!--/.DAILY INTAKE-->
-        
-        
+    
 <!--
 		<div class="row">
 			<div class="col-md-6">
@@ -135,7 +152,6 @@
             
         </div>
 -->
-
 				<!--/.DAILY INTAKE-->
         
             <!--/.DAILY INTAKE-->
@@ -180,8 +196,7 @@
                               array(
                                 "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
                                 "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-                              )
-                                                              
+                              )                                                              
                          );
                                 $getResponseVal = $response->raw_body;
                                 $getDecodeData = json_decode($getResponseVal, true);
@@ -192,19 +207,15 @@
                                         echo "<div class='panel-heading'>No recipes found </div>";
                                     } else {
                                         $number++;
-                                        echo "<div class='panel-heading'>";
-                                        echo "Recipe ".$number." : ".$value['title']."<br>Amount of calories: ".$value['calories']. "<br>";
+                                        echo "<div class='panel-body'>";
+                                        echo '<strong>Recipe '.$number.' : '.$value['title'].'</strong><br>Amount of calories: '.$value['calories']. '<img src="'.$value['image'].'" align="right"/> <br>';
                                         echo "</div>";
                                         }
-                                }
+                                    }
                                }
                         ?>
 					</div>
 				</div>
-            
-        
-        
-        
         <!-- TIMELINE -->	
             <?php
             include_once 'db_connect.php';
@@ -216,7 +227,6 @@
              	
             $foodProperties = $conn->query(
                 "SELECT product,calories,timestamp FROM `Food` WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') ORDER BY timestamp DESC LIMIT ".$_limitEvents."");           
-
 			echo"<div class='panel panel-container'>";
 				echo"<div class='panel panel-default '>";
 					echo"<div class='panel-heading'>";
@@ -258,7 +268,7 @@
 		<!--/.row-->
 	</div>	<!--/.main-->
 	  
-
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 <script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/chart.min.js"></script>

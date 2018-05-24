@@ -17,44 +17,6 @@
     
 <body>
     
-<canvas id="lineChart"></canvas>
-                 
-    <script>       
-//line
-var ctxL = document.getElementById("lineChart").getContext('2d');
-var myLineChart = new Chart(ctxL, {
-    type: 'line',
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55, 40]
-            },
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 86, 27, 90]
-            }
-        ]
-    },
-    options: {
-        responsive: true
-    }    
-});
-            
-    </script>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -132,69 +94,16 @@ var myLineChart = new Chart(ctxL, {
 				<h1 class="page-header">Nutrition</h1>
 			</div>
 		</div><!--/.row-->
-
-        <!--/.DAILY INTAKE-->
-    
-<!--
-		<div class="row">
-			<div class="col-md-6">
-				<div class="panel panel-default articles">
+        
+        	<div class="panel panel-default">
 					<div class="panel-heading">
-						Daily intake 
+						Nutritional intake values
+                    </div>
+        <canvas id="lineChart"></canvas>
+          </div>
+                 
 
-						</div>
-					<div class="panel-body articles-container">
-						<div class="article border-bottom">
-							<div class="col-xs-12">
-								<div class="row">
-									<div class="col-xs-2 col-md-2 date">
-										<div class="large">90</div>
-										<div class="text-muted">cal</div>
-									</div>
-									<div class="col-xs-10 col-md-10">
-										<p>Apple</p>
-									</div>
-								</div>
-							</div>
-							<div class="clear"></div>
-						</div>End .article
-						
-						<div class="article border-bottom">
-							<div class="col-xs-12">
-								<div class="row">
-									<div class="col-xs-2 col-md-2 date">
-										<div class="large">120</div>
-										<div class="text-muted">cal</div>
-									</div>
-									<div class="col-xs-10 col-md-10">
-										<p>KitKat</p>
-									</div>
-								</div>
-							</div>
-							<div class="clear"></div>
-						</div>
-						
-                    <div class="article">
-							<div class="col-xs-12">
-								<div class="row">
-									<div class="col-xs-2 col-md-2 date">
-										<div class="large">450</div>
-										<div class="text-muted">cal</div>
-									</div>
-									<div class="col-xs-10 col-md-10">
-										<p>Pasta</p>
-									</div>
-								</div>
-							</div>
-							<div class="clear"></div>
-						</div>
-					</div>
-                        </div>
-				</div> 
-            
-        </div>
--->
-				<!--/.DAILY INTAKE-->
+        
         
             <!--/.DAILY INTAKE-->
 				<div class="panel panel-default">
@@ -310,15 +219,99 @@ var myLineChart = new Chart(ctxL, {
 		<!--/.row-->
 	</div>	<!--/.main-->
 	  
+    <?php
+	include_once "db_connect.php";
+    $_email =  $_COOKIE["email"];
+    $today = date("Y-m-d");
+    $sqlGetCalories = "SELECT SUM(calories) AS sumCalories 
+    FROM `Food` WHERE user_id IN (select User.user_id FROM `User` where User.email = '$_email') AND timestamp = '$today';";
+    $result = $conn->query($sqlGetCalories);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $sumCal = $row["sumCalories"];
+           echo $sumCal;
+        }
+    }
+       echo  "<div class=' col-md-9 col-lg-9 '>";
+                       echo  "<table class='table table-user-information'>";
+                       echo  "<tbody>";
+                            
+                        echo    "<tr>";
+                        echo    "<td>$sumCal</td>";
+                        echo    "<td>/ 2200</td>";
+                        echo    "<tr>";
+                            
+                      
+                            
+                    echo    "<tbody>";
+                    echo    "</table>";
+                    echo    "</div>";
+                    echo    "</div>";                               
+	?>
+    
+    
+    
+    
+    
 <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 <script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+<script src="js/mdb.js"></script>
+    <script> 
+//line
+var ctxL = document.getElementById("lineChart").getContext('2d');
+var date = new Date();
+createChartSevenDays();
+function createChartSevenDays(){
+var myLineChart = new Chart(ctxL, {
+    type: 'line',
+    data: {
+        labels: [date.getDate()-6, (date.getDate()-5), (date.getDate()-4), (date.getDate()-3), (date.getDate()-2), (date.getDate()-1), (date.getDate())],
+        datasets: [
+            {
+                 label: "1",
+                    backgroundColor : "rgba(220,220,220,0)",
+                    borderWidth : 2,
+                    borderColor : "rgba(79, 153, 36, 1)",
+                    pointBackgroundColor : "rgba(79, 153, 36, 1)",
+                    pointBorderColor : "#009933",
+                    pointBorderWidth : 1,
+                    pointRadius : 4,
+                    pointHoverBackgroundColor : "#009933",
+                    pointHoverBorderColor : "rgba(79, 153, 36, 1)",
+                    data: [65, 59, 80, 81, 56, 55, 40]
+            },
+            {
+//               label: "2",
+//                    backgroundColor : "rgba(220,220,220,0)",
+//                    borderWidth : 2,
+//                    borderColor : "rgba(79, 153, 36, 1)",
+//                    pointBackgroundColor : "rgba(79, 153, 36, 1)",
+//                    pointBorderColor : "#009933",
+//                    pointBorderWidth : 1,
+//                    pointRadius : 4,
+//                    pointHoverBackgroundColor : "#009933",
+//                    pointHoverBorderColor : "rgba(79, 153, 36, 1)",
+//                    data: [65, 59, 80, 81, 56, 55, 40]
+            }
+        ]
+    },
+    options: {
+        responsive: true
+    }    
+});
+}
+
+    </script>
+    
+<!--	<script src="js/bootstrap.min.js"></script>
 	<script src="js/chart.min.js"></script>
 	<script src="js/chart-data.js"></script>
 	<script src="js/easypiechart.js"></script>
 	<script src="js/easypiechart-data.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/custom.js"></script>
+-->
 	
 </body>
 </html>

@@ -1,33 +1,52 @@
-    <?php /*
-$name = $_POST["name"];
-echo $name;
-require __DIR__ . '/vendor/autoload.php';
-use RapidApi\RapidApiConnect;
-$rapid = new RapidApiConnect('default-application_5adf253de4b0b4824e5ac536', 'dc6004e0-4602-4c1c-b599-38838972f5ea');
+<html>
+<?php 
 
-$response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&intolerances=egg%2C+gluten&number=10&offset=0&query=".$name."&type=main+course",
-  array(
-    "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
-    "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-  )
-);
-
-$getResponseVal = $response->raw_body;
-$getDecodeData = json_decode($getResponseVal, true);
-$getSpecificValue = $getDecodeData['results'][0]['title'];
-foreach($getDecodeData['results'] as $recipe) {
-    echo "Recepten : ".$recipe['title']. "<br>";
-}
-
-//$parsed_json = $parsed_json['root']['body']['result'];
-//pr($parsed_json);
-
-//foreach($parsed_json as $key => $value)
-//{
-  // echo $value['id'] . '<br>';
-   //echo $value['title'] . '<br>';
-   // etc
-//}
-   $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".$name."&maxCalories=".$maxCalories,
-*/
+    
+<div class="col-md-5" >
+    <canvas id="myChart" ></canvas>
+</div>
+    
+    <script src="\js\jquery-1.11.1.min.js" ></script>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+    
 ?>
+    
+    </html>

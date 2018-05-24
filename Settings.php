@@ -50,14 +50,17 @@
             <li><a href="#" onclick="signOut()"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 			 <script>
               function signOut() {
-                  alert("User will be logged off and redirected to Google");
+                   alert("User will be logged off");
                 var auth2 = gapi.auth2.getAuthInstance();
                 auth2.signOut().then(function () {  
 
-
-
                   console.log('User signed out.');
-                    window.location = "https://mail.google.com/mail/u/0/?logout&hl=en";;
+                    window.location = "\login.php";
+                });
+              }
+                function onLoad() {
+                  gapi.load('auth2', function() {
+                    gapi.auth2.init();
                 });
               }
                 function onLoad() {

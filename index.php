@@ -130,12 +130,17 @@
 </div>   
         
         
-  <div class="panel panel-info">
-         
-            <div class="panel-body">
-        
-                
-                    <?php
+    <form method="post" action="" name="form">  
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default articles">
+					<div class="panel-heading">
+						Progress time line
+						</div>	
+							<div class="panel-body articles-container">
+                                <div class="form-group">
+
+                                              <?php
                         include_once 'db_connect.php';
                         $_email =  $_COOKIE["email"];
                         $sql = "SELECT type, description, timestamp FROM `Events` WHERE user_id IN (select User.user_id FROM `User` where User.email = '".$_email."')";
@@ -145,8 +150,7 @@
                         } else {
                         while($row = $result->fetch_array()) {
                             
-                            
-                       echo  "<div class=' col-md-9 col-lg-9 '>";
+               echo  "<div class=' col-md-9 col-lg-9 '>";
                        echo  "<table class='table table-user-information'>";
                        echo  "<tbody>";
                             
@@ -155,22 +159,79 @@
                         echo    "<td>".$row["timestamp"]."</td>";
                         echo    "<tr>";
                       
+                      
                             
                     echo    "<tbody>";
                     echo    "</table>";
                     echo    "</div>";
                     echo    "</div>";
                      }
-                }
-                $conn->close();
-                ?>      
-                           
-                   
-                </div>
+
+}
+$conn->close();
+?>                              
+          
+                                </div>
+							</div>
+                        </div>
+				</div> 
+        </div>
+        </form>
               
-            
+      <form method="post" action="" name="form">  
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default articles">
+					<div class="panel-heading">
+						Daily calories
+						</div>	
+							<div class="panel-body articles-container">
+                                <div class="form-group">
+
+                                              <?php
+                        include 'db_connect.php';
+                        $_email =  $_COOKIE["email"];
+                        $today = date("Y-m-d");
+                        $sql = "SELECT SUM(calories) AS sumCalories 
+                        FROM `Food` WHERE user_id IN (select User.user_id FROM `User` where User.email = '$_email') AND timestamp = '$today';";
+                        $result = $conn->query($sql);
+                                  
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $sumCal = $row["sumCalories"];
+                            }
+                        }
+                                    
+                         
+                    echo  "<div class=' col-md-9 col-lg-9 '>";
+                       echo  "<table class='table table-user-information'>";
+                       echo  "<tbody>";
+                            
+                        echo    "<tr>";
+                        echo    "<td>$sumCal</td>";
+                        echo    "<td>/ 2200</td>";
+                        echo    "<tr>";
+                            
+                      
+                            
+                    echo    "<tbody>";
+                    echo    "</table>";
+                    echo    "</div>";
+                    echo    "</div>";
+
+
+
+$conn->close();
+?>                              
+          
+                                </div>
+							</div>
+                        </div>
+				</div> 
+        </div>
+        </form>      
   
-      		</div><!--/.col-->
+      	
 			<div class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>

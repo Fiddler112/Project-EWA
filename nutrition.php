@@ -221,16 +221,18 @@
 	  
     <?php
 	include_once "db_connect.php";
-    $_email =  $_COOKIE["email"];
-    $today = date("Y-m-d");
-    $sqlGetCalories = "SELECT SUM(calories) AS sumCalories 
-    FROM `Food` WHERE user_id IN (select User.user_id FROM `User` where User.email = '$_email') AND timestamp = '$today';";
-    $result = $conn->query($sqlGetCalories);
+    $_email =  $_COOKIE['email'];
+    $today = date('Y-m-d');
+    $sevenDaysAgo = date('Y-m-d', strtotime('-7 days'));
+    $sqlGetCaloriesLastSevenDays = ("SELECT Food.timestamp, count(*), SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (Food.timestamp between '$sevenDaysAgo' AND '$today') AND email = '".$_email."' group by timestamp");
+    
+
+    $result = $conn->query($sqlGetCaloriesLastSevenDays);
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $sumCal = $row["sumCalories"];
-           echo $sumCal;
+            $totalCalories = $row["totalCalories"];
+           echo $totalCalories;
         }
     }
        echo  "<div class=' col-md-9 col-lg-9 '>";
@@ -238,7 +240,8 @@
                        echo  "<tbody>";
                             
                         echo    "<tr>";
-                        echo    "<td>$sumCal</td>";
+                        echo    "<td>".$row['count(*)']."</td>";
+    
                         echo    "<td>/ 2200</td>";
                         echo    "<tr>";
                             

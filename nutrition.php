@@ -224,6 +224,7 @@
     $_email =  $_COOKIE['email'];
     $today = date('Y-m-d');
     $sevenDaysAgo = date('Y-m-d', strtotime('-7 days'));
+    
     $sqlGetCaloriesLastSevenDays = ("SELECT Food.timestamp, count(*), SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (Food.timestamp between '$sevenDaysAgo' AND '$today') AND email = '".$_email."' group by timestamp");
     
 
@@ -231,8 +232,9 @@
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $totalCalories = $row["totalCalories"];
-           echo $totalCalories;
+          $timeStampArray[] = $row['Food.timestamp'];
+          $caloriesPerDayArray[] = $row['totalCalories'];
+          $countArray[] = $row['count(*)'];
         }
     }
        echo  "<div class=' col-md-9 col-lg-9 '>";

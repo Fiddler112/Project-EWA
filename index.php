@@ -100,8 +100,33 @@
 			</div>
 		</div>
         
-        
-        
+        <!-- Progress bar-->
+    <?php
+        include_once 'db_connect.php';
+        $today = date('Y-m-d');
+        $_email =  $_COOKIE["email"];
+        $sql = "SELECT SUM(calories) AS totalCalories FROM `Food` WHERE timestamp='$today'AND user_id IN (select User.user_id FROM `User` where User.email = '".$_email."')";
+        $result = $conn->query($sql);
+        if($result == FALSE) {
+        print(mysqli_error());
+        } else {
+              while($row = $result->fetch_array()) {
+                 $calories = $row["totalCalories"]; 
+            $percentage = ($calories / 2500 * 100);
+      echo  "<div class='panel-heading'>";
+      echo  "Eaten calories today";
+      echo  "</div>";
+          echo  "<div class='row'>";
+              echo  "<div class='col-md-12'>";
+                  echo  "<div class='progress'>";
+                      echo  "<div class='progress-bar bg-success' role='progressbar' height='25px' style='width: $percentage% ' aria-valuenow=100 aria-valuemin='0' aria-valuemax='100'>$calories</div>";
+                      echo  "</div>";
+                  echo  "</div>";
+          echo  "</div>";
+        }
+        }
+  ?>
+    
         
       <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
     <!-- Carousel indicators -->
@@ -153,16 +178,10 @@
                         while($row = $result->fetch_array()) {
                             
                echo  "<div class=' col-md-9 col-lg-9 '>";
-                       echo  "<table class='table table-user-information'>";
-                       echo  "<tbody>";
-                            
-                        echo    "<tr>";
+                       echo  "<table class='table table-user-information'>";                            
                         echo    "<td>".$row["description"]."</td>";
                         echo    "<td>".$row["timestamp"]."</td>";
-                        echo    "<tr>";
-                      
-                      
-                            
+                        echo    "<tr>";                   
                     echo    "<tbody>";
                     echo    "</table>";
                     echo    "</div>";
@@ -180,6 +199,8 @@ $conn->close();
         </div>
         </form>
               
+       
+<!--
       <form method="post" action="" name="form">  
 		<div class="row">
 			<div class="col-md-12">
@@ -189,51 +210,49 @@ $conn->close();
 						</div>	
 							<div class="panel-body articles-container">
                                 <div class="form-group">
+-->
 
                                               <?php
-                        include 'db_connect.php';
-                        $_email =  $_COOKIE["email"];
-                        $today = date("Y-m-d");
-                        $sql = "SELECT SUM(calories) AS sumCalories 
-                        FROM `Food` WHERE user_id IN (select User.user_id FROM `User` where User.email = '$_email') AND timestamp = '$today';";
-                        $result = $conn->query($sql);
-                                  
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                $sumCal = $row["sumCalories"];
-                            }
-                        }
-                                    
-                         
-                    echo  "<div class=' col-md-9 col-lg-9 '>";
-                       echo  "<table class='table table-user-information'>";
-                       echo  "<tbody>";
-                            
-                        echo    "<tr>";
-                        echo    "<td>$sumCal</td>";
-                        echo    "<td>/ 2200</td>";
-                        echo    "<tr>";
-                            
-                      
-                            
-                    echo    "<tbody>";
-                    echo    "</table>";
-                    echo    "</div>";
-                    echo    "</div>";
-
-
-
-$conn->close();
+                        
+//                        $_email =  $_COOKIE["email"];
+//                        $today = date("Y-m-d");
+//                        $sql = "SELECT SUM(calories) AS sumCalories 
+//                        FROM `Food` WHERE user_id IN (select User.user_id FROM `User` where User.email = '$_email') AND timestamp = '$today';";
+//                        $result = $conn->query($sql);
+//                                  
+//                        if ($result->num_rows > 0) {
+//                            while ($row = $result->fetch_assoc()) {
+//                                $sumCal = $row["sumCalories"];
+//                            }
+//                        }
+//                                    
+//                         
+//                    echo  "<div class=' col-md-9 col-lg-9 '>";
+//                       echo  "<table class='table table-user-information'>";
+//                       echo  "<tbody>";
+//                            
+//                        echo    "<tr>";
+//                        echo    "<td>$sumCal</td>";
+//                        echo    "<td>/ 2200</td>";
+//                        echo    "<tr>";
+//                            
+//                      
+//                            
+//                    echo    "<tbody>";
+//                    echo    "</table>";
+//                    echo    "</div>";
+//                    echo    "</div>";
 ?>                              
           
+<!--
                                 </div>
 							</div>
                         </div>
 				</div> 
         </div>
         </form>      
-  
-      	
+-->
+    
 			<div class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
@@ -241,6 +260,7 @@ $conn->close();
 	</div>	<!--/.main-->
    <!-- bestanden die waarschijnlijk niet in gebruik zijn!-->
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+<!--
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/chart.min.js"></script>
@@ -249,6 +269,7 @@ $conn->close();
 	<script src="js/easypiechart-data.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/custom.js"></script>
+-->
 	
 	<!-- grafiek van tevoren?-->
 

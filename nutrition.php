@@ -140,32 +140,32 @@
 						</form>
                         
                             <?php
-//                                  $name = $_POST["name"] ?? 'null'; 
-//                                   $maxcalories = $_POST["maxCalories"] ?? '0';  
-//                                require __DIR__ . '/vendor/autoload.php';
-//                                use RapidApi\RapidApiConnect;
-//                                $rapid = new RapidApiConnect('default-application_5adf253de4b0b4824e5ac536', 'dc6004e0-4602-4c1c-b599-38838972f5ea');
-//                              $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".($name = $name ?? "")."&maxCalories=".($maxcalories =$maxcalories ?? "0"),                            
-//                              array(
-//                                "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
-//                                "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-//                              )                                                              
-//                         );
-//                                $getResponseVal = $response->raw_body;
-//                                $getDecodeData = json_decode($getResponseVal, true);
-//                               if(isset($getDecodeData['results'])){ 
-//                                   $number = 0;                                        
-//                                 foreach($getDecodeData['results'] as $key=>$value) {
-//                                    if (empty($value)) {
-//                                        echo "<div class='panel-heading'>No recipes found </div>";
-//                                    } else {
-//                                        $number++;
-//                                        echo "<div class='panel-body'>";
-//                                        echo '<strong>Recipe '.$number.' : '.$value['title'].'</strong><br>Amount of calories: '.$value['calories']. '<img src="'.$value['image'].'" align="right"/> <br>';
-//                                        echo "</div>";
-//                                        }
-//                                    }
-//                               }
+                                  $name = $_POST["name"] ?? 'null'; 
+                                   $maxcalories = $_POST["maxCalories"] ?? '0';  
+                                require __DIR__ . '/vendor/autoload.php';
+                                use RapidApi\RapidApiConnect;
+                                $rapid = new RapidApiConnect('default-application_5adf253de4b0b4824e5ac536', 'dc6004e0-4602-4c1c-b599-38838972f5ea');
+                              $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".($name = $name ?? "")."&maxCalories=".($maxcalories =$maxcalories ?? "0"),                            
+                              array(
+                                "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
+                                "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
+                              )                                                              
+                         );
+                                $getResponseVal = $response->raw_body;
+                                $getDecodeData = json_decode($getResponseVal, true);
+                               if(isset($getDecodeData['results'])){ 
+                                   $number = 0;                                        
+                                 foreach($getDecodeData['results'] as $key=>$value) {
+                                    if (empty($value)) {
+                                        echo "<div class='panel-heading'>No recipes found </div>";
+                                    } else {
+                                        $number++;
+                                        echo "<div class='panel-body'>";
+                                        echo '<strong>Recipe '.$number.' : '.$value['title'].'</strong><br>Amount of calories: '.$value['calories']. '<img src="'.$value['image'].'" align="right"/> <br>';
+                                        echo "</div>";
+                                        }
+                                    }
+                               }
                         ?>
 					</div>
 				</div>
@@ -228,7 +228,7 @@
      $caloriesPerDayArray = array();
      $countEventsPerDayArray = array();
     
-    $sqlGetCaloriesLastSevenDays = ("SELECT Food.timestamp, count(*), SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (Food.timestamp between '$sevenDaysAgo' AND '$today') AND email = '".$_email."' group by timestamp");
+    $sqlGetCaloriesLastSevenDays = ("SELECT Food.timestamp, count(*), SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (Food.timestamp between '$thirtyDaysAgo' AND '$today') AND email = '".$_email."' group by timestamp");
     
 
    $result = $conn->query($sqlGetCaloriesLastSevenDays);
@@ -240,25 +240,7 @@
           $countArray[] = $row['count(*)'];
         }
     }
-       echo  "<div class=' col-md-9 col-lg-9 '>";
-                       echo  "<table class='table table-user-information'>";
-                       echo  "<tbody>";
-                            
-                        echo    "<tr>";
-                        echo    "<td>".$timeStampArray[1]."</td>";
-                         echo    "<td>".$row['Food.timestamp']."</td>";
-                         echo    "<td>".$row['totalCalories']."</td>";
-                         
-
-                        echo    "<td>/ 2200</td>";
-                        echo    "<tr>";
-                            
-                      
-                            
-                    echo    "<tbody>";
-                    echo    "</table>";
-                    echo    "</div>";
-                    echo    "</div>";                               
+                              
 	?>
     
     

@@ -99,6 +99,8 @@
 					<div class="panel-heading">
 						Nutritional intake values
                     </div>
+                <button style="height:30px;width:200px"type="button" class="btn btn-light">Last 7 events</button>
+                <button style="height:30px;width:200px"type="button" class="btn btn-light">Events in last 180 days</button>
         <canvas id="lineChart"></canvas>
           </div>
                  
@@ -138,32 +140,32 @@
 						</form>
                         
                             <?php
-                                  $name = $_POST["name"] ?? 'null'; 
-                                   $maxcalories = $_POST["maxCalories"] ?? '0';  
-                                require __DIR__ . '/vendor/autoload.php';
-                                use RapidApi\RapidApiConnect;
-                                $rapid = new RapidApiConnect('default-application_5adf253de4b0b4824e5ac536', 'dc6004e0-4602-4c1c-b599-38838972f5ea');
-                              $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".($name = $name ?? "")."&maxCalories=".($maxcalories =$maxcalories ?? "0"),                            
-                              array(
-                                "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
-                                "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-                              )                                                              
-                         );
-                                $getResponseVal = $response->raw_body;
-                                $getDecodeData = json_decode($getResponseVal, true);
-                               if(isset($getDecodeData['results'])){ 
-                                   $number = 0;                                        
-                                 foreach($getDecodeData['results'] as $key=>$value) {
-                                    if (empty($value)) {
-                                        echo "<div class='panel-heading'>No recipes found </div>";
-                                    } else {
-                                        $number++;
-                                        echo "<div class='panel-body'>";
-                                        echo '<strong>Recipe '.$number.' : '.$value['title'].'</strong><br>Amount of calories: '.$value['calories']. '<img src="'.$value['image'].'" align="right"/> <br>';
-                                        echo "</div>";
-                                        }
-                                    }
-                               }
+//                                  $name = $_POST["name"] ?? 'null'; 
+//                                   $maxcalories = $_POST["maxCalories"] ?? '0';  
+//                                require __DIR__ . '/vendor/autoload.php';
+//                                use RapidApi\RapidApiConnect;
+//                                $rapid = new RapidApiConnect('default-application_5adf253de4b0b4824e5ac536', 'dc6004e0-4602-4c1c-b599-38838972f5ea');
+//                              $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".($name = $name ?? "")."&maxCalories=".($maxcalories =$maxcalories ?? "0"),                            
+//                              array(
+//                                "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
+//                                "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
+//                              )                                                              
+//                         );
+//                                $getResponseVal = $response->raw_body;
+//                                $getDecodeData = json_decode($getResponseVal, true);
+//                               if(isset($getDecodeData['results'])){ 
+//                                   $number = 0;                                        
+//                                 foreach($getDecodeData['results'] as $key=>$value) {
+//                                    if (empty($value)) {
+//                                        echo "<div class='panel-heading'>No recipes found </div>";
+//                                    } else {
+//                                        $number++;
+//                                        echo "<div class='panel-body'>";
+//                                        echo '<strong>Recipe '.$number.' : '.$value['title'].'</strong><br>Amount of calories: '.$value['calories']. '<img src="'.$value['image'].'" align="right"/> <br>';
+//                                        echo "</div>";
+//                                        }
+//                                    }
+//                               }
                         ?>
 					</div>
 				</div>
@@ -210,9 +212,7 @@
              }
         ?>
         <!-- TIMELINE -->
-        
-            
-			
+  	
 			<div class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
@@ -223,16 +223,19 @@
 	include_once "db_connect.php";
     $_email =  $_COOKIE['email'];
     $today = date('Y-m-d');
-    $sevenDaysAgo = date('Y-m-d', strtotime('-7 days'));
+    $thirtyDaysAgo = date('Y-m-d', strtotime('-180 days'));
+     $timeStampArray = array();
+     $caloriesPerDayArray = array();
+     $countEventsPerDayArray = array();
     
     $sqlGetCaloriesLastSevenDays = ("SELECT Food.timestamp, count(*), SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (Food.timestamp between '$sevenDaysAgo' AND '$today') AND email = '".$_email."' group by timestamp");
     
 
-    $result = $conn->query($sqlGetCaloriesLastSevenDays);
+   $result = $conn->query($sqlGetCaloriesLastSevenDays);
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-          $timeStampArray[] = $row['Food.timestamp'];
+          $timeStampArray[] = $row['timestamp'];
           $caloriesPerDayArray[] = $row['totalCalories'];
           $countArray[] = $row['count(*)'];
         }
@@ -242,8 +245,11 @@
                        echo  "<tbody>";
                             
                         echo    "<tr>";
-                        echo    "<td>".$row['count(*)']."</td>";
-    
+                        echo    "<td>".$timeStampArray[1]."</td>";
+                         echo    "<td>".$row['Food.timestamp']."</td>";
+                         echo    "<td>".$row['totalCalories']."</td>";
+                         
+
                         echo    "<td>/ 2200</td>";
                         echo    "<tr>";
                             
@@ -264,17 +270,44 @@
 <script src="js/mdb.js"></script>
     <script> 
 //line
+        
+var dailyCalorieCounter = <?php echo json_encode($caloriesPerDayArray); ?>;
+var eventsPerDayCounter = <?php echo json_encode($countEventsPerDayArray); ?>; 
+var timeStampArray = <?php echo json_encode($timeStampArray); ?>; 
 var ctxL = document.getElementById("lineChart").getContext('2d');
 var date = new Date();
-createChartSevenDays();
-function createChartSevenDays(){
-var myLineChart = new Chart(ctxL, {
+var i;
+        var a;
+createChart();
+function createChart(amountOfDays){
+var myLineChart = new Chart(ctxL, {        
     type: 'line',
     data: {
-        labels: [date.getDate()-6, (date.getDate()-5), (date.getDate()-4), (date.getDate()-3), (date.getDate()-2), (date.getDate()-1), (date.getDate())],
-        datasets: [
+         labels:
+        [timeStampArray[timeStampArray.length-7],
+         timeStampArray[timeStampArray.length-6], 
+         timeStampArray[timeStampArray.length-5], 
+         timeStampArray[timeStampArray.length-4], 
+         timeStampArray[timeStampArray.length-3],
+         timeStampArray[timeStampArray.length-2], 
+         timeStampArray[timeStampArray.length-1]],
+        datasets:[
             {
-                 label: "1",
+                 label: "Ideal amount of calories per day (man)",
+                    backgroundColor : "rgba(220,220,220,0)",
+                    borderWidth : 2,
+                    borderColor : "rgba(253, 1, 1, 1)",
+                    pointBackgroundColor : "rgba(253, 1, 1, 1)",
+                    pointBorderColor : "#BE0D0D",
+                    pointBorderWidth : 0,
+                    pointRadius : 0,
+                    pointHoverBackgroundColor : "#009933",
+                    pointHoverBorderColor : "rgba(190, 13, 13, 1)",
+                    data: [2500,2500,2500,2500,2500,2500,2500]
+             }
+            ,
+            {
+               label: "Eaten calories",
                     backgroundColor : "rgba(220,220,220,0)",
                     borderWidth : 2,
                     borderColor : "rgba(79, 153, 36, 1)",
@@ -284,20 +317,15 @@ var myLineChart = new Chart(ctxL, {
                     pointRadius : 4,
                     pointHoverBackgroundColor : "#009933",
                     pointHoverBorderColor : "rgba(79, 153, 36, 1)",
-                    data: [65, 59, 80, 81, 56, 55, 40]
-            },
-            {
-//               label: "2",
-//                    backgroundColor : "rgba(220,220,220,0)",
-//                    borderWidth : 2,
-//                    borderColor : "rgba(79, 153, 36, 1)",
-//                    pointBackgroundColor : "rgba(79, 153, 36, 1)",
-//                    pointBorderColor : "#009933",
-//                    pointBorderWidth : 1,
-//                    pointRadius : 4,
-//                    pointHoverBackgroundColor : "#009933",
-//                    pointHoverBorderColor : "rgba(79, 153, 36, 1)",
-//                    data: [65, 59, 80, 81, 56, 55, 40]
+                    data: [
+                        dailyCalorieCounter[dailyCalorieCounter.length-7],
+                        dailyCalorieCounter[dailyCalorieCounter.length-6],
+                        dailyCalorieCounter[dailyCalorieCounter.length-5],
+                        dailyCalorieCounter[dailyCalorieCounter.length-4],
+                        dailyCalorieCounter[dailyCalorieCounter.length-3],
+                        dailyCalorieCounter[dailyCalorieCounter.length-2],
+                        dailyCalorieCounter[dailyCalorieCounter.length-1],
+                    ]
             }
         ]
     },
@@ -307,6 +335,7 @@ var myLineChart = new Chart(ctxL, {
 });
 }
 
+        
     </script>
     
 <!--	<script src="js/bootstrap.min.js"></script>

@@ -52,7 +52,7 @@
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
-            <li><a href="#" onclick="signOut()"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
+            <li><a href="db_logout.php" onclick="location.href = db_logout.php;"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		    <script>
               function signOut() {
                   alert("User will be logged off");
@@ -100,8 +100,9 @@
 					<div class="panel-heading">
 						Nutritional intake values
                     </div>
-                <button style="height:30px;width:200px"type="button" class="btn btn-light">Last 7 events</button>
-                <button style="height:30px;width:200px"type="button" class="btn btn-light">Events in last 180 days</button>
+                <button style="height:30px;width:200px"type="button" onclick="createChart()" class="btn btn-light">Last 7 events</button>
+                <button style="height:30px;width:200px"type="button" onclick="createChartHalfYear()"  class="btn btn-light">Events in last 180 days</button>
+                <script> createChart() </script>
         <canvas id="lineChart"></canvas>
           </div>
         <!-- TIMELINE -->	
@@ -158,15 +159,23 @@
 	include_once "db_connect.php";
     $_email =  $_COOKIE['email'];
     $today = date('Y-m-d');
+    $aLotOfDaysAgo = date('Y-m-d', strtotime('-180 days')); 
+    $aYearAgo = date('Y-m-d', strtotime('-365 days')); 
+    $timeStampArray = array();
+    $caloriesPerDayArray = array();
+    $countEventsPerDayArray = array();
+    $datetime = array();
+    $monthArray = array();
+    $caloriesPerMonthArray = array();
+    $countPerMonthArray = array();
     
-     $timeStampArray = array();
-     $caloriesPerDayArray = array();
-     $countEventsPerDayArray = array();
-    
-    $sqlGetCaloriesLastSevenDays = ("SELECT Food.timestamp, count(*), SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (Food.timestamp between '$sevenDaysAgo' AND '$today') AND email = '".$_email."' group by timestamp");
-    
+    $sqlGetCaloriesLastSevenDays = ("SELECT Food.timestamp, count(*), SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (DATE(Food.timestamp) between '$aLotOfDaysAgo' AND '$today') AND email = '".$_email."' group by timestamp");
+    // test gets info per month
+    //SELECT Food.timestamp, count(*), MONTH(Food.timestamp) AS month, SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (Food.timestamp between '2017-05-29' AND '2018-05-29') AND email = 'perryvanede@gmail.com' group by month
+  $sqlGetLastYear ="SELECT Food.timestamp, count(*), MONTH(Food.timestamp) AS month, SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (Food.timestamp between '$aYearAgo' AND '$today') AND email = '".$_email."' group by month";
 
    $result = $conn->query($sqlGetCaloriesLastSevenDays);
+    $resultLastYear = $conn->query($sqlGetCaloriesLastSevenDays);
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -174,7 +183,14 @@
           $caloriesPerDayArray[] = $row['totalCalories'];
           $countArray[] = $row['count(*)'];
         }
-    }                              
+    }     
+     if ($resultLastYear->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          $monthArray[] = $row['timestamp'];
+          $caloriesPerMonthArray[] = $row['totalCalories'];
+          $countPerMonthArray[] = $row['count(*)'];
+        }
+    }     
 	?>
     
     
@@ -187,15 +203,16 @@
     <script> 
 //line
         
-var dailyCalorieCounter = <?php echo json_encode($caloriesPerDayArray); ?>;
-var eventsPerDayCounter = <?php echo json_encode($countEventsPerDayArray); ?>; 
-var timeStampArray = <?php echo json_encode($timeStampArray); ?>; 
+
 var ctxL = document.getElementById("lineChart").getContext('2d');
 var date = new Date();
 var i;
-        var a;
+var a;
 createChart();
-function createChart(amountOfDays){
+function createChart(){
+    var dailyCalorieCounter = <?php echo json_encode($caloriesPerDayArray); ?>;
+    var eventsPerDayCounter = <?php echo json_encode($countEventsPerDayArray); ?>; 
+    var timeStampArray = <?php echo json_encode($timeStampArray); ?>; 
 var myLineChart = new Chart(ctxL, {        
     type: 'line',
     data: {
@@ -250,18 +267,74 @@ var myLineChart = new Chart(ctxL, {
     }    
 });
 }
+function createChartHalfYear(){
+    var months = <?php echo json_encode($monthArray); ?>;
+    var monthlyCalorieCounter = <?php echo json_encode($caloriesPerMonthArray); ?>;
+    var monthlyCounts = <?php echo json_encode($countPerMonthArray); ?>;
+    var a;
+    for(a=0;a<months;a++){
+        monthlyCalorieCounter[a] = (monthlyCalorieCounter[a] / getDaysInMonth([a],2018));
+         document.write(months[a]);
+    }
+var myLineChart = new Chart(ctxL, {        
+    type: 'line',
+    data: {
+         labels: [
+//        timeStampArray[timeStampArray.length-7],
+//         timeStampArray[timeStampArray.length-6], 
+//         timeStampArray[timeStampArray.length-5], 
+//         timeStampArray[timeStampArray.length-4], 
+//         timeStampArray[timeStampArray.length-3],
+         months[months.length-2], 
+         months[months.length-1]],
+        datasets:[
+            {
+                 label: "Ideal amount of calories per day (man)",
+                    backgroundColor : "rgba(220,220,220,0)",
+                    borderWidth : 2,
+                    borderColor : "rgba(253, 1, 1, 1)",
+                    pointBackgroundColor : "rgba(253, 1, 1, 1)",
+                    pointBorderColor : "#BE0D0D",
+                    pointBorderWidth : 0,
+                    pointRadius : 0,
+                    pointHoverBackgroundColor : "#009933",
+                    pointHoverBorderColor : "rgba(190, 13, 13, 1)",
+                    data: [2500,2500,2500,2500,2500,2500,2500]
+             }
+            ,
+            {
+               label: "Eaten calories",
+                    backgroundColor : "rgba(220,220,220,0)",
+                    borderWidth : 2,
+                    borderColor : "rgba(79, 153, 36, 1)",
+                    pointBackgroundColor : "rgba(79, 153, 36, 1)",
+                    pointBorderColor : "#009933",
+                    pointBorderWidth : 1,
+                    pointRadius : 4,
+                    pointHoverBackgroundColor : "#009933",
+                    pointHoverBorderColor : "rgba(79, 153, 36, 1)",
+                    data: [monthlyCalorieCounter[monthlyCalorieCounter.length-1],monthlyCalorieCounter[monthlyCalorieCounter.length-2],2700,3000,2400,2200,2800]
+//                [
+//                        dailyCalorieCounter[dailyCalorieCounter.length-7],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-6],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-5],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-4],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-3],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-2],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-1],
+//                    ]
+            }
+        ]
+    },
+    options: {
+        responsive: true
+    }    
+});
+}
 
         
     </script>
     
-<!--	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/custom.js"></script>
--->
 	
 </body>
 </html>

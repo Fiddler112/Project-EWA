@@ -9,17 +9,15 @@
 	<link href="css/styles.css" rel="stylesheet">
 	<link rel="icon" href="img/pic.png">
 	<!--Custom Font-->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 	
     <meta name="google-signin-client_id" content="307112913485-5kkslq098hfj65e6l3qngjo1916a7h4i.apps.googleusercontent.com">
     
 </head>
 <body>
-
-	<?php
+    <?php
 	include "db_connect.php";
 	?>
-
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -57,13 +55,14 @@
 		<ul class="nav menu">
 			<li class="active"><a href="index.php"><em class="fa fa-home">&nbsp;</em> Home</a></li>
             <li><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
+            <li><a href="Recipe.php"><em class="fa fa-utensils">&nbsp;</em> Recipes</a></li>
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
             <li><a href="#" onclick="signOut()"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
             <script>
               function signOut() {
-                   alert("User will be logged off");
+                   alert("You will be signed out of google");
                 var auth2 = gapi.auth2.getAuthInstance();
                 auth2.signOut().then(function () {  
 
@@ -100,7 +99,8 @@
 			</div>
 		</div>
         
-        <!-- Progress bar-->
+        
+      <!-- Progress bar-->
     <?php
         include_once 'db_connect.php';
         $today = date('Y-m-d');
@@ -125,8 +125,7 @@
           echo  "</div>";
         }
         }
-  ?>
-    
+  ?>  
         
       <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
     <!-- Carousel indicators -->
@@ -190,7 +189,7 @@
 
 }
 $conn->close();
-?>                              
+?>                                            
           
                                 </div>
 							</div>
@@ -198,9 +197,7 @@ $conn->close();
 				</div> 
         </div>
         </form>
-              
-       
-<!--
+        <!--      
       <form method="post" action="" name="form">  
 		<div class="row">
 			<div class="col-md-12">
@@ -210,8 +207,8 @@ $conn->close();
 						</div>	
 							<div class="panel-body articles-container">
                                 <div class="form-group">
--->
 
+                          -->                 
                                               <?php
                         
 //                        $_email =  $_COOKIE["email"];
@@ -252,7 +249,7 @@ $conn->close();
         </div>
         </form>      
 -->
-    
+      	
 			<div class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
@@ -260,19 +257,5 @@ $conn->close();
 	</div>	<!--/.main-->
    <!-- bestanden die waarschijnlijk niet in gebruik zijn!-->
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-<!--
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/custom.js"></script>
--->
-	
-	<!-- grafiek van tevoren?-->
-
-
 </body>
 </html>

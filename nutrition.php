@@ -10,7 +10,7 @@
 	<link href="css/styles.css" rel="stylesheet">
 	<link rel="icon" href="img/pic.png">
 	<!--Custom Font-->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <meta name="google-signin-client_id" content="307112913485-5kkslq098hfj65e6l3qngjo1916a7h4i.apps.googleusercontent.com">
 </head>
    
@@ -48,6 +48,7 @@
 		<ul class="nav menu">
 			<li><a href="index.php"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 			<li class="active"><a href="nutrition.php"><em class="fa fa-bar-chart">&nbsp;</em> Nutrition</a></li>
+            <li><a href="Recipe.php"><em class="fa fa-utensils">&nbsp;</em> Recipes</a></li>
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
@@ -103,72 +104,6 @@
                 <button style="height:30px;width:200px"type="button" class="btn btn-light">Events in last 180 days</button>
         <canvas id="lineChart"></canvas>
           </div>
-                 
-
-        
-        
-            <!--/.DAILY INTAKE-->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Search recipe
-
-					</div>
-					<div class="panel-body">
-						<form class="form-horizontal" action="" method="post">
-							<fieldset>
-								<!-- Name input-->
-								<div class="form-group">
-									<label class="col-md-3 control-label" for="name">Name or ingrëdients</label>
-									<div class="col-md-9">
-										<input id="name" name="name" type="text" placeholder="Recipe name or ingrëdient" class="form-control">
-									</div>
-								</div>
-                                <div class="form-group">
-									<label class="col-md-3 control-label" for="name">Maximum calories</label>
-									<div class="col-md-9">
-										<input id="maxCalories" name="maxCalories" type="text" placeholder="Maximum amount of calories" class="form-control">
-									</div>
-								</div>
-								
-								<!-- Form actions -->
-								<div class="form-group">
-									<div class="col-md-12 widget-right">
-										<button type="submit" class="btn btn-default btn-md pull-right">Play recipe</button>
-									</div>
-								</div>
-							</fieldset>
-						</form>
-                        
-                            <?php
-                                  $name = $_POST["name"] ?? 'null'; 
-                                   $maxcalories = $_POST["maxCalories"] ?? '0';  
-                                require __DIR__ . '/vendor/autoload.php';
-                                use RapidApi\RapidApiConnect;
-                                $rapid = new RapidApiConnect('default-application_5adf253de4b0b4824e5ac536', 'dc6004e0-4602-4c1c-b599-38838972f5ea');
-                              $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".($name = $name ?? "")."&maxCalories=".($maxcalories =$maxcalories ?? "0"),                            
-                              array(
-                                "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
-                                "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-                              )                                                              
-                         );
-                                $getResponseVal = $response->raw_body;
-                                $getDecodeData = json_decode($getResponseVal, true);
-                               if(isset($getDecodeData['results'])){ 
-                                   $number = 0;                                        
-                                 foreach($getDecodeData['results'] as $key=>$value) {
-                                    if (empty($value)) {
-                                        echo "<div class='panel-heading'>No recipes found </div>";
-                                    } else {
-                                        $number++;
-                                        echo "<div class='panel-body'>";
-                                        echo '<strong>Recipe '.$number.' : '.$value['title'].'</strong><br>Amount of calories: '.$value['calories']. '<img src="'.$value['image'].'" align="right"/> <br>';
-                                        echo "</div>";
-                                        }
-                                    }
-                               }
-                        ?>
-					</div>
-				</div>
         <!-- TIMELINE -->	
             <?php
             include_once 'db_connect.php';
@@ -223,12 +158,12 @@
 	include_once "db_connect.php";
     $_email =  $_COOKIE['email'];
     $today = date('Y-m-d');
-    $thirtyDaysAgo = date('Y-m-d', strtotime('-180 days'));
+    
      $timeStampArray = array();
      $caloriesPerDayArray = array();
      $countEventsPerDayArray = array();
     
-    $sqlGetCaloriesLastSevenDays = ("SELECT Food.timestamp, count(*), SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (Food.timestamp between '$thirtyDaysAgo' AND '$today') AND email = '".$_email."' group by timestamp");
+    $sqlGetCaloriesLastSevenDays = ("SELECT Food.timestamp, count(*), SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (Food.timestamp between '$sevenDaysAgo' AND '$today') AND email = '".$_email."' group by timestamp");
     
 
    $result = $conn->query($sqlGetCaloriesLastSevenDays);
@@ -239,8 +174,7 @@
           $caloriesPerDayArray[] = $row['totalCalories'];
           $countArray[] = $row['count(*)'];
         }
-    }
-                              
+    }                              
 	?>
     
     

@@ -26,10 +26,6 @@
 
    
      <script>
-//         var name;
-//         var email;
-//         var gIdToken;
-//         var expiry = 30;
     function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -50,7 +46,8 @@
              var firstName = profile.getGivenName();
              var lastName = profile.getFamilyName();
              var imgURL = profile.getImageUrl();
-            
+             var auth2 = gapi.auth2.getAuthInstance();
+             auth2.disconnect();
           //Call create cookie script
              createCookie('profileName', profileName, 30, '/');
              createCookie('email', email, 30, '/');
@@ -59,12 +56,10 @@
              createCookie('lastName', lastName, 30, '/');
              createCookie('imgURL', imgURL, 30, '/');
              createCookie('amountOfEvents', '3', 30, '/');
+             createCookie('loggedIn', '1', 30, '/');
         
-    //redirect to database to create user profile
-             window.location = "db_login_gUser.php?profileName=" + profileName + "&email=" + email + "&firstName=" + firstName + "&lastName=" + lastName + "&imgURL= " + imgURL + "&id_token=" + gIdToken;
-        
-      
-       
+    //redirect to database to create user profile   
+        window.location = "db_login_gUser.php?profileName=" + profileName + "&email=" + email + "&firstName=" + firstName + "&lastName=" + lastName + "&imgURL= " + imgURL + "&id_token=" + gIdToken;
       };
        function createCookie(name,value, days, path){
         var expires = "";

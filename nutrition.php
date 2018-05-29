@@ -52,7 +52,7 @@
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
-            <li><a href="#" onclick="signOut()"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
+            <li><a href="db_logout.php" onclick="location.href = db_logout.php;"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		    <script>
               function signOut() {
                   alert("User will be logged off");
@@ -100,8 +100,9 @@
 					<div class="panel-heading">
 						Nutritional intake values
                     </div>
-                <button style="height:30px;width:200px"type="button" class="btn btn-light">Last 7 events</button>
-                <button style="height:30px;width:200px"type="button" class="btn btn-light">Events in last 180 days</button>
+                <button style="height:30px;width:200px"type="button" onclick="createChart()" class="btn btn-light">Last 7 events</button>
+                <button style="height:30px;width:200px"type="button" onclick="createChartHalfYear()"  class="btn btn-light">Events in last 180 days</button>
+                <script> createChart() </script>
         <canvas id="lineChart"></canvas>
           </div>
         <!-- TIMELINE -->	
@@ -158,12 +159,12 @@
 	include_once "db_connect.php";
     $_email =  $_COOKIE['email'];
     $today = date('Y-m-d');
-    
+    $aLotOfDaysAgo = date('Y-m-d', strtotime('-180 days')); 
      $timeStampArray = array();
      $caloriesPerDayArray = array();
      $countEventsPerDayArray = array();
-    
-    $sqlGetCaloriesLastSevenDays = ("SELECT Food.timestamp, count(*), SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (Food.timestamp between '$sevenDaysAgo' AND '$today') AND email = '".$_email."' group by timestamp");
+    $datetime = array();
+    $sqlGetCaloriesLastSevenDays = ("SELECT Food.timestamp, count(*), SUM(calories) AS totalCalories from `Food` INNER JOIN `User` ON User.user_id = Food.user_id where (DATE(Food.timestamp) between '$aLotOfDaysAgo' AND '$today') AND email = '".$_email."' group by timestamp");
     
 
    $result = $conn->query($sqlGetCaloriesLastSevenDays);
@@ -193,9 +194,9 @@ var timeStampArray = <?php echo json_encode($timeStampArray); ?>;
 var ctxL = document.getElementById("lineChart").getContext('2d');
 var date = new Date();
 var i;
-        var a;
+var a;
 createChart();
-function createChart(amountOfDays){
+function createChart(){
 var myLineChart = new Chart(ctxL, {        
     type: 'line',
     data: {
@@ -250,18 +251,67 @@ var myLineChart = new Chart(ctxL, {
     }    
 });
 }
+function createChartHalfYear(){
+    
+var myLineChart = new Chart(ctxL, {        
+    type: 'line',
+    data: {
+         labels:
+        [timeStampArray[timeStampArray.length-7],
+         timeStampArray[timeStampArray.length-6], 
+         timeStampArray[timeStampArray.length-5], 
+         timeStampArray[timeStampArray.length-4], 
+         timeStampArray[timeStampArray.length-3],
+         timeStampArray[timeStampArray.length-2], 
+         timeStampArray[timeStampArray.length-1]],
+        datasets:[
+            {
+                 label: "Ideal amount of calories per day (man)",
+                    backgroundColor : "rgba(220,220,220,0)",
+                    borderWidth : 2,
+                    borderColor : "rgba(253, 1, 1, 1)",
+                    pointBackgroundColor : "rgba(253, 1, 1, 1)",
+                    pointBorderColor : "#BE0D0D",
+                    pointBorderWidth : 0,
+                    pointRadius : 0,
+                    pointHoverBackgroundColor : "#009933",
+                    pointHoverBorderColor : "rgba(190, 13, 13, 1)",
+                    data: [2500,2500,2500,2500,2500,2500,2500]
+             }
+            ,
+            {
+               label: "Eaten calories",
+                    backgroundColor : "rgba(220,220,220,0)",
+                    borderWidth : 2,
+                    borderColor : "rgba(79, 153, 36, 1)",
+                    pointBackgroundColor : "rgba(79, 153, 36, 1)",
+                    pointBorderColor : "#009933",
+                    pointBorderWidth : 1,
+                    pointRadius : 4,
+                    pointHoverBackgroundColor : "#009933",
+                    pointHoverBorderColor : "rgba(79, 153, 36, 1)",
+                    data: [2300,2270,2700,3000,2400,2200,2800]
+//                [
+//                        dailyCalorieCounter[dailyCalorieCounter.length-7],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-6],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-5],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-4],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-3],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-2],
+//                        dailyCalorieCounter[dailyCalorieCounter.length-1],
+//                    ]
+            }
+        ]
+    },
+    options: {
+        responsive: true
+    }    
+});
+}
 
         
     </script>
     
-<!--	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/custom.js"></script>
--->
 	
 </body>
 </html>

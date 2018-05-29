@@ -89,200 +89,129 @@
 			</div>
 		</div><!--/.row-->
         
-<!-- TIMELINE -->	
-			<div class="panel panel-container">
-				<div class="panel panel-default ">
+        
+        
+    <form method="post" action="" name="form">  
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default articles">
 					<div class="panel-heading">
 						Goal history
-						
-						</div>
-					<div class="panel-body timeline-container">
-						<ul class="timeline">
-							<li>
-								<div class="timeline-badge"><em class="glyphicon glyphicon-refresh"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Los 7 kilo's</h4>
-									</div>
-									<div class="timeline-body">
-										<p>Start date: 04-2</p>
-                                        <p>End date:   04-16</p>
-                                        <p>Status: Currently in progress</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="timeline-badge primary"><em class="glyphicon glyphicon-ok"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Los 5 kilo's </h4>
-									</div>
-									<div class="timeline-body">
-										<p>Start date: 03-17</p>
-                                        <p>End date:   03-27</p>
-                                        <p>Status: Completed</p>
-									</div>
-								</div>
-							</li>
-                            <li>
-								<div class="timeline-badge primary"><em class="glyphicon glyphicon-remove"></em></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Los 5 kilo's </h4>
-									</div>
-									<div class="timeline-body">
-										<p>Start date: 03-3</p>
-                                        <p>End date:   03-17</p>
-                                        <p>Status: Not completed</p>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div> 
+						</div>	
+							<div class="panel-body articles-container">
+                                <div class="form-group">
+
+                                              <?php
+                        include_once 'db_connect.php';
+                        $_email =  $_COOKIE["email"];
+                        $sql = "SELECT goal_name, weight_goal, timegoal FROM `Goals` WHERE user_id IN (select User.user_id FROM `User` where User.email = '".$_email."')";
+                        $result = $conn->query($sql);
+                        if($result == FALSE) {
+                        print(mysqli_error());
+                        } else {
+                        while($row = $result->fetch_array()) {
+                            
+               echo  "<div class=' col-md-9 col-lg-9 '>";
+                       echo  "<table class='table table-user-information'>";                            
+                        echo    "<td>".$row["goal_name"]."</td>";
+                        echo    "<td>".$row["timegoal"]."</td>";
+                        echo    "<tr>";                   
+                    echo    "<tbody>";
+                    echo    "</table>";
+                    echo    "</div>";
+                    echo    "</div>";
+                     }
+
+}
+$conn->close();
+?>                                            
+          
+                                </div>
+							</div>
+                        </div>
+				</div> 
+        </div>
+        </form>
     
         
-        <!-- TIMELINE -->
-        
-       <!--ADD NEW USER-->
-        <!-- userfull link: https://stackoverflow.com/questions/3479130/how-to-preselect-an-html-dropdown-list-with-php/12273128#12273128->
+
+<!--
 				<div class="panel panel-default">
 					<div class="panel-heading">Add a new goal</div>
 					<div class="panel-body">
 						<div class="col-md-6">
-<!--                            <h3 >Starting information </h3>-->
-                            <label for="plan">  Select weight plan: </label>
-                                <select id="cmbMake" name="plan" >
-                                <option value="0"> Lose weight</option>
-                                <option value="1">Stay on the same weight</option>
-                                <option value="2">Gain weight</option>
-                                <option value="3">Gain muscles</option>
-                                </select>
-							<form role="form">
-								<div class="form-group">
-									<label>    Goal name</label>
-									<input class="form-control" >
-								</div>
-<!--
-                                <div class="form-group">
-									<label>Age</label>
-									<input class="form-control" >
-								</div>
-                                <div class="form-group">
-									<label>Height</label>
-									<input class="form-control" >
-								</div>
-                                 <div class="form-group">
-									<label>Weight</label>
-									<input class="form-control" >
-								</div>
-								 Message body 
-								<div class="form-group">
-									<label class="form-group" for="message">Describe your goal</label>
-									<div class="form-group">
-										<textarea class="form-control" id="message" name="message" placeholder="Please enter your description here..." rows="5"></textarea>
-									</div>
-								</div>
 -->
 
-	<!--							<div class="col-md-6">
-									<div class="form-group">
-										<label>Checkboxes</label>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="">Checkbox 1
-											</label>
-										</div>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="">Checkbox 2
-											</label>
-										</div>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="">Checkbox 3
-											</label>
-										</div>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="">Checkbox 4
-											</label>
-										</div>
-									</div> -->
-<!--                                <h3 >Results </h3>-->
-                                <div class="form-group"  >
-									<label>    Goal Weight</label>
-									<input class="form-control"placeholder="Desired weight" >
-								</div>
-                                <div class="form-group">
-									<label>I want to reach my goal in </label>
-									<input class="form-control" placeholder="Amount of days">
-								</div>
-                                <h3 >OR select a date </h3>
-                                <div class="form-group">
-									<label>I want to reach my goal by </label>
-									<input class="form-control" 
-                                    placeholder="10/14/2018">
-								</div>
-<!--
-									<div class="form-group">
-										<label>specify goal</label>
-										<div class="radio">
-											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>loss weight
-											</label>
-										</div>
-										<div class="radio">
-											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">stay weight
-											</label>
-										</div>
-										<div class="radio">
-											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">gain weight 
-											</label>
-										</div>
-										<div class="radio">
-											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">gain muscel 
-											</label>
-										</div>
-									</div>
--->
-								<!--	<div class="form-group">
-										<label>Selects</label>
-										<select class="form-control">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>Multiple Selects</label>
-										<select multiple class="form-control">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-										</select> 
-									</div> -->
-									<button type="Add User" class="btn btn-primary">Add your goal
-                                   </button>
+                            <?php
+//                       include_once 'db_connect.php';
+//                            
+//                       $_email =  $_COOKIE["email"];
+//
+//                       $value1 = $_POST['goal_name'];  
+//                            
+//                        $value2 = $_POST['weight_goal'];
+//                            
+//                        $value3 = $_POST[ 'timegoal'];
+                      
+//                       $sql = "INSERT INTO Goal (goal_name, weight_goal, timegoal, user_id)
+//                       VALUES($value1, $value2, $value3);";
+//                        $result = $conn->query($sql);
+//                        if($result == FALSE) {
+//                        print(mysqli_error());
+//                        } else {
+//                        while($row = $result->fetch_array()) {
+
+        
+//							echo"<form role='form'>";
+//								echo"<div class='form-group'>";
+//									echo"<label>   Goal name </label>";
+//									echo"<input type='text'name='goal_name' class='form-control' >";
+//								echo"</div>";
+//
+//                                echo"<div class='form-group'  >";
+//									echo"<label>    Goal Weight</label>";
+//									echo"<input name='weight_goal' class='form-control'placeholder='Desired weight' >";
+//								echo"</div>";
+//                            
+//                                echo"<h3 >select a date </h3>";
+//                                echo"<div class='form-group'>";
+//									echo"<label>I want to reach my goal by </label>";
+//									echo"<input name='timegoal' class='form-control' ";
+//                                    echo"placeholder='10/14/2018'>";
+//								echo"</div>";
+
+//									echo"<input type='submit' class='btn btn-primary'>Add your goal";
+//                                   echo"</input>";
                            
-                        </form>
+                    
+                    $conn->close();
+            ?> 
+<!--
+                        
 					  </div>
-				<!--  </div>--> 
+				</div>
+                    </div>
+-->
 				
-			<!--  </div>--> <!-- /.col-->
-     <!--ADD NEW USER-->
+     <!-- GOAL INFORMATION -->
     
+                    
+
+ 
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 			<div class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
-		<!--/.row-->
-	<!--  </div>--> 	<!--/.main-->
+	
 	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 <script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

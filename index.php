@@ -99,7 +99,10 @@
 			</div>
 		</div>
         
-        
+    <form method="post" action="" name="form">  
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default articles">    
       <!-- Progress bar-->
     <?php
         include_once 'db_connect.php';
@@ -113,19 +116,24 @@
               while($row = $result->fetch_array()) {
                  $calories = $row["totalCalories"]; 
             $percentage = ($calories / 2500 * 100);
-      echo  "<div class='panel-heading'>";
-      echo  "Eaten calories today";
+      echo  "<div class='panel-heading' >";
+      echo  "<p class= 'text-center'> Calories you have eaten today </p>";
       echo  "</div>";
           echo  "<div class='row'>";
               echo  "<div class='col-md-12'>";
-                  echo  "<div class='progress'>";
-                      echo  "<div class='progress-bar bg-success' role='progressbar' height='25px' style='width: $percentage% ' aria-valuenow=100 aria-valuemin='0' aria-valuemax='100'>$calories</div>";
+                  echo  "<div class='progress' style='height:25px' font>";
+                      echo  "<div class='progress-bar active massive-font'  role='progressbar' height='25px' style='width: $percentage% ' aria-valuenow=100 aria-valuemin='0' aria-valuemax='100'>$calories</div>";
                       echo  "</div>";
                   echo  "</div>";
           echo  "</div>";
         }
         }
   ?>  
+                    
+                                     </div>
+				</div> 
+        </div>
+        </form>
         
       <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
     <!-- Carousel indicators -->

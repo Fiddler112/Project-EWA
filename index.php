@@ -60,28 +60,6 @@
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
             <li><a href="db_logout.php" onclick="location.href = db_logout.php;"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
-            
-            
-            
-            <script>
-              function signOut() {
-                   alert("You will be signed out of google");
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function () {  
-
-                  console.log('User signed out.');
-                    window.location = "\login.php";
-                });
-              }
-                function onLoad() {
-                  gapi.load('auth2', function() {
-                    gapi.auth2.init();
-                  });
-                }
-                 function deleteCookie(name) {
-                    setCookie({name: name, value: "", seconds: 0.1});
-                }
-            </script>
 		</ul>
 	</div>
     <!-- NAVIGATIE BAR -->

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -6,7 +5,6 @@
 	<title>Google Home - Nutrition</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	<link rel="icon" href="img/pic.png">
 	<!--Custom Font-->
@@ -52,31 +50,7 @@
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
-            <li><a href="#" onclick="signOut()"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
-		    <script>
-              function signOut() {
-                  alert("User will be logged off");
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function () {  
-
-                  console.log('User signed out.');
-                    window.location = "\login.php";
-                });
-              }
-                function onLoad() {
-                  gapi.load('auth2', function() {
-                    gapi.auth2.init();
-                });
-              }
-                function onLoad() {
-                  gapi.load('auth2', function() {
-                    gapi.auth2.init();
-                  });
-                }
-                 function deleteCookie(name) {
-                    setCookie({name: name, value: "", seconds: 0.1});
-                }
-            </script>
+            <li><a href="db_logout.php" onclick="location.href = db_logout.php;"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -86,13 +60,13 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Nutrition</li>
+				<li class="active">Recipes</li>
 			</ol>
-		</div><!--/.row-->
+		</div>
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Nutrition</h1>
+				<h1 class="page-header">Recipes</h1>
 			</div>
 		</div><!--/.row-->
     
@@ -122,7 +96,7 @@
 								<!-- Form actions -->
 								<div class="form-group">
 									<div class="col-md-12 widget-right">
-										<button type="submit" class="btn btn-default btn-md pull-right">Play recipe</button>
+										<button type="submit" class="btn btn-default btn-md pull-right">Search for recipes</button>
 									</div>
 								</div>
 							</fieldset>
@@ -130,11 +104,11 @@
                         
                             <?php
                                   $name = $_POST["name"] ?? 'null'; 
-                                   $maxcalories = $_POST["maxCalories"] ?? '0';  
+                                   $maxcalories = $_POST["maxCalories"] ?? '2000';  
                                 require __DIR__ . '/vendor/autoload.php';
                                 use RapidApi\RapidApiConnect;
                                 $rapid = new RapidApiConnect('default-application_5adf253de4b0b4824e5ac536', 'dc6004e0-4602-4c1c-b599-38838972f5ea');
-                              $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".($name = $name ?? "")."&maxCalories=".($maxcalories =$maxcalories ?? "0"),                            
+                              $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".($name = $name ?? "")."&maxCalories=".($maxcalories =$maxcalories ?? "2000"),                            
                               array(
                                 "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
                                 "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
@@ -142,20 +116,25 @@
                          );
                                 $getResponseVal = $response->raw_body;
                                 $getDecodeData = json_decode($getResponseVal, true);
+                                echo "<form action='RecipeSingle.php' method='post'>";
                                if(isset($getDecodeData['results'])){ 
                                    $number = 0;     
-                                   echo "<form class='form-horizontal' action='RecipeSingle.php' method='post'>";
+                                   echo "<ul class='list-group'>";
                                 foreach($getDecodeData['results'] as $key=>$value) {
+
                                     if (empty($value)) {
                                        echo "<div class='panel-heading'>No recipes found </div>";
                                     } else {
+                                    	echo "<li class='list-group-item'>";
                                         $number++;
                                         echo "<div class='panel-body'>";
-                                        echo '<strong>Recipe '.$number.' : '.$value['title'].'</strong><br>Amount of calories: '.$value['calories']. '&nbsp;<button type="submit" class="btn btn-info">More Info</button><img src="'.$value['image'].'" align="right"/> <br>';
+                                        echo '<strong>Recipe '.$number.' : '.$value['title'].'</strong><br>Amount of calories: '.$value['calories']. '<br>';
+                                        echo "<button class='btn btn-info' type='submit' name='submit' value=".$value['id'].">More Info</button><img src='".$value['image']."' align='right'/> <br>";
                                         echo "</div>";
+                                        echo "</li>";
                                         }
                                     }
-                                   echo "</form>";
+                                    echo "</form>";                                  
                               }
                         ?>
 					</div>

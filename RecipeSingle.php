@@ -52,35 +52,54 @@
 			<li><a href="goal.php"><em class="fa fa-line-chart">&nbsp;</em> Goals</a></li>
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em> Settings</a></li>
-            <li><a href="#" onclick="signOut()"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
-		    <script>
-              function signOut() {
-                  alert("User will be logged off");
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function () {  
-
-                  console.log('User signed out.');
-                    window.location = "\login.php";
-                });
-              }
-                function onLoad() {
-                  gapi.load('auth2', function() {
-                    gapi.auth2.init();
-                });
-              }
-                function onLoad() {
-                  gapi.load('auth2', function() {
-                    gapi.auth2.init();
-                  });
-                }
-                 function deleteCookie(name) {
-                    setCookie({name: name, value: "", seconds: 0.1});
-                }
-            </script>
+             <li><a href="db_logout.php" onclick="location.href = db_logout.php;"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
 		</ul>
 	</div><!--/.sidebar-->
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<em class="fa fa-home"></em>
+				</a></li>
+				<li class="active">Recipes</li>
+			</ol>
+		</div><!--/.row-->
 		
-	
-       
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Recipes</h1>
+			</div>
+		</div><!--/.row-->
+		
+		                <?php
+		             		    require __DIR__ . '/vendor/autoload.php';
+                                use RapidApi\RapidApiConnect;             
+		                       $id = $_POST['submit'];                            
+                                $rapid = new RapidApiConnect('default-application_5adf253de4b0b4824e5ac536', 'dc6004e0-4602-4c1c-b599-38838972f5ea');
+                              $response = Unirest\Request::get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'.($id = $id ?? "").'/information',
+										  array(
+										    "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
+										    "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
+										  )
+										);                                                         
+                         
+                                $getResponseVal = $response->raw_body;
+                                $getDecodeData = json_decode($getResponseVal, true);
+                               if(isset($getDecodeData)){ 
+                                   $number = 0;     
+                               // foreach($getDecodeData['instructions'] as $key=>$value) {
+                                   echo"<div class='panel panel-container'>";
+									echo"<div class='panel panel-default '>";
+									echo "<h1>".$getDecodeData['title']."</h1>";
+									echo"<div class='panel-heading'>";
+                                	echo "<div class=panel-body>";
+                                	
+                                	echo "<br><strong>Instructions:</strong><br> ".$getDecodeData['instructions']."</div>";
+                                	echo "<img src='".$getDecodeData['image']."'</div></div>";
+                      
+                  }
+             
+		       ?>
     </body>
 </html>

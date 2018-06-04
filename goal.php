@@ -104,10 +104,10 @@
                                               <?php
                         include_once 'db_connect.php';
                         $_email =  $_COOKIE["email"];
-                        $sql = "SELECT goal_name, weight_goal, timegoal FROM `Goals` WHERE user_id IN (select User.user_id FROM `User` where User.email = '".$_email."')";
+                        $sql = "SELECT goal_name, weight_goal, timegoal FROM `Goal` WHERE user_id IN (select User.user_id FROM `User` where User.email = '".$_email."')";
                         $result = $conn->query($sql);
                         if($result == FALSE) {
-                        print(mysqli_error());
+                        print(mysqli_error($conn));
                         } else {
                         while($row = $result->fetch_array()) {
                             
@@ -123,7 +123,6 @@
                      }
 
 }
-$conn->close();
 ?>                                            
           
                                 </div>
@@ -193,20 +192,7 @@ $conn->close();
                     </div>
 -->
 				
-     <!-- GOAL INFORMATION -->
-    
-                    
-
- 
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+     <!-- GOAL INFORMATION -->       
                     
 			<div class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>

@@ -1,4 +1,7 @@
-
+<?php
+include 'functions.php';
+enterWeight();
+?>
 <html>
 <head>
 	<meta charset="utf-8">

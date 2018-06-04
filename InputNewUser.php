@@ -35,13 +35,13 @@
                 <li><a href="#">
                     <em class="fa fa-home"></em>
                 </a></li>
-                <li class="active">Details</li>
+                <li class="active">Start</li>
             </ol>
         </div>
         
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Settings</h1>
+                <h1 class="page-header">Welcome to healthy habits!</h1>
             </div>
         </div>
 
@@ -51,17 +51,17 @@
                 <div class="panel panel-default articles">
                     
                     <div class="panel-heading">
-                        Fill your weight and your length in
+                       Please fill in your weight and your length in
                         </div>  
                             <div class="panel-body articles-container">
                                 <div class="form-group">
                                   
                                         <label>Weight (Kilograms)</label>
-                                        <input type="text" class="form-control" id="weight" placeholder="Enter your weight here in kilograms">
+                                        <input type="number" class="form-control" name="weight" placeholder="Enter your weight here in kilograms">
                                       
                                      
                                         <label>Length (Centimetres)</label>
-                                        <input type="type" class="form-control" id="length" placeholder="Enter your length here in centimetres">
+                                        <input type="number" class="form-control" name="length" placeholder="Enter your length here in centimetres">
                                       
                                 </div>
                             </div>
@@ -69,28 +69,29 @@
                 </div> 
         </div>    
         
-         <button type="submit" class="btn btn-success">Submit</button> 
+         <button type="submit" name="submit" class="btn btn-success">Get started!</button> 
         </form>
             <?php
-            
-        
-        if (isset($_POST["weight"]) && !empty($_POST["length"])) {
-    
+            if(isset($_POST['submit'])) { 
+             
             $weight = isset($_POST["weight"]) ? $_POST['weight'] : "";
             $length = isset($_POST["length"]) ? $_POST['length'] : "";
             $_email =  $_COOKIE["email"];
+                echo "<script type='text/javascript'>alert('Weight and length updated! $weight');</script>"; 
             include 'db_connect.php';
             // Dit stukje hieronder doet het niet
             $sql = "UPDATE User
-            SET weight =" . $weight . "AND length=" . $length . 
-            " WHERE user_id IN (SELECT user_id FROM User WHERE email='".$_email."')";
-        
-                if (mysqli_query($conn, $sql)) {
+            SET weight='$weight', length='$length' 
+             WHERE user_id IN (SELECT user_id FROM (SELECT * FROM User) AS x WHERE email='".$_email."')";
                     if ($conn->query($sql) === TRUE) {
               echo "<script type='text/javascript'>alert('Weight and length updated!');</script>";
-                    }           
-           }  
-        }    
+                     header("Location: index.php");
+                    }  else {
+                        echo "<script type='text/javascript'>alert('Something went wrong!);</script>";
+                        echo $conn->error;
+                    }      
+             }
+            
         
           //   if ($conn->query($sql) === TRUE) {
         //   echo "<script type='text/javascript'>alert('Weight and length updated!');</script>";

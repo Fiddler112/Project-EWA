@@ -122,7 +122,7 @@
 						</form>
                         
                             <?php                   
-                                $name = $_POST["name"] ?? 'burger'; 
+                                $name = $_POST["name"] ?? ''; 
                               
                         // Optional post things
                                 if(empty($_POST['maxCalories'])){

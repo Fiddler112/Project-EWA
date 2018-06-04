@@ -86,10 +86,29 @@
 										<input id="name" name="name" type="text" placeholder="Recipe name or ingrëdient" class="form-control">
 									</div>
 								</div>
+                                <label>Optional requests</label>
                                 <div class="form-group">
 									<label class="col-md-3 control-label" for="name">Maximum calories</label>
 									<div class="col-md-9">
-										<input id="maxCalories" name="maxCalories" type="text" placeholder="Maximum amount of calories" class="form-control">
+										<input id="maxCalories" name="maxCalories" type="number" placeholder="Maximum amount of calories" class="form-control">
+									</div>
+								</div>
+                                <div class="form-group">
+									<label class="col-md-3 control-label" for="name">Maximum fat</label>
+									<div class="col-md-9">
+										<input id="maxFat" name="maxFat" type="number" placeholder="Maximum amount of Fat" class="form-control">
+									</div>
+								</div>
+                                <div class="form-group">
+									<label class="col-md-3 control-label" for="name">Maximum Saturated fat</label>
+									<div class="col-md-9">
+										<input id="maxSaturatedFat" name="maxSaturatedFat" type="number" placeholder="Maximum amount of Saturated fat" class="form-control">
+									</div>
+								</div>
+                                <div class="form-group">
+									<label class="col-md-3 control-label" for="name">Maximum Sugar</label>
+									<div class="col-md-9">
+										<input id="maxSugar" name="maxSugar" type="number" placeholder="Maximum amount of sugar" class="form-control">
 									</div>
 								</div>
 								
@@ -102,13 +121,43 @@
 							</fieldset>
 						</form>
                         
-                            <?php
-                                  $name = $_POST["name"] ?? 'null'; 
-                                   $maxcalories = $_POST["maxCalories"] ?? '2000';  
+                            <?php                   
+                                $name = $_POST["name"] ?? 'burger'; 
+                              
+                        // Optional post things
+                                if(empty($_POST['maxCalories'])){
+                                  $maxcalories = '2000';
+                                }else{
+                                  $maxcalories = $_POST['maxCalories'];
+                                }
+                                
+                                if(empty($_POST['maxFat'])){
+                                  $maxFat = '2000';
+                                }else{
+                                  $maxFat = $_POST['maxFat'];
+                                }
+                        
+                                if(empty($_POST['maxSaturatedFat'])){
+                                  $maxSaturatedFat = '2000';
+                                }else{
+                                  $maxSaturatedFat = $_POST['maxSaturatedFat'];
+                                }
+                        
+                                if(empty($_POST['maxSugar'])){
+                                  $maxSugar = '2000';
+                                }else{
+                                  $maxSugar = $_POST['maxSugar'];
+                                }
+               
+
+                        
+                        // API CALL Recipes
                                 require __DIR__ . '/vendor/autoload.php';
                                 use RapidApi\RapidApiConnect;
                                 $rapid = new RapidApiConnect('default-application_5adf253de4b0b4824e5ac536', 'dc6004e0-4602-4c1c-b599-38838972f5ea');
-                              $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".($name = $name ?? "")."&maxCalories=".($maxcalories =$maxcalories ?? "2000"),                            
+                        //Menu calls
+                                 $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".$name."&maxCalories=".$maxcalories."&maxFat=".$maxFat."&number=20&maxSaturatedFat=".$maxSaturatedFat."&maxSugar=".$maxSugar,
+                              //   $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".($name = $name ?? "")."&maxCalories=2000",                            
                               array(
                                 "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
                                 "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
@@ -120,6 +169,7 @@
                                if(isset($getDecodeData['results'])){ 
                                    $number = 0;     
                                    echo "<ul class='list-group'>";
+                                   // Print retrieved menu's
                                 foreach($getDecodeData['results'] as $key=>$value) {
 
                                     if (empty($value)) {
@@ -128,7 +178,11 @@
                                     	echo "<li class='list-group-item'>";
                                         $number++;
                                         echo "<div class='panel-body'>";
-                                        echo '<strong>Recipe '.$number.' : '.$value['title'].'</strong><br>Amount of calories: '.$value['calories']. '<br>';
+                                        echo '<strong>Recipe '.$number.' : '.$value['title'].'</strong><br>
+                                        Amount of calories: '.$value['calories']. '<br>';
+                                        echo'Amount of fat: '.$value['fat']. '<br>';
+                                        echo'Amount of protein: '.$value['protein']. '<br>';
+                                        echo'Amount of carbs: '.$value['carbs']. '<br>';
                                         echo "<button class='btn btn-info' type='submit' name='submit' value=".$value['id'].">More Info</button><img src='".$value['image']."' align='right'/> <br>";
                                         echo "</div>";
                                         echo "</li>";

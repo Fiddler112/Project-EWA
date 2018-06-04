@@ -73,6 +73,9 @@
         </form>
             <?php
             
+        
+        if (isset($_POST["weight"]) && !empty($_POST["length"])) {
+    
             $weight = isset($_POST["weight"]) ? $_POST['weight'] : "";
             $length = isset($_POST["length"]) ? $_POST['length'] : "";
             $_email =  $_COOKIE["email"];
@@ -81,24 +84,27 @@
             $sql = "UPDATE User
             SET weight =" . $weight . "AND length=" . $length . 
             " WHERE user_id IN (SELECT user_id FROM User WHERE email='".$_email."')";
-             if ($conn->query($sql) === TRUE) {
-           echo "<script type='text/javascript'>alert('Weight and length updated!');</script>";
-                 header("Location: index.php");
-             } else {
-           echo "<script type='text/javascript'>alert('Something went wrong');</script>";  
+        
+                if (mysqli_query($conn, $sql)) {
+                    if ($conn->query($sql) === TRUE) {
+              echo "<script type='text/javascript'>alert('Weight and length updated!');</script>";
+                    }           
+           }  
+        }    
+        
+          //   if ($conn->query($sql) === TRUE) {
+        //   echo "<script type='text/javascript'>alert('Weight and length updated!');</script>";
+        //         header("Location: index.php");
+         //    } else {
+        //   echo "<script type='text/javascript'>alert('Something went wrong');</script>";  
    
-           }
+           
         
             ?>
-        
-<!--            <button type="submit" class="btn btn-success" onclick="">Submit</button>-->
-             
-
           
             <div class="col-sm-12">
                 <p class="back-link">Google home Healthy Habits EWA United</p>
             </div>
-        <!--/.row-->
         
     </div>  <!--/.main-->
       

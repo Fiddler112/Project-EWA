@@ -143,7 +143,7 @@
 			<div class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
-		<!--/.row-->
+        </form>	<!--/.row-->
 	</div>	<!--/.main-->
 	  
 <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>

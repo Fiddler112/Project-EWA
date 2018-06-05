@@ -119,7 +119,6 @@
                     echo    "<tbody>";
                     echo    "</table>";
                     echo    "</div>";
-                    echo    "</div>";
                      }
 
 }

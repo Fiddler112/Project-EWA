@@ -1,30 +1,15 @@
 <?php
-                           function getRecipe(){
-                           $name = $_POST["name"];
-                           $maxcalories = $_POST["maxCalories"];
-                             require __DIR__ . '/vendor/autoload.php';
-                                use RapidApi\RapidApiConnect;
-                                $rapid = new RapidApiConnect('default-application_5adf253de4b0b4824e5ac536', 'dc6004e0-4602-4c1c-b599-38838972f5ea');
 
-                                $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=".$name."&maxCalories=".$maxcalories,
-                              array(
-                                "X-Mashape-Key" => "1kEqiAEoRFmshiBb6AVUoeX6KvFNp1u8cndjsnSFvVG8zg3A1o",
-                                "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-                              )
-                                                              
-                         );
-                                $getResponseVal = $response->raw_body;
-                                $getDecodeData = json_decode($getResponseVal, true);
-                                //$getSpecificValue = $getDecodeData['results'][0]['title'];
-                                
-                                foreach($getDecodeData['results'] as $key=>$value) {
-                                    if (empty($value)) {
-                                        echo "<div class='panel-heading'>No recepts found </div>";
-                                    } else {
-                                        echo "<div class='panel-heading'>";
-                                        echo "Recipe ".$key." : ".$value['title']." (Amount of calories): ".$value['calories']. "<br>";
-                                        echo "</div>";
-                                        }
-                                }
-                            }
+function enterWeight() {
+    include 'db_connect.php';
+    $_email = $_COOKIE["email"];
+    $sql = "SELECT weight, length FROM User WHERE user_id IN (SELECT user_id FROM User where email='".$_email."') AND (weight='0' OR length='0')";
+    $result = $conn->query($sql);
+    
+    if($result->num_rows > 0){
+        $message = "This is your first time visiting this website, please fill in your weight and length on the next page!";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        echo '<script type="text/javascript"> window.location = "InputNewUser.php" </script>';
+    }   
+}
 ?>

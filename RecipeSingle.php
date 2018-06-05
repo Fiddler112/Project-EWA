@@ -94,12 +94,17 @@
 									echo "<h1>".$getDecodeData['title']."</h1>";
 									echo"<div class='panel-heading'>";
                                 	echo "<div class=panel-body>";
-                                	
+                                    echo "Ingredients: <br>";
+                                    foreach($getDecodeData['extendedIngredients'] as $key=>$value) {
+                                	    echo $value['original']."<br>";
+                                    }
                                 	echo "<br><strong>Instructions:</strong><br> ".$getDecodeData['instructions']."</div>";
                                 	echo "<img src='".$getDecodeData['image']."'</div></div>";
                       
                   }
+        
              
 		       ?>
+    </div>
     </body>
 </html>

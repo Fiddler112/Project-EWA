@@ -1,4 +1,7 @@
-
+<?php
+include 'functions.php';
+enterWeight();
+?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -246,5 +249,6 @@ $conn->close();
 	</div>	<!--/.main-->
    <!-- bestanden die waarschijnlijk niet in gebruik zijn!-->
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
 </body>
 </html>

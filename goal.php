@@ -30,21 +30,33 @@
     text-align: center;
    
 }
+.combobox {
+text-align: left;
+   
+}
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text], input[type=text] {
     width: 100%;
-    padding: 15px;
+    padding: 10px;
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
-    background: #f1f1f1;
+    background: #ffffff;
 }
 
 input[type=text]:focus, input[type=password]:focus {
     background-color: #ddd;
     outline: none;
 }
-
+.numberInput{
+     width: 90%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    width: 50%;
+    background: #ffffff;
+        }
 hr {
     border: 1px solid #f1f1f1;
     margin-bottom: 25px;
@@ -174,55 +186,36 @@ button:hover {
          } else{            
                     echo"<div id=addFirstGoalButtonCanvas class=wrapper>";
                         echo"<button id=addFirstGoalButton onclick=hideshow() class=buttonAddFirstExercise>Add your first goal!</button>";
-                    echo"</div>";  
-             
-//         echo" <div id=addExerciseForm class=container>";
-//   echo"<div class=panel-group>";
-//     echo"<div class=panel panel-success>";
-//      echo" <div class=panel-heading>Panel Header</div>";
-//      echo" <div class=panel-body>Panel Content</div>";
-//    echo" </div>";
-//         
-             
+                    echo"</div>"; 
          }       
-       
-                           
-                            
-                           
-                      
+            
        ?>
-      <script>
-        //function addFirstGoal(){
-            var addFirstGoalButton = document.getElementById('addFirstGoalButton');
-            addFirstGoalButton.addEventListener('click',hideshow,false);
-            
-            function hideshow() {
-        document.getElementById('addFirstGoalButtonCanvas').style.visibility  = 'hidden'; 
-    }   
-            
-    //       window.alert("Add goal");
-   //     }
-        </script>
-              
-       
         
         
-        <form action="/addGoal.php" style="border:1px solid #ccc">
+        <form id="goalInsert" action="addGoal.php" style="border:1px solid #ccc" >
   <div class="container">
    
 
-    <label for="email"><b>I want to..</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
-   
-    <label for="psw"><b>Password</b></label>
-    <input type="number" placeholder="Enter new desired weight" name="psw" required>
-
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-    
+    <label for="email"><b>I want to</b></label>
+<!--    <input type="text" placeholder="Under construction" name="email" required>-->
+      <div class="combobox">
+      <span class="combobox">
+        <select name="comboBoxOption">
+          <option selected="selected" value="Lose_weight">Lose weight</option>
+          <option value="Gain_weight">Gain weight</option>
+        </select>
+      </span>
+<!--      <input type="text" name="Name" class="form-control" placeholder="Full Name" oninput="FullName.value = sal.value +' '+ Name.value">-->
+    </div><!-- /input-group -->
+    <label class="" for="psw"><b>Desired weight</b></label>
+    <input class="numberInput" type="number" min="45" max="130" placeholder="Enter new desired weight" name="desiredWeight" required>
+      <br> 
+    <label for="psw-repeat"><b>I want to complete my goal in</b></label>
+    <input type="number" class="numberInput" min="0" max="90" placeholder="" name="numberOfDays" required>
+    <b>days</b>
     <div class="clearfix">
 <!--      <button type="button" class="cancelbtn">Cancel</button>-->
-      <button type="submit" class="signupbtn">Sign Up</button>
+      <button type="submit" class="signupbtn">Save</button>
     </div>
   </div>
 </form>
@@ -338,7 +331,28 @@ button:hover {
 			<div style= "position: fixed;bottom:0;width:50%;"class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
-	
+	    <script>
+        //function addFirstGoal(){
+            var addFirstGoalButton = document.getElementById('addFirstGoalButton');
+       //   hideAtStart();
+             function hideAtStart() {
+        document.getElementById('goalInsert').style.visibility  = 'hidden'; 
+    }    
+            function hideshow() {
+        document.getElementById('addFirstGoalButtonCanvas').style.visibility  = 'hidden'; 
+        showInsert();
+    }   
+           function showInsert() {
+        document.getElementById('goalInsert').style.visibility  = 'visible'; 
+    }   
+            
+    //       window.alert("Add goal");
+   //     }
+        </script>
+              
+       
+        
+        
 	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 <script src="js/jquery-1.11.1.min.js"></script>
         

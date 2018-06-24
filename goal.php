@@ -10,6 +10,98 @@
 	<!--Custom Font-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <meta name="google-signin-client_id" content="307112913485-5kkslq098hfj65e6l3qngjo1916a7h4i.apps.googleusercontent.com">
+    <style>
+.buttonAddFirstExercise {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.hidden-div {
+    display:none
+}
+.wrapper {
+    text-align: center;
+   
+}
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+button:hover {
+    opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    padding: 14px 20px;
+    background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+       width: 100%;
+    }
+}
+        
+        
+        
+        
+        
+</style>
 </head>
 
     
@@ -51,25 +143,6 @@
 			<li><a href="User.php"><em class="fa fa-user">&nbsp;</em> Personal info</a></li>
 			<li><a href="Settings.php"><em class="fa fa-wrench">&nbsp;</em>  Settings</a></li>
             <li><a href="db_logout.php" onclick="location.href = db_logout.php;"><em class="fa fa-power-off">&nbsp;</em> Logout</a> </li>
-		    <script>
-              function signOut() {
-                  alert("User will be logged off");
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function () {  
-
-                  console.log('User signed out.');
-                    window.location = "\login.php";
-                });
-              }
-                function onLoad() {
-                  gapi.load('auth2', function() {
-                    gapi.auth2.init();
-                  });
-                }
-                 function deleteCookie(name) {
-                    setCookie({name: name, value: "", seconds: 0.1});
-                }
-            </script>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -90,7 +163,73 @@
 		</div><!--/.row-->
         
         
+         <?php 
+                        include_once 'db_connect.php';
+                        $_email =  $_COOKIE["email"];
+            $sql = ("SELECT goal_name FROM `Goal` WHERE `user_id` = (select user_id from User where email = '".$_email."')");
+         $result = $conn->query($sql);
+        $row_cnt = $result->num_rows;
+         if ($row_cnt > 0) {
+              echo "yes";
+         } else{            
+                    echo"<div id=addFirstGoalButtonCanvas class=wrapper>";
+                        echo"<button id=addFirstGoalButton onclick=hideshow() class=buttonAddFirstExercise>Add your first goal!</button>";
+                    echo"</div>";  
+             
+//         echo" <div id=addExerciseForm class=container>";
+//   echo"<div class=panel-group>";
+//     echo"<div class=panel panel-success>";
+//      echo" <div class=panel-heading>Panel Header</div>";
+//      echo" <div class=panel-body>Panel Content</div>";
+//    echo" </div>";
+//         
+             
+         }       
+       
+                           
+                            
+                           
+                      
+       ?>
+      <script>
+        //function addFirstGoal(){
+            var addFirstGoalButton = document.getElementById('addFirstGoalButton');
+            addFirstGoalButton.addEventListener('click',hideshow,false);
+            
+            function hideshow() {
+        document.getElementById('addFirstGoalButtonCanvas').style.visibility  = 'hidden'; 
+    }   
+            
+    //       window.alert("Add goal");
+   //     }
+        </script>
+              
+       
         
+        
+        <form action="/addGoal.php" style="border:1px solid #ccc">
+  <div class="container">
+   
+
+    <label for="email"><b>I want to..</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+   
+    <label for="psw"><b>Password</b></label>
+    <input type="number" placeholder="Enter new desired weight" name="psw" required>
+
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    
+    <div class="clearfix">
+<!--      <button type="button" class="cancelbtn">Cancel</button>-->
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </div>
+</form>
+        
+        
+        
+<!--
     <form method="post" action="" name="form">  
 		<div class="row">
 			<div class="col-md-12">
@@ -100,30 +239,32 @@
 						</div>	
 							<div class="panel-body articles-container">
                                 <div class="form-group">
+-->
 
                                               <?php
-                        include_once 'db_connect.php';
-                        $_email =  $_COOKIE["email"];
-                        $sql = "SELECT goal_name, weight_goal, timegoal FROM `Goal` WHERE user_id IN (select User.user_id FROM `User` where User.email = '".$_email."')";
-                        $result = $conn->query($sql);
-                        if($result == FALSE) {
-                        print(mysqli_error($conn));
-                        } else {
-                        while($row = $result->fetch_array()) {
-                            
-               echo  "<div class=' col-md-9 col-lg-9 '>";
-                       echo  "<table class='table table-user-information'>";                            
-                        echo    "<td>".$row["goal_name"]."</td>";
-                        echo    "<td>".$row["timegoal"]."</td>";
-                        echo    "<tr>";                   
-                    echo    "<tbody>";
-                    echo    "</table>";
-                    echo    "</div>";
-                     }
+//                        include_once 'db_connect.php';
+//                        $_email =  $_COOKIE["email"];
+//                        $sql = "SELECT goal_name, weight_goal, timegoal FROM `Goal` WHERE user_id IN (select User.user_id FROM `User` where User.email = '".$_email."')";
+//                        $result = $conn->query($sql);
+//                        if($result == FALSE) {
+//                        print(mysqli_error($conn));
+//                        } else {
+//                        while($row = $result->fetch_array()) {
+//                            
+//               echo  "<div class=' col-md-9 col-lg-9 '>";
+//                       echo  "<table class='table table-user-information'>";                            
+//                        echo    "<td>".$row["goal_name"]."</td>";
+//                        echo    "<td>".$row["timegoal"]."</td>";
+//                        echo    "<tr>";                   
+//                    echo    "<tbody>";
+//                    echo    "</table>";
+//                    echo    "</div>";
+//                     }
 
-}
+//}
 ?>                                            
           
+<!--
                                 </div>
 							</div>
                         </div>
@@ -132,6 +273,7 @@
         </form>
     
         
+-->
 
 <!--
 				<div class="panel panel-default">
@@ -193,19 +335,14 @@
 				
      <!-- GOAL INFORMATION -->       
                     
-			<div class="col-sm-12">
+			<div style= "position: fixed;bottom:0;width:50%;"class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
 	
 	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 <script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/custom.js"></script>
+        
+
 	
 </body>
 </html>

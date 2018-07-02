@@ -19,7 +19,7 @@ $_userIDForSQL = $_userID[0];
 $sql = "INSERT INTO `Goal` (`goal_ID`, `goal_name`, `weight_goal`, `timestamp`, `timegoal`, `user_id`) VALUES (NULL, '".$_comboBoxOption."', '".$_desiredWeight."', CURRENT_TIMESTAMP, '".$_timeSpan."', '".$_userIDForSQL."')";
 if(mysqli_query($conn, $sql)){
     echo '<script type="text/javascript">
-           window.location = "goal.php"
+           window.location = "goal.php?goalAdded=yes"
       </script>';
             
 } else{

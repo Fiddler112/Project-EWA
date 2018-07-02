@@ -3,10 +3,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Google Home - Goals</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link href="css/styles.css" rel="stylesheet">
 	<link rel="icon" href="img/pic.png">
+    
 	<!--Custom Font-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <meta name="google-signin-client_id" content="307112913485-5kkslq098hfj65e6l3qngjo1916a7h4i.apps.googleusercontent.com">
@@ -43,6 +46,12 @@ input[type=text], input[type=text] {
     border: none;
     background: #ffffff;
 }
+/*
+.alert-success{color:#37ba21;
+    background-color:#dff0d8;
+    border-color:#d6e9c6
+}
+*/
 
 input[type=text]:focus, input[type=password]:focus {
     background-color: #ddd;
@@ -109,10 +118,6 @@ button:hover {
     }
 }
         
-        
-        
-        
-        
 </style>
 </head>
 
@@ -170,32 +175,41 @@ button:hover {
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Goals</h1>
+<!--				<h1 class="page-header">Goals</h1>-->
 			</div>
 		</div><!--/.row-->
         
         
          <?php 
-                        include_once 'db_connect.php';
+                        include_once 'db_connect.php';                          
                         $_email =  $_COOKIE["email"];
-            $sql = ("SELECT goal_name FROM `Goal` WHERE `user_id` = (select user_id from User where email = '".$_email."')");
+            $sql = ("SELECT goal_name,weight_goal,timegoal,timestamp FROM `Goal` WHERE `user_id` = (select user_id from User where email = '".$_email."')");
          $result = $conn->query($sql);
         $row_cnt = $result->num_rows;
-         if ($row_cnt > 0) {
-              echo "yes";
-         } else{            
-                    echo"<div id=addFirstGoalButtonCanvas class=wrapper>";
-                        echo"<button id=addFirstGoalButton onclick=hideshow() class=buttonAddFirstExercise>Add your first goal!</button>";
-                    echo"</div>"; 
-         }       
-            
-       ?>
+         
         
+         if($row_cnt > 0 && isset($_GET['goalAdded']))  : ?>
+        <div class="alert alert-success alert-dismissible fade in">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Goal added!</strong> 
+            </div>    
+        <div id=addGoalButtonCanvas class=wrapper>
+        <button id=addGoalButton onclick=showInsert() class=buttonAddFirstExercise>Add goal</button>
+        </div>
+        <?php elseif($row_cnt > 0) : ?>
+        <div id=addGoalButtonCanvas class=wrapper>
+        <button id=addGoalButton onclick=showInsert() class=buttonAddFirstExercise>Add goal</button>
+        </div>
         
+        <?php else : ?>
+        <div id=addFirstGoalButtonCanvas class=wrapper>
+        <button id=addFirstGoalButton onclick=hideshow() class=buttonAddFirstExercise>Add your first goal!</button>
+        </div>    
+        <?php endif; ?>
+        
+      
         <form id="goalInsert" action="addGoal.php" style="border:1px solid #ccc" >
   <div class="container">
-   
-
     <label for="email"><b>I want to</b></label>
 <!--    <input type="text" placeholder="Under construction" name="email" required>-->
       <div class="combobox">
@@ -332,9 +346,10 @@ button:hover {
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
 	    <script>
-        //function addFirstGoal(){
+             hideAtStart();
+        function addFirstGoal(){
             var addFirstGoalButton = document.getElementById('addFirstGoalButton');
-       //   hideAtStart();
+    }
              function hideAtStart() {
         document.getElementById('goalInsert').style.visibility  = 'hidden'; 
     }    

@@ -3,14 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<title>Dashboard</title>
-	<link href="css/bootstrap.css" rel="stylesheet">
+<!--	<link href="css/bootstrap.css" rel="stylesheet">-->
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	<link rel="icon" href="img/pic.png">
 	<!--Custom Font-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-	
     <meta name="google-signin-client_id" content="307112913485-5kkslq098hfj65e6l3qngjo1916a7h4i.apps.googleusercontent.com">
     
 </head>
@@ -84,67 +86,65 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default articles">    
-      <!-- Progress bar-->
-    <?php
-        include_once 'db_connect.php';
-        $today = date('Y-m-d');
-        $_email =  $_COOKIE["email"];
-        $sql = "SELECT SUM(calories) AS totalCalories FROM `Food` WHERE timestamp='$today'AND user_id IN (select User.user_id FROM `User` where User.email = '".$_email."')";
-        $result = $conn->query($sql);
-        if($result == FALSE) {
-        print(mysqli_error());
-        } else {
-              while($row = $result->fetch_array()) {
-                 $calories = $row["totalCalories"]; 
-            $percentage = ($calories / 2500 * 100);
-      echo  "<div class='panel-heading' >";
-      echo  "<p class= 'text-center'> Calories you have eaten today </p>";
-      echo  "</div>";
-          echo  "<div class='row'>";
-              echo  "<div class='col-md-12'>";
-                  echo  "<div class='progress' style='height:25px' font>";
-                      echo  "<div class='progress-bar active massive-font'  role='progressbar' height='25px' style='width: $percentage% ' aria-valuenow=100 aria-valuemin='0' aria-valuemax='100'>$calories</div>";
-                      echo  "</div>";
-                  echo  "</div>";
-          echo  "</div>";
-        }
-        }
-  ?>  
-                    
-                                     </div>
+                              </div>
 				</div> 
         </div>
         </form>
+          <!-- Progress bar-->
+        <?php
+        include_once 'db_connect.php';
+        $today = date('Y-m-d');
+        $_email =  $_COOKIE["email"];
         
-      <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
-    <!-- Carousel indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>   
-    <!-- Carousel items -->
-    <div class="carousel-inner">
-        <div class="item active">
-            <img src="img/slises.png" alt="First Slide">
-        </div>
-        <div class="item">
-            <img src="img/superfoods.png" alt="Second Slide">
-        </div>
-        <div class="item">
-            <img src="img/pure.png" alt="Third Slide">
-        </div>
-    </div>
-    <!-- Carousel nav -->
-    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="carousel-control right" href="#myCarousel" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-</div>   
+        $sqlIntakes = "select SUM(calories) AS totalCalories, SUM(`fat`) AS fat, SUM(`saturated_fat`) as saturatedFat, SUM(`sugar`) as sugar, SUM(`carbohydrates`) AS carbs, User.gender AS gender FROM Food inner join User on Food.user_id = User.user_id WHERE DATE(`timestamp`) = CURDATE() AND email = '".$_email."'";           
+        $result = $conn->query($sqlIntakes);
+        if($result == FALSE) {
+        print(mysqli_error()); 
+        } else {
+             while($row = $result->fetch_array()) {
+            $calorieAmount = $row["totalCalories"]; 
+            $sugarAmount = $row["sugar"]; 
+            $recommendedAmountOfCaloriesMale = 2500;
+            $recommendedAmountOfCaloriesFemale = 2000;
+            $recommendedAmountOfSugarMale = 60;
+            $recommendedAmountOfSugarFemale = 50;
+                 
+            if($row["gender"] === "man") {
+                 $caloriePercentage = ($calorieAmount / $recommendedAmountOfCaloriesMale * 100);
+                 $sugarPercentage = ($sugarAmount / $recommendedAmountOfSugarMale * 100);
+            } else if ($row["gender"] === "woman") {
+                $caloriePercentage = ($calorieAmount / $recommendedAmountOfCaloriesFemale * 100);
+                 $sugarPercentage = ($sugarAmount / $recommendedAmountOfSugarFemale * 100);
+            }
+            }
+        }
+  ?>  
+        <!-- Echo the percentages to js -->
+         <div id="caloriePercentageOutput" style="display: none;">        
+             <?php   
+            echo htmlspecialchars($caloriePercentage);           
+            ?>  </div>
         
+         <div id="sugarPercentageOutput" style="display: none;">        
+             <?php   
+            echo htmlspecialchars($sugarPercentage);
+            ?>  </div>
         
+                   <div class="container">
+          <div class="row">
+            <div class="col-sm-5" >
+               <!-- Circle calories indicator-->
+             <div class="circle" id="calorieLevel"></div>
+            </div>
+            <p class="font-weight-normal">Calorie percentage </p>
+            <div class="col-sm-5" >
+              <!-- Circle sugar indicator-->
+             <div class="circle" id="sugarLevel"></div>
+                 <p class="font-weight-normal">Sugar percentage </p>
+            </div>
+          </div>
+        </div> 
+<!--
     <form method="post" action="" name="form">  
 		<div class="row">
 			<div class="col-md-12">
@@ -154,34 +154,36 @@
 						</div>	
 							<div class="panel-body articles-container">
                                 <div class="form-group">
+-->
 
                                               <?php
-                        include_once 'db_connect.php';
-                        $_email =  $_COOKIE["email"];
-                        $sql = "SELECT type, description, timestamp FROM `Events` WHERE user_id IN (select User.user_id FROM `User` where User.email = '".$_email."')";
-                        $result = $conn->query($sql);
-                        if($result == FALSE) {
-                        print(mysqli_error());
-                        } else {
-                        while($row = $result->fetch_array()) {
-                            
-               echo  "<div class=' col-md-9 col-lg-9 '>";
-                       echo  "<table class='table table-user-information'>";                            
-                        echo    "<td>".$row["description"]."</td>";
-                        echo    "<td>".$row["timestamp"]."</td>";
-                        echo    "<tr>";                   
-                    echo    "<tbody>";
-                    echo    "</table>";
-                    echo    "</div>";
-                    echo    "</div>";
-                            
-                                              
-                            
-                     }
-
-}
-$conn->close();
+//                        include_once 'db_connect.php';
+//                        $_email =  $_COOKIE["email"];
+//                        $sql = "SELECT type, description, timestamp FROM `Events` WHERE user_id IN (select User.user_id FROM `User` where User.email = '".$_email."')";
+//                        $result = $conn->query($sql);
+//                        if($result == FALSE) {
+//                        print(mysqli_error());
+//                        } else {
+//                        while($row = $result->fetch_array()) {
+//                            
+//               echo  "<div class=' col-md-9 col-lg-9 '>";
+//                       echo  "<table class='table table-user-information'>";                            
+//                        echo    "<td>".$row["description"]."</td>";
+//                        echo    "<td>".$row["timestamp"]."</td>";
+//                        echo    "<tr>";                   
+//                    echo    "<tbody>";
+//                    echo    "</table>";
+//                    echo    "</div>";
+//                    echo    "</div>";
+//                            
+//                                              
+//                            
+//                     }
+//
+//}
+//$conn->close();
 ?>                                            
+<!--
           
                                 </div>
 							</div>
@@ -189,65 +191,40 @@ $conn->close();
 				</div> 
         </div>
         </form>
-        <!--      
-      <form method="post" action="" name="form">  
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default articles">
-					<div class="panel-heading">
-						Daily calories
-						</div>	
-							<div class="panel-body articles-container">
-                                <div class="form-group">
-
-                          -->                 
-                                              <?php
-                        
-//                        $_email =  $_COOKIE["email"];
-//                        $today = date("Y-m-d");
-//                        $sql = "SELECT SUM(calories) AS sumCalories 
-//                        FROM `Food` WHERE user_id IN (select User.user_id FROM `User` where User.email = '$_email') AND timestamp = '$today';";
-//                        $result = $conn->query($sql);
-//                                  
-//                        if ($result->num_rows > 0) {
-//                            while ($row = $result->fetch_assoc()) {
-//                                $sumCal = $row["sumCalories"];
-//                            }
-//                        }
-//                                    
-//                         
-//                    echo  "<div class=' col-md-9 col-lg-9 '>";
-//                       echo  "<table class='table table-user-information'>";
-//                       echo  "<tbody>";
-//                            
-//                        echo    "<tr>";
-//                        echo    "<td>$sumCal</td>";
-//                        echo    "<td>/ 2200</td>";
-//                        echo    "<tr>";
-//                            
-//                      
-//                            
-//                    echo    "<tbody>";
-//                    echo    "</table>";
-//                    echo    "</div>";
-//                    echo    "</div>";
-?>                              
-          
-<!--
-                                </div>
-							</div>
-                        </div>
-				</div> 
-        </div>
-        </form>      
 -->
-      	
+        
 			<div class="col-sm-12">
 				<p class="back-link">Google home Healthy Habits EWA United</p>
 			</div>
 		<!--/.row-->
 	</div>	<!--/.main-->
-   <!-- bestanden die waarschijnlijk niet in gebruik zijn!-->
-    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+  
+  <script src="js/circles.js"></script>
+     <script src="js/circles.min.js"></script>
+	<script>
+         var caloriePerDiv = document.getElementById("caloriePercentageOutput");
+         var calData = caloriePerDiv.textContent;
+         var roundCal = Math.round(calData);
+		Circles.create({
+			id:           'calorieLevel',
+			value:        roundCal,
+			radius:       60,
+			width:        10,
+			duration:     1,
+			colors:       ['#D3B6C6', '#4B253A']
+		});
+        
+         var sugarPerDiv = document.getElementById("sugarPercentageOutput");
+         var sugData = sugarPerDiv.textContent;
+         var roundSug = Math.round(sugData);
+		Circles.create({
+			id:           'sugarLevel',
+			value:        roundSug,
+			radius:       60,
+			width:        10,
+			duration:     1,
+			colors:       ['#D3B6C6', '#4B253A']
+		});
+	</script>
 </body>
 </html>
